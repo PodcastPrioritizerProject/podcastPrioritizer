@@ -4,6 +4,7 @@ import "./App.scss";
 
 // importing components
 import MapForm from './Components/MapForm';
+import PodcastGenreForm from './Components/PodcastGenreForm';
 
 
 
@@ -90,6 +91,7 @@ function App() {
       <>
         <h1>hello</h1>
         <MapForm />
+        <PodcastGenreForm />
         {/* <form action="">
           <input type="text"
           
