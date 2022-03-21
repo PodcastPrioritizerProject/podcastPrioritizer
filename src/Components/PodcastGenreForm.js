@@ -6,11 +6,17 @@ function PodcastGenreForm() {
     //Store user input and genres returned from api
     const [ selectedGenre, setSelectedGenre ] = useState([])
     const [ userGenreInput, setUserGenreInput ] = useState('')
+    const [ finalGenreInput, setFinalGenreInput ] = useState('')
 
     //Track user input and set variable state  
     const handleInput = (e) => {
         setUserGenreInput(e.target.value)
         console.log(userGenreInput);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        setFinalGenreInput(userGenreInput)
     }
 
 
@@ -50,7 +56,7 @@ function PodcastGenreForm() {
             })
         }
 
-    }, [userGenreInput])
+    }, [finalGenreInput])
 
     console.log(userGenreInput);
 
@@ -58,8 +64,8 @@ function PodcastGenreForm() {
 
     return (
         <section>
-            <form action="">
-                <input type="text" onChange={ handleInput } list="genres" />
+            <form action="" onSubmit={ handleSubmit }>
+                <input type="text" onChange={ handleInput } list="genres" value={ userGenreInput }/>
                 <datalist id="genres">
                     {
                         //Map through the returned Genres array, return character matched genres. 
@@ -71,6 +77,7 @@ function PodcastGenreForm() {
                         })
                     }
                 </datalist>
+                <button type="submit">Submit</button>
             </form>
 
         </section>
