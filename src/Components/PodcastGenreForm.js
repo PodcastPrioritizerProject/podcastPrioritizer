@@ -27,7 +27,9 @@ function PodcastGenreForm() {
                 }
             }).then((genreResponse) => {
                 //Store genres returned from API in state variable
+                // please delete this comment
                 setSelectedGenre(genreResponse.data.genres)
+                console.log(selectedGenre);
             })
         }
     }, [userGenreInput])
@@ -75,4 +77,6 @@ function PodcastGenreForm() {
     )
 }
 
+
+// this is here
 export default PodcastGenreForm;
