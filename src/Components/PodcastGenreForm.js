@@ -11,6 +11,12 @@ function PodcastGenreForm(props) {
     const [ userGenreInput, setUserGenreInput ] = useState('')
     const [ finalGenreInput, setFinalGenreInput ] = useState('')
     const [ podcastArray, setPodcastArray ] = useState([])
+
+    let minWalkTime = props.chosenTime
+    minWalkTime = Math.floor((minWalkTime * 0.8) / 60)
+
+    let maxWalkTime = props.chosenTime
+    maxWalkTime = Math.floor((maxWalkTime * 1.2) / 60)
     
     //Track user input and set variable state  
     const handleInput = (e) => {
@@ -66,7 +72,9 @@ function PodcastGenreForm(props) {
                 url: 'https://listen-api.listennotes.com/api/v2/search',
                 headers: { "X-ListenAPI-Key": "0be4947c18024c2d8a5bb0dcb11eb2ac" },
                 params: {
-                    q: `${userGenreInput}`
+                    q: `${userGenreInput}`,
+                    len_min: `${minWalkTime}`,
+                    len_max: `${maxWalkTime}`,
                 }
             }).then((response) => {
                 console.log(response.data.results)
@@ -100,8 +108,6 @@ function PodcastGenreForm(props) {
 
             {/* passing props to PodcastEntry of the walk seconds and bike seconds */}
             <PodcastEntry 
-                walkSeconds={props.wTimeSeconds} 
-                bikeSeconds={props.bTimeSeconds}
                 podcasts={podcastArray}
             />
         </section>
