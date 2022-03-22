@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'; 
+import MapDisplay from './MapDisplay';
 
 const MapForm = (props) => {
 // creating useState variables
   const [givenAddress, setGivenAddress] = useState([]);
   const [autoTo, setAutoTo] = useState("");
   const [autoFrom, setAutoFrom] = useState("");
-
+  const [walkRoute, setWalkRoute] = useState({});
+  const [bikeRoute, setBikeRoute] = useState({});
+  const [driveRoute, setDriveRoute] = useState({});
+ 
   // create a useEffect to call axios when onChange happens for the to input field for MapForm
   useEffect(() => {
     // conditional statement to call axios when input length is longer than 1 character
@@ -78,14 +82,26 @@ const MapForm = (props) => {
         unit: 'k',
         routeType: "pedestrian",
         }
+      }),
+      axios.get("http://www.mapquestapi.com/directions/v2/route", {
+        params: {
+          key: "pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW",
+          from: `${autoFrom}`,
+          to: `${autoTo}`,
+          unit: 'k',
+          routeType: "shortest",
+        }
       })
       // after both axios calls are made, we wait for all of the data before taking it and sending it to our App.js via props
-    ]).then(axios.spread((apiDataBike, apiDataWalk) => {
+    ]).then(axios.spread((apiDataBike, apiDataWalk, apiDataDrive) => {
       props.bike(e, apiDataBike.data.route.time)
       props.walk(e, apiDataWalk.data.route.time)
+      setWalkRoute(apiDataWalk.data.route)
+      setBikeRoute(apiDataBike.data.route)
+      setDriveRoute(apiDataDrive.data.route)
     })) 
   }
-
+  console.log(driveRoute)
   return (
     <section>
       <form action="" onSubmit={handleSubmit}>
@@ -119,6 +135,11 @@ const MapForm = (props) => {
           </datalist>
         <button>Submit</button>
       </form>
+      <MapDisplay 
+      walk={walkRoute.sessionId}
+      bike={bikeRoute.sessionId}
+      drive={driveRoute.sessionId}
+      />
     </section>
   )
 }
