@@ -20,22 +20,16 @@ const MapDisplay = (props) => {
     }
   }
 
-
-
-  const walkMap = props.walk
-  const bikeMap = props.bike
-  const driveMap = props.drive
-
   return (
     <>
       {
         visible === true
         ? null
-        :<img src={`https://open.mapquestapi.com/staticmap/v5/map?key=pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW&session=${driveMap}`}alt="" />
+        :<img src={`https://open.mapquestapi.com/staticmap/v5/map?key=pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW&session=${props.map}`}alt="" />
       }
       <button 
       onClick={handleClick}
-      disabled={props.bike === undefined || props.drive === undefined ? true : false}
+      disabled={props.map === undefined ? true : false}
       >{buttonText}</button>
     </>
     

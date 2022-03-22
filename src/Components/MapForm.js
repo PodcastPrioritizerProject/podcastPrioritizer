@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'; 
 import MapDisplay from './MapDisplay';
+import CommuteType from './CommuteType';
 
 const MapForm = (props) => {
 // creating useState variables
@@ -10,6 +11,9 @@ const MapForm = (props) => {
   const [walkRoute, setWalkRoute] = useState({});
   const [bikeRoute, setBikeRoute] = useState({});
   const [driveRoute, setDriveRoute] = useState({});
+  const [chosenCommuteTime, setChosenCommuteTime] = useState("")
+  const [chosenCommuteSession, setChosenCommuteSession] = useState("")
+  const [chosenCommuteType, setChosenCommuteType] = useState("")
  
   // create a useEffect to call axios when onChange happens for the to input field for MapForm
   useEffect(() => {
@@ -96,15 +100,23 @@ const MapForm = (props) => {
       })
       // after both axios calls are made, we wait for all of the data before taking it and sending it to our App.js via props
     ]).then(axios.spread((apiDataBike, apiDataWalk, apiDataDrive) => {
-      props.bike(e, apiDataBike.data.route.time)
-      props.walk(e, apiDataWalk.data.route.time)
-      props.drive(e, apiDataDrive.data.route)
       setWalkRoute(apiDataWalk.data.route)
       setBikeRoute(apiDataBike.data.route)
       setDriveRoute(apiDataDrive.data.route)
     })) 
+    
   }
-  console.log(autoFrom)
+
+  const handleChoices = (time, sessionId, type) => {
+    setChosenCommuteTime(time)
+    setChosenCommuteSession(sessionId)
+    setChosenCommuteType(type)
+  }
+
+  useEffect(() => {
+    props.time(chosenCommuteTime)
+  }, [chosenCommuteTime])
+
   return (
     <section>
       <form action="" onSubmit={handleSubmit}>
@@ -138,10 +150,14 @@ const MapForm = (props) => {
           </datalist>
         <button>Submit</button>
       </form>
+      <CommuteType 
+      walkTime={walkRoute}
+      bikeTime={bikeRoute}
+      driveTime={driveRoute}
+      choices={handleChoices}
+      />
       <MapDisplay 
-      walk={walkRoute.sessionId}
-      bike={bikeRoute.sessionId}
-      drive={driveRoute.sessionId}
+      map={chosenCommuteSession}
       />
     </section>
   )
