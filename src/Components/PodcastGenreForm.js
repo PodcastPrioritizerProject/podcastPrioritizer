@@ -1,19 +1,24 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+// importing podcast entry results 
+import PodcastEntry from './PodcastEntry';
 
-function PodcastGenreForm() {
+
+function PodcastGenreForm(props) {
     //Store user input and genres returned from api
     const [ selectedGenre, setSelectedGenre ] = useState([])
     const [ userGenreInput, setUserGenreInput ] = useState('')
     const [ finalGenreInput, setFinalGenreInput ] = useState('')
-
+    const [ podcastArray, setPodcastArray ] = useState([])
+    
     //Track user input and set variable state  
     const handleInput = (e) => {
         setUserGenreInput(e.target.value)
         console.log(userGenreInput);
     }
 
+    // track user input and set state when submit is clicked
     const handleSubmit = (e) => {
         e.preventDefault()
         setFinalGenreInput(userGenreInput)
@@ -33,9 +38,7 @@ function PodcastGenreForm() {
                 }
             }).then((genreResponse) => {
                 //Store genres returned from API in state variable
-                // please delete this comment
                 setSelectedGenre(genreResponse.data.genres)
-                console.log(selectedGenre);
             })
         }
     }, [userGenreInput])
@@ -53,12 +56,13 @@ function PodcastGenreForm() {
                 }
             }).then((response) => {
                 console.log(response.data.results)
+                setPodcastArray(response.data.results)
             })
         }
 
     }, [finalGenreInput])
 
-    console.log(userGenreInput);
+    // console.log(userGenreInput);
 
 
 
@@ -71,7 +75,7 @@ function PodcastGenreForm() {
                         //Map through the returned Genres array, return character matched genres. 
                         selectedGenre.map( (genre) => {
                             return (
-                                <option value={genre.name} id={genre.id}>
+                                <option value={genre.name} key={genre.id}>
                                 </option>
                             )
                         })
@@ -80,10 +84,14 @@ function PodcastGenreForm() {
                 <button type="submit">Submit</button>
             </form>
 
+            {/* passing props to PodcastEntry of the walk seconds and bike seconds */}
+            <PodcastEntry 
+                walkSeconds={props.wTimeSeconds} 
+                bikeSeconds={props.bTimeSeconds}
+                podcasts={podcastArray}
+            />
         </section>
     )
 }
 
-
-// this is here
 export default PodcastGenreForm;
