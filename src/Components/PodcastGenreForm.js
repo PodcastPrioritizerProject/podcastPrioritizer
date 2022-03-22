@@ -34,7 +34,6 @@ function PodcastGenreForm() {
             }).then((genreResponse) => {
                 //Store genres returned from API in state variable
                 setSelectedGenre(genreResponse.data.genres)
-                console.log(selectedGenre);
             })
         }
     }, [userGenreInput])
