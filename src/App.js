@@ -7,34 +7,40 @@ import MapForm from './Components/MapForm';
 import PodcastGenreForm from './Components/PodcastGenreForm';
 
 function App() {
+  const [cyclingTime, setCyclingTime] = useState("");
+  const [walkingTime, setWalkingTime] = useState("");
+  const [drivingTime, setDrivingTime] = useState("");
+  console.log("walk", walkingTime)
+  console.log("bike", cyclingTime)
+  console.log("drive", drivingTime)
+  // fucntion to lift cycling time from MapForm and set state here to be passed into PodcastGenreForm
+  const handleBikeTime = (e, bikeTime) => {
+    setCyclingTime(bikeTime)
+  };
+  // fucntion to lift walking time from MapForm and set state here to be passed into PodcastGenreForm
+  const handleWalkTime = (e, walkTime) => {
+    setWalkingTime(walkTime)
+  };
 
-
-
+  const handleDriveTime = (e, driveTime) => {
+    setDrivingTime(driveTime)
+  }
+  
   return (
       <>
         <h1>hello</h1>
-        <MapForm />
-        <PodcastGenreForm />
-        {/* <form action="">
-          <input type="text"
-          
-          ></input>
-          <button>Submit</button>
-        </form> */}
-        {/* <h2>hello again</h2>
-      <input type="text" onChange={handleInput} list="cars" />
-      <datalist id="cars" >
-        {
-          givenAddress.map((singleAddress) => {
-            return (
-              <option>{singleAddress.displayString}</option>
-            )
-          })
-
-        }
-      </datalist> */}
+        <MapForm 
+        bike={handleBikeTime} 
+        walk={handleWalkTime} 
+        drive={handleDriveTime}
+        />
+        <PodcastGenreForm 
+        wTimeSeconds={walkingTime} 
+        bTimeSeconds={cyclingTime}
+        dTimeSeconds={drivingTime}
+        />
       </>
   );
-}
+};
 
 export default App;
