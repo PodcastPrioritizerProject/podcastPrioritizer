@@ -12,10 +12,10 @@ function PodcastGenreForm(props) {
     const [ finalGenreInput, setFinalGenreInput ] = useState('')
     const [ podcastArray, setPodcastArray ] = useState([])
 
-    let minWalkTime = props.wTimeSeconds
+    let minWalkTime = props.chosenTime
     minWalkTime = Math.floor((minWalkTime * 0.8) / 60)
 
-    let maxWalkTime = props.wTimeSeconds
+    let maxWalkTime = props.chosenTime
     maxWalkTime = Math.floor((maxWalkTime * 1.2) / 60)
     
     //Track user input and set variable state  
@@ -94,8 +94,6 @@ function PodcastGenreForm(props) {
 
             {/* passing props to PodcastEntry of the walk seconds and bike seconds */}
             <PodcastEntry 
-                walkSeconds={props.wTimeSeconds} 
-                bikeSeconds={props.bTimeSeconds}
                 podcasts={podcastArray}
             />
         </section>
