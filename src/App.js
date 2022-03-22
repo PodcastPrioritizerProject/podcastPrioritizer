@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import "./App.scss";
 
+
 // importing components
+import Header from './Components/Header';
 import MapForm from './Components/MapForm';
 import PodcastGenreForm from './Components/PodcastGenreForm';
 
@@ -28,7 +30,7 @@ function App() {
   
   return (
       <>
-        <h1>hello</h1>
+        <Header />
         <MapForm 
         bike={handleBikeTime} 
         walk={handleWalkTime} 
