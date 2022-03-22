@@ -98,6 +98,7 @@ const MapForm = (props) => {
     ]).then(axios.spread((apiDataBike, apiDataWalk, apiDataDrive) => {
       props.bike(e, apiDataBike.data.route.time)
       props.walk(e, apiDataWalk.data.route.time)
+      props.drive(e, apiDataDrive.data.route.time)
       setWalkRoute(apiDataWalk.data.route)
       setBikeRoute(apiDataBike.data.route)
       setDriveRoute(apiDataDrive.data.route)

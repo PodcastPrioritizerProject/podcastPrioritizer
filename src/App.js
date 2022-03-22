@@ -9,7 +9,10 @@ import PodcastGenreForm from './Components/PodcastGenreForm';
 function App() {
   const [cyclingTime, setCyclingTime] = useState("");
   const [walkingTime, setWalkingTime] = useState("");
-  console.log(walkingTime, cyclingTime)
+  const [drivingTime, setDrivingTime] = useState("");
+  console.log("walk", walkingTime)
+  console.log("bike", cyclingTime)
+  console.log("drive", drivingTime)
   // fucntion to lift cycling time from MapForm and set state here to be passed into PodcastGenreForm
   const handleBikeTime = (e, bikeTime) => {
     setCyclingTime(bikeTime)
@@ -18,12 +21,24 @@ function App() {
   const handleWalkTime = (e, walkTime) => {
     setWalkingTime(walkTime)
   };
+
+  const handleDriveTime = (e, driveTime) => {
+    setDrivingTime(driveTime)
+  }
   
   return (
       <>
         <h1>hello</h1>
-        <MapForm bike={handleBikeTime} walk={handleWalkTime}/>
-        <PodcastGenreForm wTimeSeconds={walkingTime} bTimeSeconds={cyclingTime}/>
+        <MapForm 
+        bike={handleBikeTime} 
+        walk={handleWalkTime} 
+        drive={handleDriveTime}
+        />
+        <PodcastGenreForm 
+        wTimeSeconds={walkingTime} 
+        bTimeSeconds={cyclingTime}
+        dTimeSeconds={drivingTime}
+        />
       </>
   );
 };
