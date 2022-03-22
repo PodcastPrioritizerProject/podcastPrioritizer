@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const MapDisplay = (props) => {
-  console.log(props)
+  // console.log(props)
   const show = "Show Map"
   const hide = "Hide Map"
 
@@ -35,7 +35,7 @@ const MapDisplay = (props) => {
       }
       <button 
       onClick={handleClick}
-      disabled={props.walk === undefined || props.bike === undefined || props.drive === undefined ? true : false}
+      disabled={props.bike === undefined || props.drive === undefined ? true : false}
       >{buttonText}</button>
     </>
     

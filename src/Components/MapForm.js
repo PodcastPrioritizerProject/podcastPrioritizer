@@ -20,13 +20,14 @@ const MapForm = (props) => {
         params: {
           key: 'pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW',
           q: `${autoTo}`,
-          collection: `${["adminArea", "address", "poi", "airport"]}`,
+          collection: `${["adminArea", "address", "airport"]}`,
           limit: 5,
           countryCode: 'CA',
           location: [43.6, 79.3]
         }
       }).then((response) => {
         setGivenAddress(response.data.results)
+        console.log("response",response)
       })
     }
   }, [autoTo])
@@ -40,13 +41,14 @@ const MapForm = (props) => {
         params: {
           key: 'pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW',
           q: `${autoFrom}`,
-          collection: `${["adminArea", "address", "poi", "airport"]}`,
+          collection: `${["adminArea", "address", "airport"]}`,
           limit: 5,
           countryCode: 'CA',
           location: [43.6, 79.3]
         }
       }).then((response) => {
         setGivenAddress(response.data.results)
+        
       })
     }
   }, [autoFrom])
@@ -101,11 +103,11 @@ const MapForm = (props) => {
       setDriveRoute(apiDataDrive.data.route)
     })) 
   }
-  console.log(driveRoute)
+  console.log(autoFrom)
   return (
     <section>
       <form action="" onSubmit={handleSubmit}>
-        <input type="text" onChange={handleInputFrom} list="fromLocation" id="from" value={autoFrom}/>
+        <input style={{width: "500px"}} type="text" onChange={handleInputFrom} list="fromLocation" id="from" value={autoFrom} autoComplete="off"/>
         <label htmlFor="fromLocation" className="sr-only">Enter starting location</label>
           <datalist id="fromLocation" >
             {
@@ -119,7 +121,7 @@ const MapForm = (props) => {
               })
             }
           </datalist>
-        <input type="text" onChange={handleInputTo} list="toLocation" id="to" value={autoTo}/>
+        <input style={{ width: "500px" }} type="text" onChange={handleInputTo} list="toLocation" id="to" value={autoTo} autoComplete="off"/>
         <label htmlFor="toLocation" className="sr-only">Enter destination</label>
           <datalist id="toLocation" >
             {
