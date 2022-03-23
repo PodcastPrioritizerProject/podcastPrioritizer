@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'; 
 import MapDisplay from './MapDisplay';
 import CommuteType from './CommuteType';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const MapForm = (props) => {
 // creating useState variables
@@ -26,7 +28,7 @@ const MapForm = (props) => {
           q: `${autoTo}`,
           collection: `${["adminArea", "address", "airport"]}`,
           limit: 5,
-          countryCode: 'CA',
+          // countryCode: 'CA',
           location: [43.6, 79.3]
         }
       }).then((response) => {
@@ -47,7 +49,7 @@ const MapForm = (props) => {
           q: `${autoFrom}`,
           collection: `${["adminArea", "address", "airport"]}`,
           limit: 5,
-          countryCode: 'CA',
+          // countryCode: 'CA',
           location: [43.6, 79.3]
         }
       }).then((response) => {
@@ -70,40 +72,57 @@ const MapForm = (props) => {
   // form submit function that makes two axios calls using the final input values of autoTo/autoFrom
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.all([
-      axios.get("http://www.mapquestapi.com/directions/v2/route", {
-        params: {
-        key: "pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW",
-        from: `${autoFrom}`,
-        to: `${autoTo}`,
-        unit: 'k',
-        routeType: "bicycle",
-        }
-      }),
-      axios.get('http://www.mapquestapi.com/directions/v2/route', {
-        params: {
-        key: "pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW",
-        from: `${autoFrom}`,
-        to: `${autoTo}`,
-        unit: 'k',
-        routeType: "pedestrian",
-        }
-      }),
-      axios.get("http://www.mapquestapi.com/directions/v2/route", {
-        params: {
+    if (autoFrom === "" || autoTo === "") {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please fill out your starting location as well as your destination',
+        footer: 'Hint: Start typing and our autofill will help you out!'
+      })
+    } else {
+
+      axios.all([
+        axios.get("http://www.mapquestapi.com/directions/v2/route", {
+          params: {
           key: "pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW",
           from: `${autoFrom}`,
           to: `${autoTo}`,
           unit: 'k',
-          routeType: "shortest",
-        }
-      })
-      // after both axios calls are made, we wait for all of the data before taking it and sending it to our App.js via props
-    ]).then(axios.spread((apiDataBike, apiDataWalk, apiDataDrive) => {
-      setWalkRoute(apiDataWalk.data.route)
-      setBikeRoute(apiDataBike.data.route)
-      setDriveRoute(apiDataDrive.data.route)
-    })) 
+          routeType: "bicycle",
+          }
+        }),
+        axios.get('http://www.mapquestapi.com/directions/v2/route', {
+          params: {
+          key: "pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW",
+          from: `${autoFrom}`,
+          to: `${autoTo}`,
+          unit: 'k',
+          routeType: "pedestrian",
+          }
+        }),
+        axios.get("http://www.mapquestapi.com/directions/v2/route", {
+          params: {
+            key: "pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW",
+            from: `${autoFrom}`,
+            to: `${autoTo}`,
+            unit: 'k',
+            routeType: "shortest",
+          }
+        })
+        // after both axios calls are made, we wait for all of the data before taking it and sending it to our App.js via props
+      ]).then(axios.spread((apiDataBike, apiDataWalk, apiDataDrive) => {
+
+          console.log("cycling", apiDataBike)
+          console.log("walking", apiDataWalk)
+          console.log("driving", apiDataDrive)
+          setWalkRoute(apiDataWalk.data.route)
+          setBikeRoute(apiDataBike.data.route)
+          setDriveRoute(apiDataDrive.data.route)
+   
+      })).catch(error => {
+        console.log(error)
+      });
+    }
     
   }
 
@@ -117,6 +136,7 @@ const MapForm = (props) => {
     props.time(chosenCommuteTime)
   }, [chosenCommuteTime])
 
+  
   return (
     <section>
       <form action="" onSubmit={handleSubmit}>
