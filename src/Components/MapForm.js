@@ -33,7 +33,6 @@ const MapForm = (props) => {
         }
       }).then((response) => {
         setGivenAddress(response.data.results)
-        console.log("response",response)
       })
     }
   }, [autoTo])
@@ -74,9 +73,8 @@ const MapForm = (props) => {
     e.preventDefault()
     if (autoFrom === "" || autoTo === "") {
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Please fill out your starting location as well as your destination',
+        icon: 'warning',
+        title: 'Please fill out your starting location as well as your destination',
         footer: 'Hint: Start typing and our autofill will help you out!'
       })
     } else {
