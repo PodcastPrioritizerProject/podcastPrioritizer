@@ -1,0 +1,35 @@
+// styling for the header
+
+header {
+    .titleBlock {
+        padding: 50px 0px;
+        position: relative;
+
+        h1 {
+            text-align: center;
+            position: relative;
+
+            &:before {
+                content: '';
+                width: 30px;
+                height: 30px;
+                background-color: $quaternary;
+                z-index: -1;
+                top: -10px;
+                left: 5px;
+                position: absolute;
+            }
+            &:after {
+                content: '';
+                width: 30px;
+                height: 30px;
+                background-color: $secondary;
+                z-index: -1;
+                bottom: 0px;
+                right: 0px;
+                position: absolute;
+            }
+        }
+
+    }
+}
