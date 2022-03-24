@@ -65,6 +65,10 @@ function PodcastGenreForm(props) {
             }).then((response) => {
                 console.log(response.data.results)
                 setPodcastArray(response.data.results)
+                if (podcastArray.length <= 1) {
+                    //Re-run API call with larger audio length params.
+                    console.log(``);
+                }
             })
         }
 
