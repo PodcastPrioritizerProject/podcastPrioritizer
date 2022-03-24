@@ -1,0 +1,46 @@
+* {
+    font-family: $baseFont;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 125%;
+    background-color: $primary;
+    color: $tertiary;
+}
+
+.wrapper {
+    width: 85%;
+    margin: 0 auto;
+}
+
+h1 {
+    font-family: $mainFont;
+    color: $tertiary;
+    .firstH {
+        font-family: $mainFont;
+        color: $secondary;
+    }
+    .secondH {
+        font-family: $mainFont;
+        color: $quaternary;
+    }
+}
+
+p {
+    &.punchline {
+        font-weight: bold;
+    }
+}
+
+em {
+    font-style: normal;
+    font-weight: bold;
+    &.yellow {
+        color: $secondary;
+    }
+    &.orange {
+        color: $quaternary;
+    }
+}
