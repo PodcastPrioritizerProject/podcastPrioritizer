@@ -120,7 +120,7 @@ const MapForm = (props) => {
   return (
     <section>
       <form action="" onSubmit={handleSubmit}>
-        <input style={{width: "500px"}} type="text" onChange={handleInputFrom} list="fromLocation" id="from" value={autoFrom} autoComplete="off"/>
+        <input type="text" onChange={handleInputFrom} list="fromLocation" id="from" value={autoFrom} autoComplete="off"/>
         <label htmlFor="fromLocation" className="sr-only">Enter starting location</label>
           <datalist id="fromLocation" >
             {
@@ -134,7 +134,7 @@ const MapForm = (props) => {
               })
             }
           </datalist>
-        <input style={{ width: "500px" }} type="text" onChange={handleInputTo} list="toLocation" id="to" value={autoTo} autoComplete="off"/>
+        <input type="text" onChange={handleInputTo} list="toLocation" id="to" value={autoTo} autoComplete="off"/>
         <label htmlFor="toLocation" className="sr-only">Enter destination</label>
           <datalist id="toLocation" >
             {

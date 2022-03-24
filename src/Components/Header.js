@@ -2,8 +2,11 @@ function Header() {
 
     return (
         <header>
-            <div className="titleBlock wrapper">
-                <h1> <span className="firstH">P</span>odcast <span className="secondH">P</span>rioritizer</h1>
+            <div className="wrapper">
+                <div className="titleBlock">
+                    <h1 className="firstBlock"> <span className="firstH">P</span>odcast</h1>
+                    <h1 className="secondBlock">Prioritize<span className="secondH">R</span></h1>
+                </div>
             </div>
 
             <div className="aboutSection wrapper">
