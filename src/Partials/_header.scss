@@ -1,0 +1,51 @@
+// styling for the header
+
+header {
+    margin-bottom: 40px;
+    .wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        .titleBlock {
+            padding: 50px 0px;
+            .firstBlock {
+                position: relative;
+    
+                &:before {
+                    content: '';
+                    width: 30px;
+                    height: 30px;
+                    background-color: $quaternary;
+                    z-index: -1;
+                    top: -5px;
+                    left: -15px;
+                    position: absolute;
+                }
+            }
+
+            .secondBlock {
+                position: relative;
+
+                &:after {
+                    content: '';
+                    width: 30px;
+                    height: 30px;
+                    background-color: $secondary;
+                    z-index: -1;
+                    bottom: -10px;
+                    right: -13px;
+                    position: absolute;
+                }
+            }
+    
+        }
+    }
+
+    .aboutSection {
+        .punchline {
+            margin: 40px 0 20px 0;
+        }
+    }
+}

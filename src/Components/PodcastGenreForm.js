@@ -33,6 +33,19 @@ function PodcastGenreForm(props) {
 
     //Run Autocomplete API if user input is longer than 1 character
     useEffect( function() {
+        if (userGenreInput.length < 1) {
+            axios({
+                url: 'https://listen-api.listennotes.com/api/v2/genres',
+                headers: { "X-ListenAPI-Key": "0be4947c18024c2d8a5bb0dcb11eb2ac" },
+                params: {
+                    top_level_only: 1
+                }
+            }).then((genreResponse) => {
+                //Store based genres returned from API in state variable
+                setSelectedGenre(genreResponse.data.genres)
+            })
+        }
+       
         if( userGenreInput.length >= 1) {
             
             axios({
@@ -65,6 +78,10 @@ function PodcastGenreForm(props) {
             }).then((response) => {
                 console.log(response.data.results)
                 setPodcastArray(response.data.results)
+                if (podcastArray.length <= 1) {
+                    //Re-run API call with larger audio length params.
+                    console.log(``);
+                }
             })
         }
 
