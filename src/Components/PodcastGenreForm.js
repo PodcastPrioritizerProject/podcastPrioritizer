@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import Swal from 'sweetalert2'
 // importing podcast entry results 
 import PodcastEntry from './PodcastEntry';
+import LoadingAnimationP from './LoadingAnimationP';
 
 
 function PodcastGenreForm(props) {
@@ -11,6 +12,7 @@ function PodcastGenreForm(props) {
     const [ userGenreInput, setUserGenreInput ] = useState('')
     const [ finalGenreInput, setFinalGenreInput ] = useState('')
     const [ podcastArray, setPodcastArray ] = useState([])
+    const [submitState, setSubmitState] = useState(false)
 
     let minWalkTime = props.chosenTime
     minWalkTime = Math.floor((minWalkTime * 0.8) / 60)
@@ -27,7 +29,7 @@ function PodcastGenreForm(props) {
     // track user input and set state when submit is clicked
     const handleSubmit = (e) => {
         e.preventDefault()
-        setFinalGenreInput(userGenreInput)
+          setFinalGenreInput(userGenreInput)
     }
 
 
@@ -66,7 +68,7 @@ function PodcastGenreForm(props) {
     useEffect(function() {
 
         if(userGenreInput.length >= 1) {
-            
+            setSubmitState(true)
             axios({
                 url: 'https://listen-api.listennotes.com/api/v2/search',
                 headers: { "X-ListenAPI-Key": "0be4947c18024c2d8a5bb0dcb11eb2ac" },
@@ -76,12 +78,26 @@ function PodcastGenreForm(props) {
                     len_max: `${maxWalkTime}`,
                 }
             }).then((response) => {
+
+                setSubmitState(false)  
                 console.log(response.data.results)
                 setPodcastArray(response.data.results)
                 if (podcastArray.length <= 1) {
                     //Re-run API call with larger audio length params.
                     console.log(``);
                 }
+
+            }).then(() => {
+              if (podcastArray.length <= 1) {
+                Swal.fire({
+                  icon: 'error',
+                  text: "Sorry, we couldn't find any podcasts that match your criteria",
+                  color: "#EDF2EF",
+                  confirmButtonColor: '#F97068',
+                  background: "#1a2635"
+                })
+                setUserGenreInput("")
+              }
             })
         }
 
@@ -106,9 +122,15 @@ function PodcastGenreForm(props) {
                         })
                     }
                 </datalist>
-                <button type="submit">Submit</button>
+                <button type="submit"
+                disabled={userGenreInput === "" || submitState === true ? true : false}
+                >Submit</button>
             </form>
-
+            {
+              submitState === true
+              ? <LoadingAnimationP />
+              : null
+            }      
             {/* passing props to PodcastEntry of the walk seconds and bike seconds */}
             <PodcastEntry 
                 podcasts={podcastArray}
