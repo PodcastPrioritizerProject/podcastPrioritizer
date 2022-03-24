@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from "axios";
 import "./App.scss";
-
+import {Routes, Route, Link} from 'react-router-dom';
 // importing components
 import MapForm from './Components/MapForm';
 import PodcastGenreForm from './Components/PodcastGenreForm';
+import PodcastDetails from './Components/PodcastDetails';
+
 
 function App() {
   const [chosenTime, setChosenTime] = useState("");
@@ -15,13 +17,14 @@ function App() {
 
   return (
       <>
+      <Link to='/'>
         <h1>hello</h1>
-        <MapForm 
-        time={handleTime} 
-        />
-        <PodcastGenreForm 
-        chosenTime={chosenTime}
-        />
+      </Link>
+        
+        <Routes>
+          <Route path="/" element={<><MapForm time={handleTime} /><PodcastGenreForm chosenTime={chosenTime} /> </>} /> 
+          <Route path="/:podcastId" element={<PodcastDetails />} />
+        </Routes>
       </>
   );
 };
