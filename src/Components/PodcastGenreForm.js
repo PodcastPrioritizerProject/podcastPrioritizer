@@ -65,9 +65,10 @@ function PodcastGenreForm(props) {
   }, [userGenreInput])
   
   //Run Search API to gather a list of related movies, taking in the autocompleted input as the parameter. API call will only run if character length is greater than 1.
-  useEffect(function() {
 
+  useEffect(function() {
     if(userGenreInput.length >= 1) {
+
       setSubmitState(true)
       axios({
         url: 'https://listen-api.listennotes.com/api/v2/search',
@@ -78,7 +79,6 @@ function PodcastGenreForm(props) {
             len_max: `${maxWalkTime}`,
         }
       }).then((response) => {
-
         setSubmitState(false)  
         console.log(response.data.results)
 
