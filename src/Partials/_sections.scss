@@ -1,0 +1,57 @@
+// styling for mapForm section
+.mapDetails {
+    .wrapper {
+        h2 {
+            padding-bottom: 20px;
+        }
+        .destinationForm {
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            
+            input {
+                width: 100%;
+                font-size: $baseFontSize;
+                padding: 5px;
+                margin: 5px 0 15px 0;
+            }
+        }
+    }
+}
+
+// styling for the CommuteType Component
+
+.commuteType {
+    width: 100%;
+    .commuteIconsForm {
+        display: flex;
+        justify-content: space-between;
+        .travelIconsLabel {
+            width: 90px;
+            min-height: 90px;
+            background-color: $quinary;
+            border-radius: 2px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            
+
+            .individualIcons {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+            }
+        }
+
+        input[type="radio"]:checked + label{
+            background-color: $primary;
+            box-shadow:   0px 0px 0px 2px $quaternary;
+        }
+    }
+}
