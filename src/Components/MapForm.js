@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'; 
 import MapDisplay from './MapDisplay';
 import CommuteType from './CommuteType';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const MapForm = (props) => {
 // creating useState variables
@@ -70,41 +72,65 @@ const MapForm = (props) => {
   // form submit function that makes two axios calls using the final input values of autoTo/autoFrom
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.all([
-      axios.get("http://www.mapquestapi.com/directions/v2/route", {
-        params: {
-        key: "pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW",
-        from: `${autoFrom}`,
-        to: `${autoTo}`,
-        unit: 'k',
-        routeType: "bicycle",
-        }
-      }),
-      axios.get('http://www.mapquestapi.com/directions/v2/route', {
-        params: {
-        key: "pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW",
-        from: `${autoFrom}`,
-        to: `${autoTo}`,
-        unit: 'k',
-        routeType: "pedestrian",
-        }
-      }),
-      axios.get("http://www.mapquestapi.com/directions/v2/route", {
-        params: {
+    if (autoFrom === "") {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Please enter your starting location',
+        footer: 'Hint: Start typing and our autofill will help you out!'
+      })
+    } else if (autoTo === ""){
+      Swal.fire({
+        icon: 'warning',
+        title: 'Please enter your destination',
+        footer: 'Hint: Start typing and our autofill will help you out!'
+      })
+    }else {
+      e.target[2].disabled = true
+
+      axios.all([
+        axios.get("http://www.mapquestapi.com/directions/v2/route", {
+          params: {
           key: "pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW",
           from: `${autoFrom}`,
           to: `${autoTo}`,
           unit: 'k',
-          routeType: "shortest",
-        }
-      })
-      // after both axios calls are made, we wait for all of the data before taking it and sending it to our App.js via props
-    ]).then(axios.spread((apiDataBike, apiDataWalk, apiDataDrive) => {
-      setWalkRoute(apiDataWalk.data.route)
-      setBikeRoute(apiDataBike.data.route)
-      setDriveRoute(apiDataDrive.data.route)
-    })) 
-    
+          routeType: "bicycle",
+          }
+        }),
+        axios.get('http://www.mapquestapi.com/directions/v2/route', {
+          params: {
+          key: "pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW",
+          from: `${autoFrom}`,
+          to: `${autoTo}`,
+          unit: 'k',
+          routeType: "pedestrian",
+          }
+        }),
+        axios.get("http://www.mapquestapi.com/directions/v2/route", {
+          params: {
+            key: "pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW",
+            from: `${autoFrom}`,
+            to: `${autoTo}`,
+            unit: 'k',
+            routeType: "shortest",
+          }
+        })
+        // after both axios calls are made, we wait for all of the data before taking it and sending it to our App.js via props
+      ]).then(axios.spread((apiDataBike, apiDataWalk, apiDataDrive) => {
+          e.target[2].disabled = false
+          console.log("cycling", apiDataBike)
+          console.log("walking", apiDataWalk)
+          console.log("driving", apiDataDrive)
+          setWalkRoute(apiDataWalk.data.route)
+          setBikeRoute(apiDataBike.data.route)
+          setDriveRoute(apiDataDrive.data.route)
+   
+      })).catch(error => {
+        console.log(error)
+      });
+    }
+    setAutoTo("")
+    setAutoFrom("")
   }
 
   const handleChoices = (time, sessionId, type) => {
@@ -117,10 +143,11 @@ const MapForm = (props) => {
     props.time(chosenCommuteTime)
   }, [chosenCommuteTime])
 
+  
   return (
     <section>
       <form action="" onSubmit={handleSubmit}>
-        <input style={{width: "500px"}} type="text" onChange={handleInputFrom} list="fromLocation" id="from" value={autoFrom} autoComplete="off"/>
+        <input type="text" onChange={handleInputFrom} list="fromLocation" id="from" value={autoFrom} autoComplete="off"/>
         <label htmlFor="fromLocation" className="sr-only">Enter starting location</label>
           <datalist id="fromLocation" >
             {
@@ -134,7 +161,7 @@ const MapForm = (props) => {
               })
             }
           </datalist>
-        <input style={{ width: "500px" }} type="text" onChange={handleInputTo} list="toLocation" id="to" value={autoTo} autoComplete="off"/>
+        <input type="text" onChange={handleInputTo} list="toLocation" id="to" value={autoTo} autoComplete="off"/>
         <label htmlFor="toLocation" className="sr-only">Enter destination</label>
           <datalist id="toLocation" >
             {

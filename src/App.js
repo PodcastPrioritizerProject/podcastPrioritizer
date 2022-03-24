@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import "./App.scss";
 import {Routes, Route, Link} from 'react-router-dom';
+
 // importing components
+import Header from './Components/Header';
 import MapForm from './Components/MapForm';
 import PodcastGenreForm from './Components/PodcastGenreForm';
 import PodcastDetails from './Components/PodcastDetails';
@@ -22,9 +24,10 @@ function App() {
       </Link>
         
         <Routes>
-          <Route path="/" element={<><MapForm time={handleTime} /><PodcastGenreForm chosenTime={chosenTime} /> </>} /> 
+        <Route path="/" element={<><Header /><MapForm time={handleTime} /><PodcastGenreForm chosenTime={chosenTime} /> </>} /> 
           <Route path="/:podcastId" element={<PodcastDetails />} />
         </Routes>
+
       </>
   );
 };

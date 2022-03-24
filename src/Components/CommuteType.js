@@ -1,16 +1,10 @@
-// import { useState } from "react"
+import Swal from 'sweetalert2'
 
 const CommuteType = (props) => {
-  // console.log(props)
 
-  // const [commuteSeconds, setCommuteSeconds] = useState("")
-  // const [commuteSession, setCommuteSession] = useState("")
-  // console.log(commuteSeconds)
-  // console.log(commuteSession)
-  // console.log(props)
+  // console.log(props.walkTime.formattedTime)
+
   const handleChange = (time, sessionId, type) => {
-    // setCommuteSeconds(time)
-    // setCommuteSession(sessionId)
     props.choices(time, sessionId, type)
   }
 
@@ -23,6 +17,11 @@ const CommuteType = (props) => {
         <label htmlFor="walk">
           <div style={{height: "100px", width: "100px", border: "2px solid red"}}>
             <p>Walk</p>
+            {
+              props.walkTime.formattedTime === undefined && props.bikeTime.formattedTime !== undefined
+              ? <p>DON'T WALK TOO FAR</p>
+              : <p>{props.walkTime.formattedTime}</p>
+            }
           </div>
         </label>
         <input type="radio" id="bike" name="types" className="sr-only"
@@ -31,6 +30,7 @@ const CommuteType = (props) => {
         <label htmlFor="bike">
           <div style={{ height: "100px", width: "100px", border: "2px solid red" }}>
             <p>Bike</p>
+            <p>{props.bikeTime.formattedTime}</p>
           </div>
         </label>
         <input type="radio" id="drive" name="types" className="sr-only"
@@ -39,6 +39,7 @@ const CommuteType = (props) => {
         <label htmlFor="drive">
           <div style={{ height: "100px", width: "100px", border: "2px solid red" }}>
             <p>Drive</p>
+            <p>{props.driveTime.formattedTime}</p>
           </div>
         </label>
       </form>
