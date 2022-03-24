@@ -2,7 +2,7 @@ import Swal from 'sweetalert2'
 
 const CommuteType = (props) => {
 
-  console.log(props.walkTime.formattedTime)
+  // console.log(props.walkTime.formattedTime)
 
   const handleChange = (time, sessionId, type) => {
     props.choices(time, sessionId, type)

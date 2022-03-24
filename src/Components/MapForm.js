@@ -28,11 +28,12 @@ const MapForm = (props) => {
           q: `${autoTo}`,
           collection: `${["adminArea", "address", "airport"]}`,
           limit: 5,
-          // countryCode: 'CA',
+          countryCode: 'CA',
           location: [43.6, 79.3]
         }
       }).then((response) => {
         setGivenAddress(response.data.results)
+        console.log("response",response)
       })
     }
   }, [autoTo])
@@ -48,7 +49,7 @@ const MapForm = (props) => {
           q: `${autoFrom}`,
           collection: `${["adminArea", "address", "airport"]}`,
           limit: 5,
-          // countryCode: 'CA',
+          countryCode: 'CA',
           location: [43.6, 79.3]
         }
       }).then((response) => {
@@ -71,13 +72,20 @@ const MapForm = (props) => {
   // form submit function that makes two axios calls using the final input values of autoTo/autoFrom
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (autoFrom === "" || autoTo === "") {
+    if (autoFrom === "") {
       Swal.fire({
         icon: 'warning',
-        title: 'Please fill out your starting location as well as your destination',
+        title: 'Please enter your starting location',
         footer: 'Hint: Start typing and our autofill will help you out!'
       })
-    } else {
+    } else if (autoTo === ""){
+      Swal.fire({
+        icon: 'warning',
+        title: 'Please enter your destination',
+        footer: 'Hint: Start typing and our autofill will help you out!'
+      })
+    }else {
+      e.target[2].disabled = true
 
       axios.all([
         axios.get("http://www.mapquestapi.com/directions/v2/route", {
@@ -109,7 +117,7 @@ const MapForm = (props) => {
         })
         // after both axios calls are made, we wait for all of the data before taking it and sending it to our App.js via props
       ]).then(axios.spread((apiDataBike, apiDataWalk, apiDataDrive) => {
-
+          e.target[2].disabled = false
           console.log("cycling", apiDataBike)
           console.log("walking", apiDataWalk)
           console.log("driving", apiDataDrive)
@@ -121,7 +129,8 @@ const MapForm = (props) => {
         console.log(error)
       });
     }
-    
+    setAutoTo("")
+    setAutoFrom("")
   }
 
   const handleChoices = (time, sessionId, type) => {
