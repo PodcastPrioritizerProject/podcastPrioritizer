@@ -11,11 +11,11 @@ function PodcastEntry(props) {
                 let audioMinutes = Math.floor(e.audio_length_sec / 60)
                 return (
                     <Link key={e.id} to={`/home/${e.id}`}>
-                    <li key={e.id}>
-                            <img src={e.thumbnail} alt={`picture for ${e.podcast_title_original}`} />
-                            <h2>{e.title_original}</h2>
-                            <p>{audioMinutes}</p>
-                        </li>
+                      <li key={e.id}>
+                        <img src={e.thumbnail} alt={`picture for ${e.podcast_title_original}`} />
+                        <h2>{e.title_original}</h2>
+                        <p>{audioMinutes}</p>
+                      </li>
                     </Link>
                 )
             
