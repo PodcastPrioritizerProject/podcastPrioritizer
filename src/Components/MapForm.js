@@ -187,6 +187,7 @@ const MapForm = (props) => {
     }
     navigator.geolocation.getCurrentPosition(locationFinder);
   }
+  
 
   return (
     <section>
