@@ -1,8 +1,4 @@
-import Swal from 'sweetalert2'
-
 const CommuteType = (props) => {
-
-  // console.log(props.walkTime.formattedTime)
 
   const handleChange = (time, sessionId, type) => {
     props.choices(time, sessionId, type)
@@ -23,6 +19,11 @@ const CommuteType = (props) => {
               ? <p>DON'T WALK TOO FAR</p>
               : <p>{props.walkTime.formattedTime}</p>
             }
+            {
+              props.walkTime.distance === undefined
+              ? null
+              : <p>{props.walkTime.distance.toFixed(1)}km</p>
+            }
           </div>
         </label>
         <input type="radio" id="bike" name="types" className="sr-only"
@@ -33,6 +34,11 @@ const CommuteType = (props) => {
           <div style={{ height: "100px", width: "100px", border: "2px solid red" }}>
             <p>Bike</p>
             <p>{props.bikeTime.formattedTime}</p>
+            {
+              props.bikeTime.distance === undefined
+              ? null
+              : <p>{props.bikeTime.distance.toFixed(1)}km</p>
+            }
           </div>
         </label>
         <input type="radio" id="drive" name="types" className="sr-only"
@@ -43,6 +49,12 @@ const CommuteType = (props) => {
           <div style={{ height: "100px", width: "100px", border: "2px solid red" }}>
             <p>Drive</p>
             <p>{props.driveTime.formattedTime}</p>
+            {
+              props.driveTime.distance === undefined
+              ? null
+              : <p>{props.driveTime.distance.toFixed(1)}km</p>
+            }
+         
           </div>
         </label>
       </form>
