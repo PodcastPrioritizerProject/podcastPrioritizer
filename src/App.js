@@ -22,9 +22,9 @@ function App() {
       <Link to='/'>
         <h1>hello</h1>
       </Link>
-        <Header />
+        
         <Routes>
-          <Route path="/" element={<><MapForm time={handleTime} /><PodcastGenreForm chosenTime={chosenTime} /> </>} /> 
+        <Route path="/" element={<><Header /><MapForm time={handleTime} /><PodcastGenreForm chosenTime={chosenTime} /> </>} /> 
           <Route path="/:podcastId" element={<PodcastDetails />} />
         </Routes>
 
