@@ -16,9 +16,6 @@ function App() {
 
   return (
       <>
-        <Link to='/'>
-          <h1>hello</h1>
-        </Link>
         <Routes>
           <Route path="/" element={<Home audioUrl={handleAudioUrl}/>} /> 
           <Route path="/:podcastId" element={<PodcastDetails />} />

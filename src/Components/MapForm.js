@@ -147,6 +147,9 @@ const MapForm = (props) => {
           Swal.fire({
             icon: 'error',
             text: "All roads lead to Rome, but no roads lead to where you're going!",
+            color: "#EDF2EF",
+            confirmButtonColor: '#F97068',
+            background: "#1a2635"
           })
           setWalkRoute({})
           setBikeRoute({})
@@ -155,7 +158,10 @@ const MapForm = (props) => {
           Swal.fire({
             icon: 'error',
             text: "Sorry for the wait! We tried our best but could not find a route for your destination",
-            footer: "Hint: Check for any typos or add a more specific address."
+            footer: "Hint: Check for any typos or add a more specific address.",
+            color: "#EDF2EF",
+            confirmButtonColor: '#F97068',
+            background: "#1a2635"
           })
           setWalkRoute({})
           setBikeRoute({})

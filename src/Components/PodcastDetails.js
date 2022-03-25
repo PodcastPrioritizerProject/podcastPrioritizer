@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -41,6 +41,9 @@ const PodcastDetails = () => {
     
     return (
         <div className="podcastCard">
+        <Link to='/'>
+          <button type='button'>BACK ICON HERE</button>
+        </Link>
             <div className="podcastCardImage">
                 <img src={image} alt="" />
             </div>
