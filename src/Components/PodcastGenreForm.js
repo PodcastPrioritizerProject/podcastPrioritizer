@@ -18,7 +18,7 @@ function PodcastGenreForm(props) {
   const [finalGenre, setFinalGenre] = useState(window.sessionStorage.getItem('finalGenre'))
 
   // const [sessionTime, setSessionTime] = useState(window.sessionStorage.getItem('count'));
-
+  console.log(props.chosenTime)
 
 
   let minWalkTime = props.chosenTime
@@ -122,6 +122,8 @@ function PodcastGenreForm(props) {
             len_max: `${maxWalkTime}`,
         }
       }).then((response) => {
+        setFinalGenreInput("")
+        
         setSubmitState(false)  
         console.log(response.data.results)
 
@@ -146,23 +148,28 @@ function PodcastGenreForm(props) {
 
   return (
     <section>
-      <form action="" onSubmit={ handleSubmit }>
-        <input type="text" onChange={ handleInput } list="genres" value={ userGenreInput }/>
-        <datalist id="genres">
-          {
-            //Map through the returned Genres array, return character matched genres. 
-            selectedGenre.map( (genre) => {
-              return (
-                <option value={genre.name} key={genre.id}>
-                </option>
-              )
-            })
-          }
-        </datalist>
-        <button type="submit"
-        disabled={userGenreInput === "" || submitState === true ? true : false}
-        >Submit</button>
-      </form>
+      {
+        props.chosenTime === "" && window.sessionStorage.finalGenre === undefined
+        ? null
+        :
+        <form action="" onSubmit={ handleSubmit }>
+          <input type="text" onChange={ handleInput } list="genres" value={ userGenreInput }/>
+          <datalist id="genres">
+            {
+              //Map through the returned Genres array, return character matched genres. 
+              selectedGenre.map( (genre) => {
+                return (
+                  <option value={genre.name} key={genre.id}>
+                  </option>
+                )
+              })
+            }
+          </datalist>
+          <button type="submit"
+          disabled={userGenreInput === "" || submitState === true ? true : false}
+          >Submit</button>
+        </form>
+      }
       {
         submitState === true
         ? <LoadingAnimationP />

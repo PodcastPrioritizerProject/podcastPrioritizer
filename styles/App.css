@@ -500,6 +500,18 @@ header .aboutSection .punchline {
     opacity: 1;
   }
 }
+#root {
+  padding-bottom: 150px;
+}
+
+.audioPlayer {
+  position: fixed;
+  bottom: 0;
+  right: 50%;
+  -webkit-transform: translate(50%, -50%);
+          transform: translate(50%, -50%);
+}
+
 .mapDetails .wrapper h2 {
   padding-bottom: 20px;
 }
@@ -519,10 +531,48 @@ header .aboutSection .punchline {
       -ms-flex-align: center;
           align-items: center;
 }
-.mapDetails .wrapper .destinationForm input {
+.mapDetails .wrapper .destinationForm .startingLocation {
+  width: 100%;
+}
+.mapDetails .wrapper .destinationForm .startingLocation .inputStart {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 5px 0 15px 0;
+  background-color: #273b50;
+}
+.mapDetails .wrapper .destinationForm .startingLocation .inputStart input {
   width: 100%;
   font-size: 0.9rem;
+  padding: 10px;
+}
+.mapDetails .wrapper .destinationForm .startingLocation .inputStart button {
+  max-height: 35px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   padding: 5px;
+}
+.mapDetails .wrapper .destinationForm .startingLocation .inputStart button svg {
+  max-height: 30px;
+  max-width: 30px;
+}
+.mapDetails .wrapper .destinationForm .finalLocation {
+  width: 100%;
+}
+.mapDetails .wrapper .destinationForm .finalLocation input {
+  width: 100%;
+  font-size: 0.9rem;
+  padding: 10px;
   margin: 5px 0 15px 0;
 }
 

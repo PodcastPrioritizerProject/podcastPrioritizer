@@ -1,6 +1,6 @@
 const AudioPlayer = (props) => {
   return (
-    <div>
+    <div className="audioPlayer">
       <p>podcast title</p>
       <audio
         controls

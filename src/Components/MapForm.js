@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios'; 
 import MapDisplay from './MapDisplay';
 import CommuteType from './CommuteType';
@@ -19,6 +19,7 @@ const MapForm = (props) => {
   const [chosenCommuteSession, setChosenCommuteSession] = useState("")
   const [chosenCommuteType, setChosenCommuteType] = useState("")
   const [submitState, setSubmitState] = useState(false)
+  const [commuteComponent, setComuteComponent] = useState(false)
 
   // create a useEffect to call axios when onChange happens for the to input field for MapForm
   useEffect(() => {
@@ -104,6 +105,7 @@ const MapForm = (props) => {
 
       // this state triggers loading animation
       setSubmitState(true)
+      setComuteComponent(true)
       axios.all([
         axios.get("http://www.mapquestapi.com/directions/v2/route", {
           params: {
@@ -134,6 +136,8 @@ const MapForm = (props) => {
         })
         // after both axios calls are made, we wait for all of the data before taking it and sending it to our App.js via props
       ]).then(axios.spread((apiDataBike, apiDataWalk, apiDataDrive) => {
+
+        commuteRef.current.scrollIntoView({ behavior: 'smooth' })
         // when the API call returns, enable the submit button
         e.target[2].disabled = false
         // stop loading animation render
@@ -196,6 +200,7 @@ const MapForm = (props) => {
     navigator.geolocation.getCurrentPosition(locationFinder);
   }
   
+  const commuteRef = useRef()
 
   return (
     <section className='mapDetails'>
@@ -240,7 +245,7 @@ const MapForm = (props) => {
                 }
               </datalist>
           </div>
-          <button>Submit</button>
+          <button ref={commuteRef}>Submit</button>
         </form>
         {/* loading animation while waiting for API results */}
         {
@@ -248,15 +253,25 @@ const MapForm = (props) => {
           ?<LoadingAnimation />
           : null
         }
-        <CommuteType 
-        walkTime={walkRoute}
-        bikeTime={bikeRoute}
-        driveTime={driveRoute}
-        choices={handleChoices}
-        />
-        <MapDisplay 
-        map={chosenCommuteSession}
-        />
+        {
+          commuteComponent === true
+          ? <CommuteType
+            walkTime={walkRoute}
+            bikeTime={bikeRoute}
+            driveTime={driveRoute}
+            choices={handleChoices}
+          />
+          : null
+        }
+        {
+          chosenCommuteTime === "" && window.sessionStorage.finalGenre === undefined
+          ? null
+          : <MapDisplay
+            map={chosenCommuteSession} />
+        }
+
+        
+    
       </div>
     </section>
   )
