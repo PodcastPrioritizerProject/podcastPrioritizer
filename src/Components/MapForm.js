@@ -190,54 +190,61 @@ const MapForm = (props) => {
   
 
   return (
-    <section>
-      <form action="" onSubmit={handleSubmit}>
-        <input type="text" onChange={handleInputFrom} list="fromLocation" id="from" value={autoFrom} autoComplete="off"/>
-        <label htmlFor="fromLocation" className="sr-only">Enter starting location</label>
-        <button type='button' onClick={() => {myLocation()}}>X</button>
-          <datalist id="fromLocation" >
-            {
-              // map through the givenAddress state defined by the axios call and return it as options (autofill API)
-              givenAddress.map((singleAddress) => {
-                return (
-                  <option key={singleAddress.id}>
-                  {singleAddress.displayString}
-                  </option>
-                )
-              })
-            }
-          </datalist>
-        <input type="text" onChange={handleInputTo} list="toLocation" id="to" value={autoTo} autoComplete="off"/>
-        <label htmlFor="toLocation" className="sr-only">Enter destination</label>
-          <datalist id="toLocation" >
-            {
-              // map through the givenAddress state defined by the axios call and return it as options (autofill API)
-              givenAddress.map((singleAddress) => {
-                return (
-                  <option key={singleAddress.id}>
-                  {singleAddress.displayString}
-                  </option>
-                )
-              })
-            }
-          </datalist>
-        <button>Submit</button>
-      </form>
-      {/* loading animation while waiting for API results */}
-      {
-        submitState === true
-        ?<LoadingAnimation />
-        : null
-      }
-      <CommuteType 
-      walkTime={walkRoute}
-      bikeTime={bikeRoute}
-      driveTime={driveRoute}
-      choices={handleChoices}
-      />
-      <MapDisplay 
-      map={chosenCommuteSession}
-      />
+    <section className='mapDetails'>
+      <div className="wrapper">
+        <h2>Where To?</h2>
+        <form action="" onSubmit={handleSubmit} className="destinationForm">
+
+          <div className="startingLocation">
+            <label htmlFor="fromLocation" className='orange'>Enter starting location</label>
+            <input type="text" onChange={handleInputFrom} list="fromLocation" id="from" value={autoFrom} autoComplete="off"/>
+              <datalist id="fromLocation" >
+                {
+                  // map through the givenAddress state defined by the axios call and return it as options (autofill API)
+                  givenAddress.map((singleAddress) => {
+                    return (
+                      <option key={singleAddress.id}>
+                      {singleAddress.displayString}
+                      </option>
+                    )
+                  })
+                }
+              </datalist>
+          </div>
+          <div className="finalLocation">
+            <label htmlFor="toLocation" className='yellow'>Enter destination</label>
+            <input type="text" onChange={handleInputTo} list="toLocation" id="to" value={autoTo} autoComplete="off"/>
+              <datalist id="toLocation" >
+                {
+                  // map through the givenAddress state defined by the axios call and return it as options (autofill API)
+                  givenAddress.map((singleAddress) => {
+                    return (
+                      <option key={singleAddress.id}>
+                      {singleAddress.displayString}
+                      </option>
+                    )
+                  })
+                }
+              </datalist>
+          </div>
+          <button>Submit</button>
+        </form>
+        {/* loading animation while waiting for API results */}
+        {
+          submitState === true
+          ?<LoadingAnimation />
+          : null
+        }
+        <CommuteType 
+        walkTime={walkRoute}
+        bikeTime={bikeRoute}
+        driveTime={driveRoute}
+        choices={handleChoices}
+        />
+        <MapDisplay 
+        map={chosenCommuteSession}
+        />
+      </div>
     </section>
   )
 }

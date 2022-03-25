@@ -9,9 +9,17 @@ h1 {
     text-transform: uppercase;
 }
 
+h2 {
+    font-size: 1.4rem;
+}
+
 p {
     font-size: $baseFontSize;
     &.punchline {
         font-size: 1rem;
     }
+}
+
+label {
+    font-size: $baseFontSize;
 }

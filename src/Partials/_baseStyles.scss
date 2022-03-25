@@ -17,6 +17,14 @@ html {
     color: $tertiary;
 }
 
+.orange {
+    color: $quaternary;
+}
+
+.yellow {
+    color: $secondary;
+}
+
 .wrapper {
     width: 85%;
     margin: 0 auto;
@@ -28,10 +36,12 @@ h1 {
     .firstH {
         font-family: $mainFont;
         color: $secondary;
+        text-shadow: 1px 1px 0 $primary, 1px -1px 0 $primary, -1px 1px 0 $primary, -1px -1px 0 $primary, 1px 0px 0 $primary, 0px 1px 0 $primary, -1px 0px 0 $primary, 0px -1px 0 $primary;
     }
     .secondH {
         font-family: $mainFont;
         color: $quaternary;
+        text-shadow: 1px 1px 0 $primary, 1px -1px 0 $primary, -1px 1px 0 $primary, -1px -1px 0 $primary, 1px 0px 0 $primary, 0px 1px 0 $primary, -1px 0px 0 $primary, 0px -1px 0 $primary;
     }
 }
 
@@ -51,3 +61,32 @@ em {
         color: $quaternary;
     }
 }
+
+input {
+    background-color: $quinary;
+    color: $tertiary;
+    font-family: $baseFont;
+    border: none;
+    padding: 5px;
+}
+
+button {
+    padding: 10px;
+    font-family: $baseFont;
+    font-weight: bold;
+    font-size: $baseFontSize;
+    background-color: $quinary;
+    color: $quaternary;
+    border: none;
+    border-radius: 2px;
+    &:active {
+        background-color: $primary;
+        box-shadow:   0px 0px 0px 2px $quaternary;
+    }
+}
+
+svg {
+    color: $quaternary;
+    font-size: 2rem;
+}
+

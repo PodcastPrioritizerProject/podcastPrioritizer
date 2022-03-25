@@ -1,3 +1,8 @@
+import Swal from 'sweetalert2'
+import { AiFillCar } from 'react-icons/ai';
+import { MdDirectionsBike } from 'react-icons/md'
+import { FaWalking } from 'react-icons/fa'
+
 const CommuteType = (props) => {
 
   const handleChange = (time, sessionId, type) => {
@@ -6,14 +11,15 @@ const CommuteType = (props) => {
 
   return (
     <div className="commuteType">
-      <form action="" id="types" style={{display: "flex"}}>
+      <h2>How Will You Be Travelling?</h2>
+      <form action="" id="types" className='commuteIconsForm'>
         <input type="radio" id="walk" name="types" className="sr-only"
           disabled={props.walkTime.time ? false : true}
           onClick={() => {handleChange(props.walkTime.time, props.walkTime.sessionId, props.walkTime.options.routeType)}}
         />
-        <label htmlFor="walk">
-          <div style={{height: "100px", width: "100px", border: "2px solid red"}}>
-            <p>Walk</p>
+        <label htmlFor="walk" aria-label="walking time" className='travelIconsLabel'>
+          <div className='individualIcons'>
+            <FaWalking />
             {
               props.walkTime.formattedTime === undefined && props.bikeTime.formattedTime !== undefined
               ? <p>DON'T WALK TOO FAR</p>
@@ -30,9 +36,9 @@ const CommuteType = (props) => {
           disabled={props.bikeTime.time ? false : true}
           onClick={() => { handleChange(props.bikeTime.time, props.bikeTime.sessionId, props.bikeTime.options.routeType)}}
         />
-        <label htmlFor="bike">
-          <div style={{ height: "100px", width: "100px", border: "2px solid red" }}>
-            <p>Bike</p>
+        <label htmlFor="bike" aria-label="biking time" className='travelIconsLabel'>
+          <div className='individualIcons'>
+            <MdDirectionsBike />
             <p>{props.bikeTime.formattedTime}</p>
             {
               props.bikeTime.distance === undefined
@@ -45,9 +51,9 @@ const CommuteType = (props) => {
           disabled={props.driveTime.time ? false : true}
           onClick={() => { handleChange(props.driveTime.time, props.driveTime.sessionId, props.driveTime.options.routeType)}}
         />
-        <label htmlFor="drive">
-          <div style={{ height: "100px", width: "100px", border: "2px solid red" }}>
-            <p>Drive</p>
+        <label htmlFor="drive" aria-label="driving time" className='travelIconsLabel'>
+          <div className='individualIcons'>
+            <AiFillCar />
             <p>{props.driveTime.formattedTime}</p>
             {
               props.driveTime.distance === undefined

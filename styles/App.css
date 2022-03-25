@@ -260,6 +260,14 @@ html {
   color: #EDF2EF;
 }
 
+.orange {
+  color: #F97068;
+}
+
+.yellow {
+  color: #E8EB5E;
+}
+
 .wrapper {
   width: 85%;
   margin: 0 auto;
@@ -272,10 +280,12 @@ h1 {
 h1 .firstH {
   font-family: "Judson", serif;
   color: #E8EB5E;
+  text-shadow: 1px 1px 0 #1a2635, 1px -1px 0 #1a2635, -1px 1px 0 #1a2635, -1px -1px 0 #1a2635, 1px 0px 0 #1a2635, 0px 1px 0 #1a2635, -1px 0px 0 #1a2635, 0px -1px 0 #1a2635;
 }
 h1 .secondH {
   font-family: "Judson", serif;
   color: #F97068;
+  text-shadow: 1px 1px 0 #1a2635, 1px -1px 0 #1a2635, -1px 1px 0 #1a2635, -1px -1px 0 #1a2635, 1px 0px 0 #1a2635, 0px 1px 0 #1a2635, -1px 0px 0 #1a2635, 0px -1px 0 #1a2635;
 }
 
 p.punchline {
@@ -293,6 +303,35 @@ em.orange {
   color: #F97068;
 }
 
+input {
+  background-color: #273b50;
+  color: #EDF2EF;
+  font-family: "Lato", sans-serif;
+  border: none;
+  padding: 5px;
+}
+
+button {
+  padding: 10px;
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+  font-size: 0.9rem;
+  background-color: #273b50;
+  color: #F97068;
+  border: none;
+  border-radius: 2px;
+}
+button:active {
+  background-color: #1a2635;
+  -webkit-box-shadow: 0px 0px 0px 2px #F97068;
+          box-shadow: 0px 0px 0px 2px #F97068;
+}
+
+svg {
+  color: #F97068;
+  font-size: 2rem;
+}
+
 h1, h2, p {
   margin: 0;
   padding: 0;
@@ -304,11 +343,19 @@ h1 {
   text-transform: uppercase;
 }
 
+h2 {
+  font-size: 1.4rem;
+}
+
 p {
   font-size: 0.9rem;
 }
 p.punchline {
   font-size: 1rem;
+}
+
+label {
+  font-size: 0.9rem;
 }
 
 header {
@@ -358,6 +405,10 @@ header .wrapper .titleBlock .secondBlock:after {
   bottom: -10px;
   right: -13px;
   position: absolute;
+}
+header .aboutSection {
+  padding-bottom: 40px;
+  border-bottom: 1px solid #EDF2EF;
 }
 header .aboutSection .punchline {
   margin: 40px 0 20px 0;
@@ -448,4 +499,80 @@ header .aboutSection .punchline {
   100% {
     opacity: 1;
   }
+}
+.mapDetails .wrapper h2 {
+  padding-bottom: 20px;
+}
+.mapDetails .wrapper .destinationForm {
+  margin-bottom: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.mapDetails .wrapper .destinationForm input {
+  width: 100%;
+  font-size: 0.9rem;
+  padding: 5px;
+  margin: 5px 0 15px 0;
+}
+
+.commuteType {
+  width: 100%;
+}
+.commuteType .commuteIconsForm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.commuteType .commuteIconsForm .travelIconsLabel {
+  width: 90px;
+  min-height: 90px;
+  background-color: #273b50;
+  border-radius: 2px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.commuteType .commuteIconsForm .travelIconsLabel .individualIcons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.commuteType .commuteIconsForm input[type=radio]:checked + label {
+  background-color: #1a2635;
+  -webkit-box-shadow: 0px 0px 0px 2px #F97068;
+          box-shadow: 0px 0px 0px 2px #F97068;
 }
