@@ -10,7 +10,7 @@ const Home = (props) => {
     
 
     const handleAudioUrl = (podcast) => {
-      props.handleAudioUrl(podcast)
+      props.audioUrl(podcast)
     } 
 
     const handleTime = (time) => {

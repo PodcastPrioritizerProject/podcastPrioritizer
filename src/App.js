@@ -5,6 +5,7 @@ import {Routes, Route, Link} from 'react-router-dom';
 // importing components
 import PodcastDetails from './Components/PodcastDetails';
 import Home from './Components/Home';
+import AudioPlayer from "./Components/AudioPlayer"
 
 function App() {
   const [audioObject, setAudioObject] = useState({})
