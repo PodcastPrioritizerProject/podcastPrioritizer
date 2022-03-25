@@ -40,7 +40,6 @@ function PodcastEntry(props) {
             
             })
         
-
         }  
         </ul>
     )
