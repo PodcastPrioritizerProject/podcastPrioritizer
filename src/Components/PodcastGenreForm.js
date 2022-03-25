@@ -97,7 +97,9 @@ function PodcastGenreForm(props) {
 
   // console.log(userGenreInput);
 
-
+  const handleUrl = (url) => {
+    props.urlChoice(url)
+  }
 
   return (
     <section>
@@ -126,6 +128,7 @@ function PodcastGenreForm(props) {
       {/* passing props to PodcastEntry of the walk seconds and bike seconds */}
         <PodcastEntry 
         podcasts={podcastArray}
+        podcastUrl={handleUrl}
       />
     </section>
   )

@@ -18,8 +18,7 @@ const PodcastDetails = () => {
             }
         }).then(( apiResponse) => {
             setPodcastInfo(apiResponse.data)
-            setPodcastPublisher(podcastInfo.podcast.title)
-            console.log(podcastInfo.podcast.title)
+            setPodcastPublisher(apiResponse.data.podcast.title)
         })
     }, [])
 
