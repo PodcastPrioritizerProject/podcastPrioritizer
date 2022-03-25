@@ -4,10 +4,10 @@ import axios from 'axios';
 
 
 const PodcastDetails = () => {
-    const { podcastId } = useParams(); 
-    const [ podcastInfo, setPodcastInfo ] = useState({})
-    const [podcastPublisher, setPodcastPublisher] = useState("")
-  
+  const { podcastId } = useParams(); 
+  const [ podcastInfo, setPodcastInfo ] = useState({})
+  const [podcastPublisher, setPodcastPublisher] = useState("")
+  const [actualDescription, setActualDescription] = useState("")
 
     useEffect(() => {
         axios({
@@ -24,6 +24,18 @@ const PodcastDetails = () => {
     }, [])
 
     const { title, description, image, audio_length_sec } = podcastInfo
+    console.log(description)
+  useEffect(() => {
+
+    if (description === undefined) {
+      console.log("no info")
+    } else {
+      let newDescription = description
+      let newestDescription = newDescription.replace(/(<([^>]+)>)/gi, "")
+      setActualDescription(newestDescription)
+
+    }
+  }, [description])
 
     const audioMinutes = Math.floor(audio_length_sec / 60)
     
@@ -36,7 +48,7 @@ const PodcastDetails = () => {
                 <h2>{podcastPublisher}</h2>
                 <h2>{title}</h2>
                 <p>{audioMinutes}minutes</p>
-                <p>{description}</p>
+                <p>{actualDescription}</p>
             </div>
         </div>
     )
