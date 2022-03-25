@@ -11,7 +11,7 @@ function PodcastEntry(props) {
   // }
 
   const handleClick = (individualAudio) => {
-    // setAudioUrl(individualAudio)
+    console.log(individualAudio)
     props.podcastUrl(individualAudio)
     }
 

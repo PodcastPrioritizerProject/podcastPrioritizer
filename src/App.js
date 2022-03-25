@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import "./App.scss";
 import {Routes, Route, Link} from 'react-router-dom';
 
@@ -12,12 +12,24 @@ import AudioPlayer from './Components/AudioPlayer';
 function App() {
   const [chosenTime, setChosenTime] = useState("");
   const [audioObject, setAudioObject] = useState({})
-  console.log(chosenTime)
+
+  useEffect(() => {
+    if (chosenTime === "") {
+      console.log("empty string")
+    } else {
+      window.sessionStorage.setItem('count', chosenTime)
+    }
+  }, [chosenTime]);
+  
+  useEffect(() => {
+    if (window.sessionStorage.count != "" && window.sessionStorage.count != null ) {
+      setChosenTime(JSON.parse(window.sessionStorage.getItem('count')))
+    } 
+  }, [chosenTime]);
 
   const handleTime = (time) => {
     setChosenTime(time)
   };
-
 
   const handleAudioUrl = (podcast) => {
     setAudioObject(podcast)

@@ -14,6 +14,7 @@ function PodcastGenreForm(props) {
   const [ podcastArray, setPodcastArray ] = useState([])
   const [submitState, setSubmitState] = useState(false)
 
+
   let minWalkTime = props.chosenTime
   minWalkTime = Math.floor((minWalkTime * 0.8) / 60)
 
