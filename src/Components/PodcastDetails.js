@@ -7,7 +7,8 @@ const PodcastDetails = () => {
     const { podcastId } = useParams(); 
     const [ podcastInfo, setPodcastInfo ] = useState({})
     const [podcastPublisher, setPodcastPublisher] = useState("")
-  
+    const [actualDescription, setActualDescription] = useState("")
+    
 
     useEffect(() => {
         axios({
@@ -18,18 +19,34 @@ const PodcastDetails = () => {
             }
         }).then(( apiResponse) => {
             setPodcastInfo(apiResponse.data)
-<<<<<<< HEAD
-            setPodcastPublisher(podcastInfo.podcast.title)
-=======
             setPodcastPublisher(apiResponse.data.podcast.title)
 
->>>>>>> bd7ba49eb6ddaa184e9f22f5b0c2c33f77deed76
         })
     }, [])
 
     const { title, description, image, audio_length_sec } = podcastInfo
 
-    const audioMinutes = Math.floor(audio_length_sec / 60)
+    const audioMinutes = Math.floor(audio_length_sec / 60) % 60
+    let audioHours = Math.floor(audio_length_sec / 3600) 
+
+    if (audioHours == 0) {
+        audioHours = null
+    } else {
+        audioHours = `${audioHours}hrs`
+    }
+
+    
+
+    useEffect( () => {
+
+        if (description === undefined) {
+            console.log("no info")
+        } else {
+            let newDescription = description
+            let newestDescription = newDescription.replace(/(<([^>]+)>)/gi, "");
+            setActualDescription(newestDescription)
+        }
+    }, [description])
 
 
     
@@ -42,8 +59,8 @@ const PodcastDetails = () => {
             <div className="podcastCardText">
                 <h2>{podcastPublisher}</h2>
                 <h2>{title}</h2>
-                <p>{audioMinutes}minutes</p>
-                <p>{description}</p>
+                <p>{audioHours} {audioMinutes}minutes</p>
+                <p>{actualDescription}</p>
             </div>
         </div>
     )

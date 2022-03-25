@@ -21,6 +21,7 @@ function PodcastEntry(props) {
             // mapping array for podcasts and displaying it on the DOM
             results.map((e) => { 
                 let audioMinutes = Math.floor(e.audio_length_sec / 60)
+                console.log(e);
                 return (
                   <div key={e.id}>
                     <Link to={`/${e.id}`}>
