@@ -44,6 +44,8 @@ header {
     }
 
     .aboutSection {
+        padding-bottom: 40px;
+        border-bottom: 1px solid $tertiary;
         .punchline {
             margin: 40px 0 20px 0;
         }

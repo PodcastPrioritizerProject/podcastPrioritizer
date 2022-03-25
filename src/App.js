@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import axios from "axios";
+import { useState } from 'react';
 import "./App.scss";
 import {Routes, Route, Link} from 'react-router-dom';
 
@@ -8,7 +7,6 @@ import Header from './Components/Header';
 import MapForm from './Components/MapForm';
 import PodcastGenreForm from './Components/PodcastGenreForm';
 import PodcastDetails from './Components/PodcastDetails';
-
 
 function App() {
   const [chosenTime, setChosenTime] = useState("");
@@ -19,13 +17,13 @@ function App() {
 
   return (
       <>
-      <Link to='/'>
+      <Link to='/home'>
         <h1>hello</h1>
       </Link>
         
         <Routes>
-        <Route path="/" element={<><Header /><MapForm time={handleTime} /><PodcastGenreForm chosenTime={chosenTime} /> </>} /> 
-          <Route path="/:podcastId" element={<PodcastDetails />} />
+          <Route path="/home" element={<><Header /><MapForm time={handleTime} /><PodcastGenreForm chosenTime={chosenTime} /> </>} /> 
+          <Route path="/home/:podcastId" element={<PodcastDetails />} />
         </Routes>
 
       </>

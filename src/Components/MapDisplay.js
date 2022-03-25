@@ -25,11 +25,11 @@ const MapDisplay = (props) => {
       {
         visible === true
         ? null
-        :<img src={`https://open.mapquestapi.com/staticmap/v5/map?key=pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW&session=${props.map}`}alt="" />
+        :<img src={`https://open.mapquestapi.com/staticmap/v5/map?key=pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW&session=${props.map}&type=dark`}alt="" />
       }
       <button 
       onClick={handleClick}
-      disabled={props.map === undefined ? true : false}
+      disabled={props.map ? false : true}
       >{buttonText}</button>
     </>
     
