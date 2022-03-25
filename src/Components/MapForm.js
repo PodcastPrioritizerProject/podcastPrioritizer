@@ -148,9 +148,6 @@ const MapForm = (props) => {
           setBikeRoute({})
           setDriveRoute({})
         } else {
-          // console.log("cycling", apiDataBike)
-          // console.log("walking", apiDataWalk)
-          // console.log("driving", apiDataDrive)
           setWalkRoute(apiDataWalk.data.route)
           setBikeRoute(apiDataBike.data.route)
           setDriveRoute(apiDataDrive.data.route)

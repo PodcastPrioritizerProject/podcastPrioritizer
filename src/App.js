@@ -13,20 +13,6 @@ function App() {
   const [chosenTime, setChosenTime] = useState("");
   const [audioObject, setAudioObject] = useState({})
 
-  useEffect(() => {
-    if (chosenTime === "") {
-      console.log("empty string")
-    } else {
-      window.sessionStorage.setItem('count', chosenTime)
-    }
-  }, [chosenTime]);
-  
-  useEffect(() => {
-    if (window.sessionStorage.count != "" && window.sessionStorage.count != null ) {
-      setChosenTime(JSON.parse(window.sessionStorage.getItem('count')))
-    } 
-  }, [chosenTime]);
-
   const handleTime = (time) => {
     setChosenTime(time)
   };
