@@ -17,13 +17,13 @@ function App() {
 
   return (
       <>
-      <Link to='/home'>
+      <Link to='/'>
         <h1>hello</h1>
       </Link>
         
         <Routes>
-          <Route path="/home" element={<><Header /><MapForm time={handleTime} /><PodcastGenreForm chosenTime={chosenTime} /> </>} /> 
-          <Route path="/home/:podcastId" element={<PodcastDetails />} />
+          <Route path="/" element={<><Header /><MapForm time={handleTime} /><PodcastGenreForm chosenTime={chosenTime} /> </>} /> 
+          <Route path="/:podcastId" element={<PodcastDetails />} />
         </Routes>
 
       </>
