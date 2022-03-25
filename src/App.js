@@ -1,19 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import "./App.scss";
 import {Routes, Route, Link} from 'react-router-dom';
 
 // importing components
-import Header from './Components/Header';
-import MapForm from './Components/MapForm';
-import PodcastGenreForm from './Components/PodcastGenreForm';
 import PodcastDetails from './Components/PodcastDetails';
+import Home from './Components/Home';
+
 
 function App() {
-  const [chosenTime, setChosenTime] = useState("");
-  console.log(chosenTime)
-  const handleTime = (time) => {
-    setChosenTime(time)
-  };
+
+
 
   return (
       <>
@@ -22,7 +18,7 @@ function App() {
       </Link>
         
         <Routes>
-          <Route path="/" element={<><Header /><MapForm time={handleTime} /><PodcastGenreForm chosenTime={chosenTime} /> </>} /> 
+          <Route path="/" element={<Home />} /> 
           <Route path="/:podcastId" element={<PodcastDetails />} />
         </Routes>
 

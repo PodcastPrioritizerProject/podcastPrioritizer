@@ -7,7 +7,9 @@ const CommuteType = (props) => {
 
   const handleChange = (time, sessionId, type) => {
     props.choices(time, sessionId, type)
+    window.sessionStorage.setItem('count', time);
   }
+
 
   return (
     <div className="commuteType">

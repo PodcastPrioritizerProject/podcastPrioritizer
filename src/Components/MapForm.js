@@ -4,12 +4,14 @@ import MapDisplay from './MapDisplay';
 import CommuteType from './CommuteType';
 import Swal from 'sweetalert2'
 import LoadingAnimation from './LoadingAnimation';
+import { BiCurrentLocation } from 'react-icons/bi'
 
 const MapForm = (props) => {
 // creating useState variables
   const [givenAddress, setGivenAddress] = useState([]);
   const [autoTo, setAutoTo] = useState("");
   const [autoFrom, setAutoFrom] = useState("");
+  // windows.getsessionstorage.
   const [walkRoute, setWalkRoute] = useState({});
   const [bikeRoute, setBikeRoute] = useState({});
   const [driveRoute, setDriveRoute] = useState({});
@@ -72,6 +74,9 @@ const MapForm = (props) => {
   // form submit function that makes two axios calls using the final input values of autoTo/autoFrom
   const handleSubmit = (e) => {
     e.preventDefault()
+
+    
+
     if (autoFrom === ""){
       Swal.fire({
         icon: 'warning',
@@ -93,6 +98,10 @@ const MapForm = (props) => {
     }else {
       // if the input fields are not empty, disable the button after submit
       e.target[2].disabled = true
+
+      // clearing the session storage data
+      window.sessionStorage.clear()
+
       // this state triggers loading animation
       setSubmitState(true)
       axios.all([
@@ -173,6 +182,8 @@ const MapForm = (props) => {
     setChosenCommuteSession(sessionId)
     setChosenCommuteType(type)
   }
+
+  // Delete This!
   // when the final commute is selected, this sends the information to App.js to be used in our podcast display
   useEffect(() => {
     props.time(chosenCommuteTime)
@@ -197,20 +208,24 @@ const MapForm = (props) => {
 
           <div className="startingLocation">
             <label htmlFor="fromLocation" className='orange'>Enter starting location</label>
-            <input type="text" onChange={handleInputFrom} list="fromLocation" id="from" value={autoFrom} autoComplete="off"/>
-            <button type='button' onClick={myLocation}>X</button>
-              <datalist id="fromLocation" >
-                {
-                  // map through the givenAddress state defined by the axios call and return it as options (autofill API)
-                  givenAddress.map((singleAddress) => {
-                    return (
-                      <option key={singleAddress.id}>
-                      {singleAddress.displayString}
-                      </option>
-                    )
-                  })
-                }
-              </datalist>
+            <div className="inputStart">
+              <input type="text" onChange={handleInputFrom} list="fromLocation" id="from" value={autoFrom} autoComplete="off"/>
+              <button type='button' onClick={myLocation}>
+                <BiCurrentLocation />
+              </button>
+                <datalist id="fromLocation" >
+                  {
+                    // map through the givenAddress state defined by the axios call and return it as options (autofill API)
+                    givenAddress.map((singleAddress) => {
+                      return (
+                        <option key={singleAddress.id}>
+                        {singleAddress.displayString}
+                        </option>
+                      )
+                    })
+                  }
+                </datalist>
+            </div>
           </div>
           <div className="finalLocation">
             <label htmlFor="toLocation" className='yellow'>Enter destination</label>
