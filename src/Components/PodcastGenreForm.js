@@ -145,34 +145,38 @@ function PodcastGenreForm(props) {
   }
 
   return (
-    <section>
-      <form action="" onSubmit={ handleSubmit }>
-        <input type="text" onChange={ handleInput } list="genres" value={ userGenreInput }/>
-        <datalist id="genres">
-          {
-            //Map through the returned Genres array, return character matched genres. 
-            selectedGenre.map( (genre) => {
-              return (
-                <option value={genre.name} key={genre.id}>
-                </option>
-              )
-            })
-          }
-        </datalist>
-        <button type="submit"
-        disabled={userGenreInput === "" || submitState === true ? true : false}
-        >Submit</button>
-      </form>
-      {
-        submitState === true
-        ? <LoadingAnimationP />
-        : null
-      }      
-      {/* passing props to PodcastEntry of the walk seconds and bike seconds */}
-        <PodcastEntry 
-        podcasts={podcastArray}
-        podcastUrl={handleUrl}
-      />
+    <section className='podcastForm'>
+      <div className="wrapper">
+        <h2>What Podcast Genre?</h2>
+        <form action="" onSubmit={ handleSubmit } className="podcastGenreForm">
+          <input type="text" onChange={ handleInput } list="genres" value={ userGenreInput }/>
+          <datalist id="genres">
+            {
+              //Map through the returned Genres array, return character matched genres. 
+              selectedGenre.map( (genre) => {
+                return (
+                  <option value={genre.name} key={genre.id}>
+                  </option>
+                )
+              })
+            }
+          </datalist>
+          <button type="submit"
+          disabled={userGenreInput === "" || submitState === true ? true : false}
+          >Submit</button>
+        </form>
+        {
+          submitState === true
+          ? <LoadingAnimationP />
+          : null
+        }      
+        {/* passing props to PodcastEntry of the walk seconds and bike seconds */}
+          <PodcastEntry 
+          podcasts={podcastArray}
+          podcastUrl={handleUrl}
+        />
+
+      </div>
     </section>
   )
 }

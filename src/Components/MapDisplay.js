@@ -21,17 +21,19 @@ const MapDisplay = (props) => {
   }
 
   return (
-    <>
-      {
-        visible === true
-        ? null
-        :<img src={`https://open.mapquestapi.com/staticmap/v5/map?key=pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW&session=${props.map}&type=dark`}alt="" />
-      }
+    <div className="mapButton">
       <button 
       onClick={handleClick}
       disabled={props.map ? false : true}
       >{buttonText}</button>
-    </>
+      <div className="mapImg wrapper">
+        {
+          visible === true
+          ? null
+          :<img src={`https://open.mapquestapi.com/staticmap/v5/map?key=pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW&session=${props.map}&type=dark`}alt="" />
+        }
+      </div>
+    </div>
     
   )
 }
