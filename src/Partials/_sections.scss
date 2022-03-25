@@ -10,12 +10,45 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            
-            input {
+
+            .startingLocation {
                 width: 100%;
-                font-size: $baseFontSize;
-                padding: 5px;
-                margin: 5px 0 15px 0;
+                .inputStart{
+                    display: flex;
+                    align-items: center;
+                    margin: 5px 0 15px 0;
+                    background-color: $quinary;
+                    input {
+                        width: 100%;
+                        font-size: $baseFontSize;
+                        padding: 10px;
+                    }
+                    button {
+                        max-height: 35px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 5px;
+
+                        svg {
+                            max-height: 30px;
+                            max-width: 30px;
+                        }
+                    }
+
+                }
+
+            }
+
+            .finalLocation {
+                width: 100%;
+                input {
+                    width: 100%;
+                    font-size: $baseFontSize;
+                    padding: 10px;
+                    margin: 5px 0 15px 0;
+                }
+
             }
         }
     }

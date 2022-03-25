@@ -1,32 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import "./App.scss";
 import {Routes, Route, Link} from 'react-router-dom';
 
 // importing components
-import Header from './Components/Header';
-import MapForm from './Components/MapForm';
-import PodcastGenreForm from './Components/PodcastGenreForm';
 import PodcastDetails from './Components/PodcastDetails';
+import Home from './Components/Home';
+import AudioPlayer from "./Components/AudioPlayer"
 
 function App() {
-  const [chosenTime, setChosenTime] = useState("");
-  console.log(chosenTime)
-  const handleTime = (time) => {
-    setChosenTime(time)
-  };
+  const [audioObject, setAudioObject] = useState({})
+
+  const handleAudioUrl = (e) => {
+    setAudioObject(e)
+  }
 
 
   return (
       <>
-      <Link to='/'>
-        <h1>hello</h1>
-      </Link>
-        
+        <Link to='/'>
+          <h1>hello</h1>
+        </Link>
         <Routes>
-          <Route path="/" element={<><Header /><MapForm time={handleTime} /><PodcastGenreForm chosenTime={chosenTime} /> </>} /> 
+          <Route path="/" element={<Home audioUrl={handleAudioUrl}/>} /> 
           <Route path="/:podcastId" element={<PodcastDetails />} />
         </Routes>
-
+        <AudioPlayer audio={audioObject}/>
       </>
   );
 };

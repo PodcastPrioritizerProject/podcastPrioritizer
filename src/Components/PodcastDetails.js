@@ -18,12 +18,17 @@ const PodcastDetails = () => {
             }
         }).then(( apiResponse) => {
             setPodcastInfo(apiResponse.data)
+<<<<<<< HEAD
             setPodcastPublisher(podcastInfo.podcast.title)
+=======
+            setPodcastPublisher(apiResponse.data.podcast.title)
+
+>>>>>>> bd7ba49eb6ddaa184e9f22f5b0c2c33f77deed76
         })
     }, [])
 
     const { title, description, image, audio_length_sec } = podcastInfo
-   
+
     const audioMinutes = Math.floor(audio_length_sec / 60)
 
 
