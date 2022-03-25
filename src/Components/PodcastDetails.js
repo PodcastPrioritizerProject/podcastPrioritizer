@@ -6,6 +6,8 @@ import axios from 'axios';
 const PodcastDetails = () => {
     const { podcastId } = useParams(); 
     const [ podcastInfo, setPodcastInfo ] = useState({})
+    const [podcastPublisher, setPodcastPublisher] = useState("")
+  
 
     useEffect(() => {
         axios({
@@ -16,18 +18,24 @@ const PodcastDetails = () => {
             }
         }).then(( apiResponse) => {
             setPodcastInfo(apiResponse.data)
+            setPodcastPublisher(podcastInfo.podcast.title)
+            console.log(podcastInfo.podcast.title)
         })
     }, [])
 
-    const { title, description, image  } = podcastInfo
-
+    const { title, description, image, audio_length_sec } = podcastInfo
+   
+    const audioMinutes = Math.floor(audio_length_sec / 60)
+    
     return (
         <div className="podcastCard">
             <div className="podcastCardImage">
                 <img src={image} alt="" />
             </div>
             <div className="podcastCardText">
+                <h2>{podcastPublisher}</h2>
                 <h2>{title}</h2>
+                <p>{audioMinutes}minutes</p>
                 <p>{description}</p>
             </div>
         </div>
