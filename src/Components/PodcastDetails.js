@@ -16,10 +16,13 @@ const PodcastDetails = () => {
             }
         }).then(( apiResponse) => {
             setPodcastInfo(apiResponse.data)
+            console.log(podcastInfo.podcast);
         })
     }, [])
 
-    const { title, description, image  } = podcastInfo
+    const { title, description, image, audio_length_sec  } = podcastInfo
+
+    let audioMinutes = Math.floor(audio_length_sec / 60)
 
     return (
         <div className="podcastCard">
@@ -28,6 +31,7 @@ const PodcastDetails = () => {
             </div>
             <div className="podcastCardText">
                 <h2>{title}</h2>
+                <p>{audioMinutes} minutes</p>
                 <p>{description}</p>
             </div>
         </div>
