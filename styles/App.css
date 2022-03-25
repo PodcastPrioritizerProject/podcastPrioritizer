@@ -269,7 +269,8 @@ html {
 }
 
 .wrapper {
-  width: 85%;
+  max-width: 1000px;
+  width: 95%;
   margin: 0 auto;
 }
 
@@ -324,6 +325,7 @@ button {
   color: #F97068;
   border: none;
   border-radius: 2px;
+  cursor: pointer;
 }
 button:active {
   background-color: #1a2635;
@@ -574,6 +576,7 @@ header .aboutSection .punchline {
   position: absolute;
   height: 100%;
   right: 0;
+  cursor: pointer;
 }
 .mapDetails .wrapper .destinationForm .startingLocation .inputStart button svg {
   max-height: 30px;
@@ -602,7 +605,7 @@ header .aboutSection .punchline {
   margin-bottom: 40px;
 }
 .commuteType .commuteIconsForm .travelIconsLabel {
-  width: 90px;
+  width: calc(33.3333333333% - 5px);
   min-height: 90px;
   background-color: #273b50;
   border-radius: 2px;
@@ -619,6 +622,7 @@ header .aboutSection .punchline {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  cursor: pointer;
 }
 .commuteType .commuteIconsForm .travelIconsLabel .individualIcons {
   display: -webkit-box;
