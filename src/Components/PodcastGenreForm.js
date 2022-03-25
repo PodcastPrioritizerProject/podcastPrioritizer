@@ -147,12 +147,15 @@ function PodcastGenreForm(props) {
   }
 
   return (
-    <section>
-      {
+    <section className='podcastForm'>
+        {
         props.chosenTime === "" && window.sessionStorage.finalGenre === undefined
         ? null
         :
-        <form action="" onSubmit={ handleSubmit }>
+
+      <div className="wrapper">
+        <h2>What Podcast Genre?</h2>
+        <form action="" onSubmit={ handleSubmit } className="podcastGenreForm">
           <input type="text" onChange={ handleInput } list="genres" value={ userGenreInput }/>
           <datalist id="genres">
             {
@@ -169,14 +172,15 @@ function PodcastGenreForm(props) {
           disabled={userGenreInput === "" || submitState === true ? true : false}
           >Submit</button>
         </form>
+      </div>
       }
       {
         submitState === true
-        ? <LoadingAnimationP />
-        : null
-      }      
-      {/* passing props to PodcastEntry of the walk seconds and bike seconds */}
-        <PodcastEntry 
+          ? <LoadingAnimationP />
+          : null
+      }
+      {/* passing props to PodcastEntry of the walk seconds and bike seconds */ }
+      <PodcastEntry
         podcasts={podcastArray}
         podcastUrl={handleUrl}
       />

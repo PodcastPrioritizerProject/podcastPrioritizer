@@ -24,17 +24,20 @@ console.log(mapBackup)
   }
 
   return (
-    <>
+
+    <div className="mapButton">
       <button 
       onClick={handleClick}
-        disabled={props.map || window.sessionStorage.map ? false : true}
+      disabled={props.map || window.sessionStorage.map ? false : true}
       >{buttonText}</button>
-      {
-        visible === true
-        ? null
-        :<img src={`https://open.mapquestapi.com/staticmap/v5/map?key=pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW&session=${mapBackup}&type=dark`}alt="" />
-      }
-    </>
+      <div className="mapImg wrapper">
+        {
+          visible === true
+          ? null
+          :<img src={`https://open.mapquestapi.com/staticmap/v5/map?key=pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW&session=${mapBackup}&type=dark`}alt="" />
+        }
+      </div>
+    </div>
     
   )
 }
