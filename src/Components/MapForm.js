@@ -198,6 +198,7 @@ const MapForm = (props) => {
           <div className="startingLocation">
             <label htmlFor="fromLocation" className='orange'>Enter starting location</label>
             <input type="text" onChange={handleInputFrom} list="fromLocation" id="from" value={autoFrom} autoComplete="off"/>
+            <button type='button' onClick={myLocation}>X</button>
               <datalist id="fromLocation" >
                 {
                   // map through the givenAddress state defined by the axios call and return it as options (autofill API)

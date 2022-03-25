@@ -38,7 +38,7 @@ function PodcastGenreForm(props) {
     if (userGenreInput.length < 1) {
       axios({
         url: 'https://listen-api.listennotes.com/api/v2/genres',
-        headers: { "X-ListenAPI-Key": "0be4947c18024c2d8a5bb0dcb11eb2ac" },
+        headers: { "X-ListenAPI-Key": "317ae89aeb8841b9b61635577fa94768" },
         params: {
             top_level_only: 1
         }
@@ -52,7 +52,7 @@ function PodcastGenreForm(props) {
         
       axios({
         url: 'https://listen-api.listennotes.com/api/v2/typeahead',
-        headers: { "X-ListenAPI-Key": "0be4947c18024c2d8a5bb0dcb11eb2ac" },
+        headers: { "X-ListenAPI-Key": "317ae89aeb8841b9b61635577fa94768" },
         params: {
             q: `${userGenreInput}`,
             show_genres: 1
@@ -72,7 +72,7 @@ function PodcastGenreForm(props) {
       setSubmitState(true)
       axios({
         url: 'https://listen-api.listennotes.com/api/v2/search',
-        headers: { "X-ListenAPI-Key": "0be4947c18024c2d8a5bb0dcb11eb2ac" },
+        headers: { "X-ListenAPI-Key": "317ae89aeb8841b9b61635577fa94768" },
         params: {
             q: `${userGenreInput}`,
             len_min: `${minWalkTime}`,
