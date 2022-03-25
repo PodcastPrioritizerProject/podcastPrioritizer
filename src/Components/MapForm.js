@@ -19,7 +19,7 @@ const MapForm = (props) => {
   const [chosenCommuteSession, setChosenCommuteSession] = useState("")
   const [chosenCommuteType, setChosenCommuteType] = useState("")
   const [submitState, setSubmitState] = useState(false)
- 
+
   // create a useEffect to call axios when onChange happens for the to input field for MapForm
   useEffect(() => {
     // conditional statement to call axios when input length is longer than 1 character
@@ -157,9 +157,6 @@ const MapForm = (props) => {
           setBikeRoute({})
           setDriveRoute({})
         } else {
-          console.log("cycling", apiDataBike)
-          console.log("walking", apiDataWalk)
-          console.log("driving", apiDataDrive)
           setWalkRoute(apiDataWalk.data.route)
           setBikeRoute(apiDataBike.data.route)
           setDriveRoute(apiDataDrive.data.route)

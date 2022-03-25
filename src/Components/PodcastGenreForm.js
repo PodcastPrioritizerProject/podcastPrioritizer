@@ -20,6 +20,7 @@ function PodcastGenreForm(props) {
   // const [sessionTime, setSessionTime] = useState(window.sessionStorage.getItem('count'));
 
 
+
   let minWalkTime = props.chosenTime
   minWalkTime = Math.floor((minWalkTime * 0.8) / 60)
 

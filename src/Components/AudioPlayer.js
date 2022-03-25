@@ -1,5 +1,4 @@
 const AudioPlayer = (props) => {
-  console.log(props)
   return (
     <div>
       <p>podcast title</p>
