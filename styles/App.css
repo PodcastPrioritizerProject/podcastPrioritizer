@@ -605,8 +605,11 @@ header .aboutSection .punchline {
   margin-bottom: 40px;
 }
 .commuteType .commuteIconsForm .travelIconsLabel {
-  width: calc(33.3333333333% - 5px);
+  width: 28.3333333333vw;
   min-height: 90px;
+  height: 28.3333333333vw;
+  max-height: 200px;
+  max-width: 300px;
   background-color: #273b50;
   border-radius: 2px;
   display: -webkit-box;
