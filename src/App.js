@@ -59,16 +59,21 @@ const player = useRef()
           {/* <button type='button' onClick={playAudio}>CLICK ME</button>
         <button type='button' onClick={pauseAudio}>CLICK ME PAUSE</button>
         <button type='button' onClick={toggleAudio}>CLICK ME toggle</button> */}
-          <AudioPlayer
-            ref={player}
-            autoPlay
-            src={audioObject.audio}
-            // onPlay={e => console.log("onPlay")}
-            onPlay={handlePlay}
-            onPause={handlePause}
-            onEnded={handleEnd}
-          // other props here
-          />
+        {
+          audioObject.audio
+            ? <AudioPlayer
+              ref={player}
+              autoPlay
+              src={audioObject.audio}
+              // onPlay={e => console.log("onPlay")}
+              onPlay={handlePlay}
+              onPause={handlePause}
+              onEnded={handleEnd}
+            // other props here
+            />
+          : null
+        }
+
         </div>
       </>
   );

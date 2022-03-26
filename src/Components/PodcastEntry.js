@@ -29,12 +29,17 @@ function PodcastEntry(props) {
  
   const handleClick = (individualAudio, e) => {
 
-    if (isClicked === false) {
-      props.playerTest.current.audio.current.play()
-      setIsClicked(true)
-    } else if (isClicked === true){
-      props.playerTest.current.audio.current.pause()
-      setIsClicked(false)
+    if (buttonId !== ""){
+
+      if (isClicked === false) {
+        props.playerTest.current.audio.current.play()
+        setIsClicked(true)
+      } else if (isClicked === true){
+        props.playerTest.current.audio.current.pause()
+        setIsClicked(false)
+      }
+    } else {
+      console.log("no info")
     }
 
     props.podcastUrl(individualAudio)
