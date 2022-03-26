@@ -9,7 +9,7 @@ const PodcastDetails = () => {
     const [podcastPublisher, setPodcastPublisher] = useState("")
     const [actualDescription, setActualDescription] = useState("")
     
-
+    //Call Podcast API using the epsiode ID to display the specific epsisode
     useEffect(() => {
         axios({
             url: `https://listen-api.listennotes.com/api/v2/episodes/${podcastId}`,
@@ -24,6 +24,7 @@ const PodcastDetails = () => {
         })
     }, [])
 
+    //Destructure the object returned by the API call
     const { title, description, image, audio_length_sec } = podcastInfo
 
     const audioMinutes = Math.floor(audio_length_sec / 60) % 60
@@ -31,6 +32,8 @@ const PodcastDetails = () => {
 
     if (audioHours == 0) {
         audioHours = null
+    } else if (audioHours == 1) {
+        audioHours = `${audioHours}hr`
     } else {
         audioHours = `${audioHours}hrs`
     }
