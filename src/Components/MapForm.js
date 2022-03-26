@@ -236,22 +236,24 @@ const MapForm = (props) => {
             </div>
           </div>
           <div className="finalLocation">
-            <label htmlFor="toLocation" className='yellow'>Enter destination</label>
-            <input type="text" onChange={handleInputTo} list="toLocation" id="to" value={autoTo} autoComplete="off"/>
-              <datalist id="toLocation" >
-                {
-                  // map through the givenAddress state defined by the axios call and return it as options (autofill API)
-                  givenAddress.map((singleAddress) => {
-                    return (
-                      <option key={singleAddress.id}>
-                      {singleAddress.displayString}
-                      </option>
-                    )
-                  })
-                }
-              </datalist>
+            <div className="inputFinal">
+              <label htmlFor="toLocation" className='yellow'>Enter destination</label>
+              <input type="text" onChange={handleInputTo} list="toLocation" id="to" value={autoTo} autoComplete="off"/>
+                <datalist id="toLocation" >
+                  {
+                    // map through the givenAddress state defined by the axios call and return it as options (autofill API)
+                    givenAddress.map((singleAddress) => {
+                      return (
+                        <option key={singleAddress.id}>
+                        {singleAddress.displayString}
+                        </option>
+                      )
+                    })
+                  }
+                </datalist>
+            <button ref={commuteRef}>Submit</button>
+            </div>
           </div>
-          <button ref={commuteRef}>Submit</button>
         </form>
         {/* loading animation while waiting for API results */}
         {

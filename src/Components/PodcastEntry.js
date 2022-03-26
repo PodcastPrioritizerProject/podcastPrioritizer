@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link} from 'react-router-dom';
 
 import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai'
@@ -7,21 +7,40 @@ import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai'
 function PodcastEntry(props) {
 
   const [isClicked, setIsClicked] = useState(false)
-  // const [audioUrl, setAudioUrl] = useState("")
+  const [buttonId, setButtonId] = useState("")
+
   const results = props.podcasts
+  console.log(props.playerTest, "WE MADE IT ")
 
-  // const passAudioUrl = (e, audioUrl) => {
-  //   props.podcastUrl(e, audioUrl)
-  // }
+  useEffect(()=>{
+      setIsClicked(true)
+      props.podcastPlay(isClicked)
+  },[buttonId])
 
-  const handleClick = (individualAudio) => {
-    console.log(individualAudio)
-    props.podcastUrl(individualAudio)
-    setIsClicked(!isClicked)
+  useEffect(() => {
+    if (props.canPlay === false){
+      setIsClicked(false)
+      // props.podcastPlay(isClicked)
+    } else if (props.canPlay === true) {
+      setIsClicked(true)
+      // props.podcastPlay(isClicked)
+    }
+  }, [props.canPlay])
+ 
+  const handleClick = (individualAudio, e) => {
+
+    if (isClicked === false) {
+      props.playerTest.current.audio.current.play()
+      setIsClicked(true)
+    } else if (isClicked === true){
+      props.playerTest.current.audio.current.pause()
+      setIsClicked(false)
     }
 
-    console.log(isClicked);
-
+    props.podcastUrl(individualAudio)
+    setButtonId(e.currentTarget.id)
+    props.podcastPlay(isClicked)
+  }
 
     return (
         <ul>
@@ -51,20 +70,22 @@ function PodcastEntry(props) {
                         </div>
                     </li>
                     </Link>
-                    <button type='button' onClick={() => {handleClick(e)}}>
+                    <button id={e.id} type='button' 
+                    onClick={(event) => {handleClick(e, event)}}>
                       {
-                        isClicked ?
-                          <AiFillPauseCircle />
+                        e.id === buttonId && props.canPlay === true && isClicked === true ?
+                        <AiFillPauseCircle />
+                        
                         :
-                          <AiFillPlayCircle />
+                        <AiFillPlayCircle />
+                        
                       }
+        
                     </button>
                   </div>
                 )
-            
-            })
-        
-        }  
+              })
+            }  
         </ul>
     )
 }

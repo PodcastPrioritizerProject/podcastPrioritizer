@@ -12,7 +12,7 @@ const MapDisplay = (props) => {
   if (props.map === "") {
     mapBackup = window.sessionStorage.getItem('map')
   }
-console.log(mapBackup)
+// console.log(mapBackup)
   const handleClick = () => {
     if (visible === true){
       setButtonText(hide)

@@ -18,7 +18,7 @@ function PodcastGenreForm(props) {
   const [finalGenre, setFinalGenre] = useState(window.sessionStorage.getItem('finalGenre'))
 
   // const [sessionTime, setSessionTime] = useState(window.sessionStorage.getItem('count'));
-  console.log(props.chosenTime)
+  // console.log(props.chosenTime)
 
 
   let minWalkTime = props.chosenTime
@@ -69,7 +69,7 @@ function PodcastGenreForm(props) {
         }
       }).then((response) => {
         setSubmitState(false)
-        console.log(response.data.results)
+        // console.log(response.data.results)
 
         setPodcastArray(response.data.results)
       })
@@ -146,6 +146,10 @@ function PodcastGenreForm(props) {
     props.urlChoice(url)
   }
 
+  const handlePodcastPlay = (e) => {
+    props.podcastPlay(e)
+  }
+  // console.log("can audio play PODCAST GENRE", props.canPlay)
   return (
     <section className='podcastForm'>
         {
@@ -183,6 +187,9 @@ function PodcastGenreForm(props) {
       <PodcastEntry
         podcasts={podcastArray}
         podcastUrl={handleUrl}
+        canPlay={props.canPlay}
+        podcastPlay={handlePodcastPlay}
+        playerTest={props.playerTest}
       />
     </section>
   )
