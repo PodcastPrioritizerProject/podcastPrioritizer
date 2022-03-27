@@ -1,5 +1,8 @@
+//Import useEffect and useState from react
 import { useEffect, useState } from 'react';
+//Import axios
 import axios from 'axios';
+//Import sweetalert for error handling
 import Swal from 'sweetalert2'
 // importing podcast entry results 
 import PodcastEntry from './PodcastEntry';
@@ -18,7 +21,6 @@ function PodcastGenreForm(props) {
   const [finalGenre, setFinalGenre] = useState(window.sessionStorage.getItem('finalGenre'))
 
   // const [sessionTime, setSessionTime] = useState(window.sessionStorage.getItem('count'));
-  // console.log(props.chosenTime)
 
 
   let minWalkTime = props.chosenTime
@@ -41,7 +43,6 @@ function PodcastGenreForm(props) {
   //Track user input and set variable state  
   const handleInput = (e) => {
     setUserGenreInput(e.target.value)
-    console.log(userGenreInput);
   }
 
   // track user input and set state when submit is clicked
@@ -69,8 +70,6 @@ function PodcastGenreForm(props) {
         }
       }).then((response) => {
         setSubmitState(false)
-        // console.log(response.data.results)
-
         setPodcastArray(response.data.results)
       })
     }
@@ -122,11 +121,8 @@ function PodcastGenreForm(props) {
             len_max: `${maxWalkTime}`,
         }
       }).then((response) => {
-        setFinalGenreInput("")
-        
+        setFinalGenreInput("")   
         setSubmitState(false)  
-        console.log(response.data.results)
-
         setPodcastArray(response.data.results)
 
         if (podcastArray.length <= 1) {
@@ -140,8 +136,6 @@ function PodcastGenreForm(props) {
 
   }, [finalGenreInput])
 
-  // console.log(userGenreInput);
-
   const handleUrl = (url) => {
     props.urlChoice(url)
   }
@@ -149,7 +143,6 @@ function PodcastGenreForm(props) {
   const handlePodcastPlay = (e) => {
     props.podcastPlay(e)
   }
-  // console.log("can audio play PODCAST GENRE", props.canPlay)
   return (
     <section className='podcastForm'>
         {
