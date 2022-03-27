@@ -23,8 +23,8 @@ function PodcastGenreForm(props) {
 
   let minWalkTime = props.chosenTime
   minWalkTime = Math.floor((minWalkTime * 0.8) / 60)
-
-  if (props.chosenTime == 0) {
+// changes
+  if (props.chosenTime === 0) {
     minWalkTime = window.sessionStorage.getItem('minWalk')
   }
   
@@ -32,8 +32,8 @@ function PodcastGenreForm(props) {
 
   let maxWalkTime = props.chosenTime
   maxWalkTime = Math.floor((maxWalkTime * 1.2) / 60)
-
-  if (props.chosenTime == 0) {
+// changes
+  if (props.chosenTime === 0) {
     maxWalkTime = window.sessionStorage.getItem('maxWalk')
   }
   
