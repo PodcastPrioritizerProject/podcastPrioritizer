@@ -335,6 +335,24 @@ button:active {
 button.podcastButton {
   background-color: transparent;
 }
+button:disabled {
+  color: #949494;
+  opacity: 0.5;
+}
+
+input:disabled + label {
+  opacity: 0.5;
+}
+input:disabled + label svg {
+  color: #949494;
+}
+
+input[type=radio]:checked + label {
+  opacity: 1;
+}
+input[type=radio]:checked + label svg {
+  color: #F97068;
+}
 
 svg {
   color: #F97068;
@@ -538,6 +556,9 @@ datalist option {
 
 .mapDetails {
   width: 100%;
+}
+.mapDetails .wrapper .loading {
+  margin-bottom: 20px;
 }
 .mapDetails .wrapper h2 {
   padding-bottom: 20px;

@@ -92,6 +92,24 @@ button {
     &.podcastButton {
         background-color: transparent;
     }
+    &:disabled {
+      // background-color: #5A5A5A;
+      color: #949494;
+      opacity: 0.5;
+    }
+}
+
+input:disabled + label {
+      opacity: 0.5;
+      svg {
+        color: #949494;
+      }
+}
+input[type="radio"]:checked + label {
+  opacity: 1;
+  svg {
+    color: $quaternary;
+  }
 }
 
 svg {

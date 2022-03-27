@@ -24,7 +24,7 @@ const CommuteType = (props) => {
   const walkR = useRef()
   const bikeR = useRef()
   const driveR = useRef()
-
+  console.log(bikeR)
   useEffect(() => {
 
     if (window.sessionStorage.chosenCommute === walkR.current.id){

@@ -224,7 +224,7 @@ const MapForm = (props) => {
           <div className="startingLocation">
             <label htmlFor="fromLocation" className='orange'>Enter starting location</label>
             <div className="inputStart">
-              <input type="text" onChange={handleInputFrom} list="fromLocation" id="from" value={autoFrom} autoComplete="off"/>
+              <input placeholder="483 Queen St W, Toronto, ON" type="text" onChange={handleInputFrom} list="fromLocation" id="from" value={autoFrom} autoComplete="off"/>
               <button type='button' onClick={myLocation}>
                 <BiCurrentLocation />
               </button>
@@ -245,7 +245,7 @@ const MapForm = (props) => {
           <div className="finalLocation">
             <div className="inputFinal">
               <label htmlFor="toLocation" className='yellow'>Enter destination</label>
-              <input type="text" onChange={handleInputTo} list="toLocation" id="to" value={autoTo} autoComplete="off"/>
+              <input placeholder="Toronto, ON" type="text" onChange={handleInputTo} list="toLocation" id="to" value={autoTo} autoComplete="off"/>
                 <datalist id="toLocation" >
                   {
                     // map through the givenAddress state defined by the axios call and return it as options (autofill API)

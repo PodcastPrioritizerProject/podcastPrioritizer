@@ -161,7 +161,7 @@ function PodcastGenreForm(props) {
       <div className="wrapper">
         <h2>What Podcast Genre?</h2>
         <form action="" onSubmit={ handleSubmit } className="podcastGenreForm">
-          <input type="text" onChange={ handleInput } list="genres" value={ userGenreInput }/>
+              <input placeholder="Music, Finance, News..." type="text" onChange={ handleInput } list="genres" value={ userGenreInput }/>
           <datalist id="genres">
             {
               //Map through the returned Genres array, return character matched genres. 
