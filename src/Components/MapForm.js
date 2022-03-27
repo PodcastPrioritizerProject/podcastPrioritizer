@@ -258,9 +258,9 @@ const MapForm = (props) => {
                     })
                   }
                 </datalist>
-            <button ref={commuteRef}>Submit</button>
             </div>
           </div>
+            <button ref={commuteRef}>Get the Route</button>
         </form>
         {/* loading animation while waiting for API results */}
         {

@@ -8,6 +8,7 @@ import Home from './Components/Home';
 // import Player from "./Components/Player"
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
+import Footer from './Components/Footer';
 
 function App() {
   const [audioObject, setAudioObject] = useState({})
@@ -62,6 +63,8 @@ const player = useRef()
         }
 
         {/* </div> */}
+
+        <Footer />
       </>
   );
 };

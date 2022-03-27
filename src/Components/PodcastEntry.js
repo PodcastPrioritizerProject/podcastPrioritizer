@@ -78,7 +78,7 @@ function PodcastEntry(props) {
                                 </div>
                             </li>
                         </Link>
-                        <button id={e.id} type='button' 
+                        <button id={e.id} className="podcastButton" type='button' 
                         onClick={(event) => {handleClick(e, event)}}>
                         {/* Onclick that changes the pause/play button depending on if it was clicked. Button is connected with the audioPlayer via canPlay */}
                         {
