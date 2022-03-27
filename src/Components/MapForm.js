@@ -190,7 +190,6 @@ const MapForm = (props) => {
     setChosenCommuteType(type)
   }
 
-  // Delete This!
   // when the final commute is selected, this sends the information to App.js to be used in our podcast display
   useEffect(() => {
     props.time(chosenCommuteTime)
@@ -251,9 +250,9 @@ const MapForm = (props) => {
                     })
                   }
                 </datalist>
-            <button ref={commuteRef}>Submit</button>
             </div>
           </div>
+            <button ref={commuteRef}>Get the Route</button>
         </form>
         {/* loading animation while waiting for API results */}
         {

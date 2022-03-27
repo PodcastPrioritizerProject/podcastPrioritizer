@@ -76,7 +76,7 @@ function PodcastEntry(props) {
                                 </div>
                             </li>
                         </Link>
-                        <button id={e.id} type='button' 
+                        <button id={e.id} className="podcastButton" type='button' 
                         onClick={(event) => {handleClick(e, event)}}>
                         {
                             e.id === buttonId && props.canPlay === true && isClicked === true ?
