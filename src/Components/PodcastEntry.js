@@ -1,6 +1,7 @@
+//Import useEffect, useState, and Link from React & React router
 import { useEffect, useState } from 'react';
 import { Link} from 'react-router-dom';
-
+//Import React icons
 import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai'
 
 function PodcastEntry(props) {
@@ -9,7 +10,6 @@ function PodcastEntry(props) {
   const [buttonId, setButtonId] = useState("")
 
   const results = props.podcasts
- 
   useEffect(()=>{
       setIsClicked(true)
       props.podcastPlay(isClicked)
@@ -25,10 +25,11 @@ function PodcastEntry(props) {
     }
   }, [props.canPlay])
  
+  //Handles button click which plays and pauses the audio 
   const handleClick = (individualAudio, e) => {
 
     if (buttonId !== ""){
-
+      //Ensures both the audio player and podcast entry play icon are in sync
       if (isClicked === false) {
         props.playerTest.current.audio.current.play()
         setIsClicked(true)
@@ -39,7 +40,8 @@ function PodcastEntry(props) {
     } else {
 
     }
-
+    
+    //Connects both the audio player icon as well as the podcast entry audio icon
     props.podcastUrl(individualAudio)
     setButtonId(e.currentTarget.id)
     props.podcastPlay(isClicked)
@@ -51,9 +53,11 @@ function PodcastEntry(props) {
                 {
                     // mapping array for podcasts and displaying it on the DOM
                     results.map((e) => { 
+
+                        //Calculate podcast time to be minutes and hours 
                         let audioMinutes = Math.floor(e.audio_length_sec / 60) % 60
                         let audioHours = Math.floor(e.audio_length_sec / 3600) 
-
+                        //Conditional that makes the hours singular or plural based on the length of the podcast
                         if (audioHours == 0) {
                         audioHours = null
                         } else if (audioHours == 1) {
@@ -76,6 +80,7 @@ function PodcastEntry(props) {
                         </Link>
                         <button id={e.id} type='button' 
                         onClick={(event) => {handleClick(e, event)}}>
+                        {/* Onclick that changes the pause/play button depending on if it was clicked. Button is connected with the audioPlayer via canPlay */}
                         {
                             e.id === buttonId && props.canPlay === true && isClicked === true ?
                             <AiFillPauseCircle />

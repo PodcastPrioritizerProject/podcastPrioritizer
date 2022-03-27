@@ -18,31 +18,35 @@ const PodcastDetails = () => {
                 id: `${podcastId}`
             }
         }).then(( apiResponse) => {
+            //Set returned episode object into useState
             setPodcastInfo(apiResponse.data)
+            //Set returned podcast object intoUseState
             setPodcastPublisher(apiResponse.data.podcast.title)
-            // console.log(apiResponse.data)
-
         })
     }, [])
 
     //Destructure the object returned by the API call
     const { title, description, image, audio_length_sec } = podcastInfo
-    // console.log(description)
-  useEffect(() => {
 
-    if (description === undefined) {
-      console.log("no info")
-    } else {
-      let newDescription = description
-      let newestDescription = newDescription.replace(/(<([^>]+)>)/gi, "")
-      setActualDescription(newestDescription)
+    
+    useEffect(() => {
 
-    }
-  }, [description])
+        if (description === undefined) {
+        console.log("no info")
+        } else {
+        let newDescription = description
+        let newestDescription = newDescription.replace(/(<([^>]+)>)/gi, "")
+        setActualDescription(newestDescription)
 
+        }
+    }, [description])
+
+
+    //Calculate podcast time to be minutes and hours 
     const audioMinutes = Math.floor(audio_length_sec / 60) % 60
     let audioHours = Math.floor(audio_length_sec / 3600) 
 
+    //Conditional that makes the hours singular or plural based on the length of the podcast
     if (audioHours == 0) {
         audioHours = null
     } else if (audioHours == 1) {
@@ -52,9 +56,8 @@ const PodcastDetails = () => {
     }
 
     
-
+    //Run a useEffect which takes in the description, if evaluated to a string run Regex to remove HTML elements from API call.   
     useEffect( () => {
-
         if (description === undefined) {
             console.log("no info")
         } else {
@@ -63,9 +66,6 @@ const PodcastDetails = () => {
             setActualDescription(newestDescription)
         }
     }, [description])
-
-
-    
     
     return (
         <div className="podcastCard">
