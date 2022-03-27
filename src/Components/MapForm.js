@@ -26,7 +26,7 @@ const MapForm = (props) => {
     // conditional statement to call axios when input length is longer than 1 character
     if ((autoTo.length > 1)) {
       axios({
-        url: 'http://www.mapquestapi.com/search/v3/prediction',
+        url: 'https://www.mapquestapi.com/search/v3/prediction',
         params: {
           key: 'pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW',
           q: `${autoTo}`,
@@ -46,7 +46,7 @@ const MapForm = (props) => {
     // conditional statement to call axios when input length is longer than 1 character
     if ((autoFrom.length > 1)) {
       axios({
-        url: 'http://www.mapquestapi.com/search/v3/prediction',
+        url: 'https://www.mapquestapi.com/search/v3/prediction',
         params: {
           key: 'pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW',
           q: `${autoFrom}`,
@@ -107,7 +107,7 @@ const MapForm = (props) => {
       setSubmitState(true)
       setComuteComponent(true)
       axios.all([
-        axios.get("http://www.mapquestapi.com/directions/v2/route", {
+        axios.get("https://www.mapquestapi.com/directions/v2/route", {
           params: {
           key: "pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW",
           from: `${autoFrom}`,
@@ -116,7 +116,7 @@ const MapForm = (props) => {
           routeType: "bicycle",
           }
         }),
-        axios.get('http://www.mapquestapi.com/directions/v2/route', {
+        axios.get('https://www.mapquestapi.com/directions/v2/route', {
           params: {
           key: "pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW",
           from: `${autoFrom}`,
@@ -125,7 +125,7 @@ const MapForm = (props) => {
           routeType: "pedestrian",
           }
         }),
-        axios.get("http://www.mapquestapi.com/directions/v2/route", {
+        axios.get("https://www.mapquestapi.com/directions/v2/route", {
           params: {
             key: "pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW",
             from: `${autoFrom}`,
