@@ -49,48 +49,50 @@ function PodcastEntry(props) {
 
     return (
         <ul>
-        {
-            // mapping array for podcasts and displaying it on the DOM
-            results.map((e) => { 
-                let audioMinutes = Math.floor(e.audio_length_sec / 60) % 60
-                let audioHours = Math.floor(e.audio_length_sec / 3600) 
+            <div className="wrapper">
+                {
+                    // mapping array for podcasts and displaying it on the DOM
+                    results.map((e) => { 
+                        let audioMinutes = Math.floor(e.audio_length_sec / 60) % 60
+                        let audioHours = Math.floor(e.audio_length_sec / 3600) 
 
-                if (audioHours == 0) {
-                  audioHours = null
-                } else if (audioHours == 1) {
-                  audioHours = `${audioHours}hr`
-                } else {
-                  audioHours = `${audioHours}hrs`
-                }
-                return (
-                  <div key={e.id} className="individualPodcast">
-                    <Link to={`/${e.id}`}>
-                    <li>
-                        <div className="imgContainer">
-                            <img src={e.thumbnail} alt={`picture for ${e.podcast_title_original}`} />
-                        </div>
-                        <div className="textContainer">
-                            <h3>{e.podcast_title_original}</h3>
-                            <p>{audioHours} {audioMinutes}min</p>
-                        </div>
-                    </li>
-                    </Link>
-                    <button id={e.id} type='button' 
-                    onClick={(event) => {handleClick(e, event)}}>
-                      {
-                        e.id === buttonId && props.canPlay === true && isClicked === true ?
-                        <AiFillPauseCircle />
-                        
-                        :
-                        <AiFillPlayCircle />
-                        
-                      }
-        
-                    </button>
-                  </div>
-                )
-              })
-            }  
+                        if (audioHours == 0) {
+                        audioHours = null
+                        } else if (audioHours == 1) {
+                        audioHours = `${audioHours}hr`
+                        } else {
+                        audioHours = `${audioHours}hrs`
+                        }
+                        return (
+                        <div key={e.id} className="individualPodcast">
+                        <Link to={`/${e.id}`}>
+                            <li>
+                                <div className="imgContainer">
+                                    <img src={e.thumbnail} alt={`picture for ${e.podcast_title_original}`} />
+                                </div>
+                                <div className="textContainer">
+                                    <h3>{e.podcast_title_original}</h3>
+                                    <p>{audioHours} {audioMinutes}min</p>
+                                </div>
+                            </li>
+                        </Link>
+                        <button id={e.id} type='button' 
+                        onClick={(event) => {handleClick(e, event)}}>
+                        {
+                            e.id === buttonId && props.canPlay === true && isClicked === true ?
+                            <AiFillPauseCircle />
+                            
+                            :
+                            <AiFillPlayCircle />
+                            
+                        }
+            
+                        </button>
+                    </div>
+                    )
+                    })
+                }  
+            </div>
         </ul>
     )
 }

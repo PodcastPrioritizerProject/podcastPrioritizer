@@ -1,6 +1,7 @@
 .rhap_forward-button,
 .rhap_rewind-button,
-.rhap_repeat-button {
+.rhap_repeat-button
+{
   display: none;
 }
 
@@ -20,6 +21,42 @@
   bottom: 0;
   height: 120px;
   width: 100%;
+  z-index: 100;
+  opacity: 90%;
+  .rhap_container {
+    background-color: $senary;
+    .rhap_time {
+      color: $tertiary;
+    }
+    .rhap_progress-filled {
+      background-color: $secondary;
+    }
+
+    .rhap_progress-indicator {
+      background-color: $quaternary;
+    }
+
+    .rhap_volume-container {
+      height: 32px;
+      button {
+        display: flex;
+        align-items: center;
+        svg {
+          object-fit: contain;
+          width: 100%;
+        }
+      }
+    }
+
+    .rhap_volume-indicator {
+      background-color: $quaternary;
+    }
+    .rhap_controls-section {
+      .rhap_additional-controls{
+        display: none;
+      }
+    }
+  }
 }
 .audioThumbnail {
  width: 116px;
@@ -27,3 +64,5 @@
       height: 100%;
     }
 }
+
+

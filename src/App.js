@@ -36,7 +36,7 @@ function App() {
 
 const player = useRef()
 
-// console.log(player)
+console.log(audioObject)
 
 // const playAudio = () => {
 //   player.current.audio.current.play();
@@ -54,27 +54,32 @@ const player = useRef()
           <Route path="/:podcastId" element={<PodcastDetails />} />
         </Routes>
         {/* <Player audio={audioObject}/> */}
-        <div className="audioPlayer wrapper">
-          <div className="audioThumbnail"><img src={audioObject.thumbnail} alt="" /></div>
+        {/* <div className="audioPlayer wrapper">
+          <div className="audioThumbnail"><img src={audioObject.thumbnail} alt="" /></div> */}
           {/* <button type='button' onClick={playAudio}>CLICK ME</button>
         <button type='button' onClick={pauseAudio}>CLICK ME PAUSE</button>
-        <button type='button' onClick={toggleAudio}>CLICK ME toggle</button> */}
+      <button type='button' onClick={toggleAudio}>CLICK ME toggle</button> */}
         {
           audioObject.audio
-            ? <AudioPlayer
-              ref={player}
-              autoPlay
-              src={audioObject.audio}
-              // onPlay={e => console.log("onPlay")}
-              onPlay={handlePlay}
-              onPause={handlePause}
-              onEnded={handleEnd}
-            // other props here
-            />
-          : null
+            ? 
+              <div className="audioPlayer wrapper">
+                <div className="audioThumbnail"><img src={audioObject.thumbnail} alt="" /></div>
+                <AudioPlayer
+
+                  ref={player}
+                  autoPlay
+                  src={audioObject.audio}
+                  // onPlay={e => console.log("onPlay")}
+                  onPlay={handlePlay}
+                  onPause={handlePause}
+                  onEnded={handleEnd}
+                // other props here
+                />
+              </div>
+            : null
         }
 
-        </div>
+        {/* </div> */}
       </>
   );
 };

@@ -151,14 +151,16 @@
     ul {
         margin-bottom: 100px;
         .individualPodcast {
+            position: relative;
             a {
                 text-decoration: none;
+                color: $tertiary;
             }
             li {
                 width: 100%;
                 display: flex;
-                margin: 30px 0;
-                padding: 15px 0;
+                // margin: 30px 0;
+                padding: 40px 0;
                 border-bottom: 1px solid $tertiary;
                 border-top: 1px solid $tertiary;
 
@@ -170,10 +172,14 @@
                     }
                 }
                 .textContainer {
-                    width: 70%;
+                    width: calc(70% - 20px);
                     // white-space: nowrap;
+                    margin-left: 20px;
                     overflow: hidden;
                     text-overflow: ellipsis;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
                     // max-height: 150px;
                     h3 {
                         color: $tertiary;
@@ -181,6 +187,12 @@
                     }
                 }
             }
+        }
+        button {
+            position: absolute;
+            right: 0px;
+            bottom: 20px;
+            z-index: 10;
         }
     }
 
