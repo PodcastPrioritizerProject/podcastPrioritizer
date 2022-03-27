@@ -1,18 +1,19 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState} from "react";
 
 const MapDisplay = (props) => {
-  // console.log(props)
+
+  // variables that hold the button text
   const show = "Show Map"
   const hide = "Hide Map"
 
   const [buttonText, setButtonText] = useState("Show Map")
   const [visible, setVisible] = useState(true)
+
+  // since we lose our state while routing, the last displayed map will be shown
   let mapBackup = props.map
   if (props.map === "") {
     mapBackup = window.sessionStorage.getItem('map')
   }
-// console.log(mapBackup)
   const handleClick = () => {
     if (visible === true){
       setButtonText(hide)

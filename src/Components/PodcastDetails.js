@@ -20,14 +20,14 @@ const PodcastDetails = () => {
         }).then(( apiResponse) => {
             setPodcastInfo(apiResponse.data)
             setPodcastPublisher(apiResponse.data.podcast.title)
-            console.log(apiResponse.data)
+            // console.log(apiResponse.data)
 
         })
     }, [])
 
     //Destructure the object returned by the API call
     const { title, description, image, audio_length_sec } = podcastInfo
-    console.log(description)
+    // console.log(description)
   useEffect(() => {
 
     if (description === undefined) {
@@ -59,7 +59,7 @@ const PodcastDetails = () => {
             console.log("no info")
         } else {
             let newDescription = description
-            let newestDescription = newDescription.replace(/(<([^>]+)>)/gi, "");
+            let newestDescription = newDescription.replace(/(<([^>]+)>)/gi, " ");
             setActualDescription(newestDescription)
         }
     }, [description])

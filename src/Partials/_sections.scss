@@ -41,23 +41,18 @@
                             max-width: 30px;
                         }
                     }
-
                 }
-
             }
-
             .finalLocation {
                 width: 100%;
                   .inputFinal {
                     position: relative;
-                    
-      
-                      button {
-                      position: absolute;
-                      right: 0;
-                      bottom: 15px;
-                      }
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+                   
                   }
+
                 
                 input {
                     width: 100%;
@@ -81,9 +76,9 @@
         margin-bottom: 40px;
 
         .travelIconsLabel {
-            width: calc((100vw / 3) - 5vw);
+            width: calc((100vw / 3) - 6vw);
             min-height: 90px;
-            height: calc((100vw / 3) - 5vw);
+            height: calc((100vw / 3) - 6vw);
             max-height: 200px;
             max-width: 300px;
             background-color: $quinary;
@@ -113,7 +108,6 @@
 }
 
 // styling for MapDisplay
-
 .mapButton {
     width: 100%;
     display: flex;
@@ -129,7 +123,6 @@
 }
 
 // Styling for PodcastGenreForm
-
 .podcastForm {
   width: 100%;
     h2 {
@@ -147,7 +140,6 @@
             margin-bottom: 15px;
         }
     }
-
     ul {
         margin-bottom: 100px;
         .individualPodcast {
@@ -195,6 +187,4 @@
             z-index: 10;
         }
     }
-
-
 }

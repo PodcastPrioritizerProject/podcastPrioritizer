@@ -270,7 +270,7 @@ html {
 
 .wrapper {
   max-width: 1000px;
-  width: 95%;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -578,11 +578,16 @@ header .aboutSection .punchline {
 }
 .mapDetails .wrapper .destinationForm .finalLocation .inputFinal {
   position: relative;
-}
-.mapDetails .wrapper .destinationForm .finalLocation .inputFinal button {
-  position: absolute;
-  right: 0;
-  bottom: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 .mapDetails .wrapper .destinationForm .finalLocation input {
   width: 100%;
@@ -604,9 +609,9 @@ header .aboutSection .punchline {
   margin-bottom: 40px;
 }
 .commuteType .commuteIconsForm .travelIconsLabel {
-  width: 28.3333333333vw;
+  width: 27.3333333333vw;
   min-height: 90px;
-  height: 28.3333333333vw;
+  height: 27.3333333333vw;
   max-height: 200px;
   max-width: 300px;
   background-color: #273b50;
@@ -695,16 +700,19 @@ header .aboutSection .punchline {
 .podcastForm ul {
   margin-bottom: 100px;
 }
+.podcastForm ul .individualPodcast {
+  position: relative;
+}
 .podcastForm ul .individualPodcast a {
   text-decoration: none;
+  color: #EDF2EF;
 }
 .podcastForm ul .individualPodcast li {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin: 30px 0;
-  padding: 15px 0;
+  padding: 40px 0;
   border-bottom: 1px solid #EDF2EF;
   border-top: 1px solid #EDF2EF;
 }
@@ -717,12 +725,29 @@ header .aboutSection .punchline {
      object-fit: contain;
 }
 .podcastForm ul .individualPodcast li .textContainer {
-  width: 70%;
+  width: calc(70% - 20px);
+  margin-left: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 .podcastForm ul .individualPodcast li .textContainer h3 {
   color: #EDF2EF;
+}
+.podcastForm ul button {
+  position: absolute;
+  right: 0px;
+  bottom: 20px;
+  z-index: 10;
 }
 
 .rhap_forward-button,
@@ -756,6 +781,42 @@ header .aboutSection .punchline {
   bottom: 0;
   height: 120px;
   width: 100%;
+  z-index: 100;
+  opacity: 90%;
+}
+.audioPlayer .rhap_container {
+  background-color: #161e27;
+}
+.audioPlayer .rhap_container .rhap_time {
+  color: #EDF2EF;
+}
+.audioPlayer .rhap_container .rhap_progress-filled {
+  background-color: #E8EB5E;
+}
+.audioPlayer .rhap_container .rhap_progress-indicator {
+  background-color: #F97068;
+}
+.audioPlayer .rhap_container .rhap_volume-container {
+  height: 32px;
+}
+.audioPlayer .rhap_container .rhap_volume-container button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.audioPlayer .rhap_container .rhap_volume-container button svg {
+  -o-object-fit: contain;
+     object-fit: contain;
+  width: 100%;
+}
+.audioPlayer .rhap_container .rhap_volume-indicator {
+  background-color: #F97068;
+}
+.audioPlayer .rhap_container .rhap_controls-section .rhap_additional-controls {
+  display: none;
 }
 
 .audioThumbnail {

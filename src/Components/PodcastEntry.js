@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link} from 'react-router-dom';
 
 import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai'
-// import {useState} from "react";
 
 function PodcastEntry(props) {
 
@@ -10,8 +9,7 @@ function PodcastEntry(props) {
   const [buttonId, setButtonId] = useState("")
 
   const results = props.podcasts
-  console.log(props.playerTest, "WE MADE IT ")
-
+ 
   useEffect(()=>{
       setIsClicked(true)
       props.podcastPlay(isClicked)
@@ -20,10 +18,10 @@ function PodcastEntry(props) {
   useEffect(() => {
     if (props.canPlay === false){
       setIsClicked(false)
-      // props.podcastPlay(isClicked)
+
     } else if (props.canPlay === true) {
       setIsClicked(true)
-      // props.podcastPlay(isClicked)
+
     }
   }, [props.canPlay])
  
@@ -39,7 +37,7 @@ function PodcastEntry(props) {
         setIsClicked(false)
       }
     } else {
-      console.log("no info")
+
     }
 
     props.podcastUrl(individualAudio)
@@ -86,7 +84,7 @@ function PodcastEntry(props) {
                             <AiFillPlayCircle />
                             
                         }
-            
+          
                         </button>
                     </div>
                     )

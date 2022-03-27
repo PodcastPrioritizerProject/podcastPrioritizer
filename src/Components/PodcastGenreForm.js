@@ -6,6 +6,7 @@ import PodcastEntry from './PodcastEntry';
 import LoadingAnimationP from './LoadingAnimationP';
 
 
+
 function PodcastGenreForm(props) {
   //Store user input and genres returned from api
   const [ selectedGenre, setSelectedGenre ] = useState([])
@@ -17,10 +18,6 @@ function PodcastGenreForm(props) {
   const [maxWalk, setMaxWalk] = useState(window.sessionStorage.getItem('maxWalk'))
   const [finalGenre, setFinalGenre] = useState(window.sessionStorage.getItem('finalGenre'))
 
-  // const [sessionTime, setSessionTime] = useState(window.sessionStorage.getItem('count'));
-  // console.log(props.chosenTime)
-
-
   let minWalkTime = props.chosenTime
   minWalkTime = Math.floor((minWalkTime * 0.8) / 60)
 // changes
@@ -28,8 +25,6 @@ function PodcastGenreForm(props) {
     minWalkTime = window.sessionStorage.getItem('minWalk')
   }
   
-
-
   let maxWalkTime = props.chosenTime
   maxWalkTime = Math.floor((maxWalkTime * 1.2) / 60)
 // changes
@@ -37,11 +32,9 @@ function PodcastGenreForm(props) {
     maxWalkTime = window.sessionStorage.getItem('maxWalk')
   }
   
-  
   //Track user input and set variable state  
   const handleInput = (e) => {
     setUserGenreInput(e.target.value)
-    console.log(userGenreInput);
   }
 
   // track user input and set state when submit is clicked
@@ -51,6 +44,13 @@ function PodcastGenreForm(props) {
     window.sessionStorage.setItem('minWalk', minWalkTime);
     window.sessionStorage.setItem('maxWalk', maxWalkTime);
     window.sessionStorage.setItem('finalGenre', userGenreInput);
+    props.infoToType(e)
+
+  }
+
+  window.onbeforeunload = () => {
+    window.sessionStorage.clear()
+    console.log("clear podcast genre")
   }
 
   // Run when routing back
@@ -69,11 +69,9 @@ function PodcastGenreForm(props) {
         }
       }).then((response) => {
         setSubmitState(false)
-        // console.log(response.data.results)
-
         setPodcastArray(response.data.results)
       })
-    }
+    } 
   }, [])
 
   //Run Autocomplete API if user input is longer than 1 character
@@ -110,6 +108,7 @@ function PodcastGenreForm(props) {
   //Run Search API to gather a list of related movies, taking in the autocompleted input as the parameter. API call will only run if character length is greater than 1.
 
   useEffect(function() {
+
     if(userGenreInput.length >= 1){
 
       setSubmitState(true)
@@ -123,20 +122,22 @@ function PodcastGenreForm(props) {
         }
       }).then((response) => {
         setFinalGenreInput("")
-        
         setSubmitState(false)  
-        console.log(response.data.results)
-
         setPodcastArray(response.data.results)
-
-        if (podcastArray.length <= 1) {
-          //Re-run API call with larger audio length params.
-          console.log(``);
+        
+        if (response.data.results.length < 1) {
+          Swal.fire({
+            icon: 'error',
+            text: 'Sorry, we could not find any podcasts to match your commute length',
+            color: "#EDF2EF",
+            confirmButtonColor: '#F97068',
+            background: "#1a2635"
+          })
         }
 
       })
 
-    }
+    } 
 
   }, [finalGenreInput])
 
@@ -153,7 +154,7 @@ function PodcastGenreForm(props) {
   return (
     <section className='podcastForm'>
         {
-        props.chosenTime === "" && window.sessionStorage.finalGenre === undefined
+        props.chosenTime === 0 && window.sessionStorage.finalGenre === undefined
         ? null
         :
 
