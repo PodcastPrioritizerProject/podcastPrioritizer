@@ -1,0 +1,29 @@
+.rhap_forward-button,
+.rhap_rewind-button,
+.rhap_repeat-button {
+  display: none;
+}
+
+// * {
+//   border: 1px solid red;
+// }
+#root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.audioPlayer {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  height: 120px;
+  width: 100%;
+}
+.audioThumbnail {
+ width: 116px;
+    img {
+      height: 100%;
+    }
+}

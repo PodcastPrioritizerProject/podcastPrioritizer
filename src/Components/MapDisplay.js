@@ -8,8 +8,11 @@ const MapDisplay = (props) => {
 
   const [buttonText, setButtonText] = useState("Show Map")
   const [visible, setVisible] = useState(true)
- 
-
+  let mapBackup = props.map
+  if (props.map === "") {
+    mapBackup = window.sessionStorage.getItem('map')
+  }
+// console.log(mapBackup)
   const handleClick = () => {
     if (visible === true){
       setButtonText(hide)
@@ -21,16 +24,17 @@ const MapDisplay = (props) => {
   }
 
   return (
+
     <div className="mapButton">
       <button 
       onClick={handleClick}
-      disabled={props.map ? false : true}
+      disabled={props.map || window.sessionStorage.map ? false : true}
       >{buttonText}</button>
       <div className="mapImg wrapper">
         {
           visible === true
           ? null
-          :<img src={`https://open.mapquestapi.com/staticmap/v5/map?key=pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW&session=${props.map}&type=dark`}alt="" />
+          :<img src={`https://open.mapquestapi.com/staticmap/v5/map?key=pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW&session=${mapBackup}&type=dark`}alt="" />
         }
       </div>
     </div>

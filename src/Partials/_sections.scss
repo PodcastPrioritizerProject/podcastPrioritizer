@@ -1,5 +1,6 @@
 // styling for mapForm section
 .mapDetails {
+  width: 100%;
     .wrapper {
         h2 {
             padding-bottom: 20px;
@@ -14,9 +15,10 @@
             .startingLocation {
                 width: 100%;
                 .inputStart{
+                    position: relative;
                     display: flex;
                     align-items: center;
-                    margin: 5px 0 15px 0;
+                    margin: 5px 0 25px 0;
                     background-color: $quinary;
                     input {
                         width: 100%;
@@ -29,7 +31,11 @@
                         align-items: center;
                         justify-content: center;
                         padding: 5px;
-
+                        margin-left: 5px;
+                        position: absolute;
+                        height: 100%;
+                        right: 0;
+                        cursor: pointer;
                         svg {
                             max-height: 30px;
                             max-width: 30px;
@@ -42,12 +48,24 @@
 
             .finalLocation {
                 width: 100%;
+                  .inputFinal {
+                    position: relative;
+                    
+      
+                      button {
+                      position: absolute;
+                      right: 0;
+                      bottom: 15px;
+                      }
+                  }
+                
                 input {
                     width: 100%;
                     font-size: $baseFontSize;
                     padding: 10px;
                     margin: 5px 0 15px 0;
                 }
+
 
             }
         }
@@ -61,15 +79,20 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 40px;
+
         .travelIconsLabel {
-            width: 90px;
+            width: calc((100vw / 3) - 5vw);
             min-height: 90px;
+            height: calc((100vw / 3) - 5vw);
+            max-height: 200px;
+            max-width: 300px;
             background-color: $quinary;
             border-radius: 2px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
 
             
 
@@ -108,6 +131,7 @@
 // Styling for PodcastGenreForm
 
 .podcastForm {
+  width: 100%;
     h2 {
         padding-bottom: 20px;
     }
@@ -116,6 +140,7 @@
         flex-direction: column;
         align-items: center;
         margin-bottom: 40px;
+        
         input {
             padding: 10px;
             width: 100%;

@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -26,6 +26,18 @@ const PodcastDetails = () => {
 
     //Destructure the object returned by the API call
     const { title, description, image, audio_length_sec } = podcastInfo
+    console.log(description)
+  useEffect(() => {
+
+    if (description === undefined) {
+      console.log("no info")
+    } else {
+      let newDescription = description
+      let newestDescription = newDescription.replace(/(<([^>]+)>)/gi, "")
+      setActualDescription(newestDescription)
+
+    }
+  }, [description])
 
     const audioMinutes = Math.floor(audio_length_sec / 60) % 60
     let audioHours = Math.floor(audio_length_sec / 3600) 
@@ -56,6 +68,9 @@ const PodcastDetails = () => {
     
     return (
         <div className="podcastCard">
+        <Link to='/'>
+          <button type='button'>BACK ICON HERE</button>
+        </Link>
             <div className="podcastCardImage">
                 <img src={image} alt="" />
             </div>
