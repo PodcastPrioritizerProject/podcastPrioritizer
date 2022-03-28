@@ -677,6 +677,7 @@ datalist option {
       -ms-flex-align: center;
           align-items: center;
   cursor: pointer;
+  text-align: center;
 }
 .commuteType .commuteIconsForm .travelIconsLabel .individualIcons {
   display: -webkit-box;
@@ -793,7 +794,11 @@ datalist option {
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
-.podcastForm ul .individualPodcast li .textContainer h3 {
+.podcastForm ul .individualPodcast li .textContainer .podcastTitle {
+  color: #E8EB5E;
+  padding-bottom: 10px;
+}
+.podcastForm ul .individualPodcast li .textContainer .podcastTitleOriginal {
   color: #EDF2EF;
   padding-bottom: 10px;
 }
