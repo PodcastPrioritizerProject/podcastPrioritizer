@@ -2,6 +2,7 @@ import { AiFillCar } from 'react-icons/ai';
 import { MdDirectionsBike } from 'react-icons/md';
 import { FaWalking } from 'react-icons/fa';
 import { useState, useRef, useEffect } from 'react';
+import Swal from 'sweetalert2'
 
 const CommuteType = (props) => {
 
@@ -49,13 +50,25 @@ const CommuteType = (props) => {
       driveR.current.labels[0].children[0].children[1].innerText = `${window.sessionStorage.driveTime} \n ${Number(distanceD).toFixed(1)}km`
       
     }
+    if (props.driveTime.formattedTime === "00:00:00") {
+
+      Swal.fire({
+        icon: 'error',
+        text: "Sorry for the wait! We tried our best but could not find a route for your destination",
+        footer: "Hint: Check for any typos or add a more specific address.",
+        color: "#EDF2EF",
+        confirmButtonColor: '#F97068',
+        background: "#1a2635"
+      })
+    }
 
   },[props.bikeTime, props.driveTime])
 
   // console.log(walkR)
-  // console.log(bikeR)
+  console.log(bikeR)
   // console.log(driveR)
-
+  console.log(window.sessionStorage.bikeTime)
+  console.log(props.bikeTime.formattedTime)
   return (
     <div className="commuteType">
       <h2>How Will You Be Travelling?</h2>
@@ -102,6 +115,14 @@ const CommuteType = (props) => {
                     <p>{props.bikeTime.distance.toFixed(1)}km</p>
                   </>
             }
+            {
+              window.sessionStorage.bikeTime && props.bikeTime.formattedTime === undefined
+              ? <>
+                  <p></p>
+                </>
+                : null
+            }
+        
             {/* {
               props.bikeTime.distance === undefined
               ? null

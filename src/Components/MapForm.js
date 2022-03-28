@@ -123,7 +123,7 @@ const MapForm = (props) => {
       // this state triggers loading animation
       setSubmitState(true)
       setComuteComponent(true)
-     
+      
       axios.all([
         axios.get("https://www.mapquestapi.com/directions/v2/route", {
           params: {
@@ -208,10 +208,7 @@ const MapForm = (props) => {
     // clear the input fields if BOTH of them are not empty after submit
     if (autoFrom === autoTo){
       setAutoTo("")
-    } else if (autoFrom !== "" && autoTo !== "") {
-      setAutoTo("")
-      setAutoFrom("")
-    }
+    } 
   }
   // this function lifts information from <CommuteType /> to be used for the map and podcast displays
   const handleChoices = (time, sessionId, type) => {
