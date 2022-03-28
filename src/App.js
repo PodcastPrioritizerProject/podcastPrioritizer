@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import "./App.scss";
 import {Routes, Route,} from 'react-router-dom';
 
@@ -32,7 +32,13 @@ function App() {
     setCanPlay(false)
   }
 
-const player = useRef()
+  const player = useRef()
+
+  useEffect(() => {
+    if (navigator.onLine === false){
+      alert("you lost connection")
+    }
+  }, [navigator.onLine])
 
   return (
       <>

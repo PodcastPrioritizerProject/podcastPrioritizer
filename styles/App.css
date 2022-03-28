@@ -767,8 +767,10 @@ datalist option {
   display: -ms-flexbox;
   display: flex;
   padding: 40px 0;
-  border-bottom: 1px solid #EDF2EF;
-  border-top: 1px solid #EDF2EF;
+  padding: 40px 15px;
+  margin: 20px 0;
+  background-color: #273b50;
+  border-radius: 2px;
 }
 .podcastForm ul .individualPodcast li .imgContainer {
   width: 30%;
