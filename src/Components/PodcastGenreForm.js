@@ -49,7 +49,6 @@ function PodcastGenreForm(props) {
     window.sessionStorage.setItem('maxWalk', maxWalkTime);
     window.sessionStorage.setItem('finalGenre', userGenreInput);
     props.infoToType(e)
-
   }
 
   window.onbeforeunload = () => {
