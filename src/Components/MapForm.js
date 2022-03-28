@@ -277,7 +277,7 @@ const MapForm = (props) => {
             choices={handleChoices}
             passFromPodcast={props.passToType}
           />
-          : <p>NOTHING</p>
+          : null
         }
         {
           chosenCommuteTime === 0 && window.sessionStorage.finalGenre === undefined

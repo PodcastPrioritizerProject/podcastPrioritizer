@@ -148,6 +148,9 @@ datalist {
 // Styling for PodcastGenreForm
 .podcastForm {
   width: 100%;
+    .loading {
+      margin-bottom: 20px;
+    }
     h2 {
         padding-bottom: 20px;
     }

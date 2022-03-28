@@ -17,6 +17,7 @@ function PodcastGenreForm(props) {
   const [ finalGenreInput, setFinalGenreInput ] = useState('')
   const [ podcastArray, setPodcastArray ] = useState([])
   const [submitState, setSubmitState] = useState(false)
+  const [loadState, setLoadState] = useState(false)
   const [minWalk, setMinWalk] = useState(window.sessionStorage.getItem('minWalk'))
   const [maxWalk, setMaxWalk] = useState(window.sessionStorage.getItem('maxWalk'))
   const [finalGenre, setFinalGenre] = useState(window.sessionStorage.getItem('finalGenre'))
@@ -115,6 +116,7 @@ function PodcastGenreForm(props) {
     if(userGenreInput.length >= 1){
 
       setSubmitState(true)
+      setLoadState(true)
       axios({
         url: 'https://listen-api.listennotes.com/api/v2/search',
         headers: { "X-ListenAPI-Key": "317ae89aeb8841b9b61635577fa94768" },
@@ -124,10 +126,12 @@ function PodcastGenreForm(props) {
             len_max: `${maxWalkTime}`,
         }
       }).then((response) => {
-        setFinalGenreInput("")   
-        setSubmitState(false)  
+        setFinalGenreInput("")
+        setTimeout(() => {
+          setSubmitState(false)  
+        }, 2000)   
         setPodcastArray(response.data.results)
-        
+        setLoadState(false)
         if (response.data.results.length < 1) {
           Swal.fire({
             icon: 'error',
@@ -180,7 +184,7 @@ function PodcastGenreForm(props) {
       </div>
       }
       {
-        submitState === true
+        loadState === true
           ? <LoadingAnimationP />
           : null
       }

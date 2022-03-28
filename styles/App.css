@@ -726,6 +726,9 @@ datalist option {
 .podcastForm {
   width: 100%;
 }
+.podcastForm .loading {
+  margin-bottom: 20px;
+}
 .podcastForm h2 {
   padding-bottom: 20px;
 }
