@@ -1,7 +1,27 @@
 // styling for mapForm section
+
+datalist {
+    cursor: pointer;
+    outline: none;
+    background: rgb(122, 122, 122);
+    appearance: none;
+    border-radius: 15px;
+    margin: 5px 0;
+    padding: 10px 10px;
+    color: $secondary;
+    text-align: center;
+    option {
+        text-align: center;
+        font-size: 0.8rem;
+    }
+}
+
 .mapDetails {
   width: 100%;
     .wrapper {
+      .loading {
+        margin-bottom: 20px;
+      }
         h2 {
             padding-bottom: 20px;
         }
@@ -41,23 +61,18 @@
                             max-width: 30px;
                         }
                     }
-
                 }
-
             }
-
             .finalLocation {
                 width: 100%;
                   .inputFinal {
                     position: relative;
-                    
-      
-                      button {
-                      position: absolute;
-                      right: 0;
-                      bottom: 15px;
-                      }
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+                   
                   }
+
                 
                 input {
                     width: 100%;
@@ -81,9 +96,9 @@
         margin-bottom: 40px;
 
         .travelIconsLabel {
-            width: calc((100vw / 3) - 5vw);
+            width: calc((100vw / 3) - 6vw);
             min-height: 90px;
-            height: calc((100vw / 3) - 5vw);
+            height: calc((100vw / 3) - 6vw);
             max-height: 200px;
             max-width: 300px;
             background-color: $quinary;
@@ -101,6 +116,9 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
+                p {
+                    padding: 3px 0;
+                }
 
             }
         }
@@ -113,7 +131,6 @@
 }
 
 // styling for MapDisplay
-
 .mapButton {
     width: 100%;
     display: flex;
@@ -129,9 +146,11 @@
 }
 
 // Styling for PodcastGenreForm
-
 .podcastForm {
   width: 100%;
+    .loading {
+      margin-bottom: 20px;
+    }
     h2 {
         padding-bottom: 20px;
     }
@@ -147,7 +166,6 @@
             margin-bottom: 15px;
         }
     }
-
     ul {
         margin-bottom: 100px;
         .individualPodcast {
@@ -183,18 +201,84 @@
                     // max-height: 150px;
                     h3 {
                         color: $tertiary;
+                        padding-bottom: 10px;
                         
                     }
                 }
             }
         }
-        button {
+        .podcastButton {
             position: absolute;
             right: 0px;
-            bottom: 20px;
+            bottom: 10px;
             z-index: 10;
         }
     }
+}
 
+// styling for podcastDetails
 
+.podcastCard {
+    position: relative;
+    width: 100%;
+
+    .navBar {
+        position: fixed;
+        width: 100%;
+        background-color: $primary;
+        opacity: 0.9;
+        
+        a {
+            button {
+                margin: 5px 10px;
+                background-color: transparent;
+                padding: 0;
+                height: 40px;
+                width: 40px;
+            }
+        }
+    }
+    .wrapper {
+        .podcastContent {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .podcastCardImage {
+                margin: 10px 0;
+                width: 75%;
+                max-width: 250px;
+                img {
+                    width: 100%;
+                }
+            }
+            .podcastCardText {
+                width: 100%;
+                .details {
+                    padding-bottom: 15px;
+                    margin-bottom: 30px;
+                    border-bottom: 1px solid $tertiary;
+    
+                    h2 {
+                        margin: 10px 0;
+                        color: $secondary;
+                        text-align: center;
+                    }
+                    h3 {
+                        margin: 20px 0 15px 0;
+                    }
+                }
+                .podcastBody {
+                    width: 100%;
+                    p {
+                        line-height: 1.25rem;
+                        overflow: hidden;
+                    }
+                    margin-bottom: 100px;
+                }
+            }
+    
+    
+        }
+    }
 }

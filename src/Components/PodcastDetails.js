@@ -1,6 +1,8 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { IoMdReturnLeft } from 'react-icons/io'
+
 
 
 const PodcastDetails = () => {
@@ -62,24 +64,36 @@ const PodcastDetails = () => {
             console.log("no info")
         } else {
             let newDescription = description
-            let newestDescription = newDescription.replace(/(<([^>]+)>)/gi, "");
+            let newestDescription = newDescription.replace(/(<([^>]+)>)/gi, " ");
             setActualDescription(newestDescription)
         }
     }, [description])
     
     return (
         <div className="podcastCard">
-        <Link to='/'>
-          <button type='button'>BACK ICON HERE</button>
-        </Link>
-            <div className="podcastCardImage">
-                <img src={image} alt="" />
+            <div className="navBar">
+                <Link to='/'>
+                    <button type='button'> 
+                        <IoMdReturnLeft /> 
+                    </button>
+                </Link>
             </div>
-            <div className="podcastCardText">
-                <h2>{podcastPublisher}</h2>
-                <h2>{title}</h2>
-                <p>{audioHours} {audioMinutes}minutes</p>
-                <p>{actualDescription}</p>
+            <div className="wrapper">
+                <div className="podcastContent">
+                    <div className="podcastCardImage">
+                        <img src={image} alt="" />
+                    </div>
+                    <div className="podcastCardText">
+                        <div className="details">
+                            <h2>{podcastPublisher}</h2>
+                            <h3>{title}</h3>
+                            <p>{audioHours} {audioMinutes}minutes</p>
+                        </div>
+                        <div className="podcastBody">
+                            <p>{actualDescription}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

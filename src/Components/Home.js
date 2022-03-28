@@ -6,8 +6,9 @@ import MapForm from './MapForm';
 import PodcastGenreForm from './PodcastGenreForm';
 
 const Home = (props) => {
-  console.log(props.playerTest, "PLEASE WORK")
+  // console.log(props.playerTest, "PLEASE WORK")
   const [chosenTime, setChosenTime] = useState('');
+  const [propToType, setPropToType] = useState("")
   // this function passes podcast info to parent
   const handleAudioUrl = (podcast) => {
     props.audioUrl(podcast)
@@ -21,11 +22,23 @@ const Home = (props) => {
   const handlePodcastPlayHome = (e) => {
     props.podcastPlay(e)
   }
+  const handleSubmitToType = (e) => {
+    setPropToType(e)
+  }
   return (
       <>
-          <Header />
-          <MapForm time={handleTime} />
-      <PodcastGenreForm chosenTime={chosenTime} urlChoice={handleAudioUrl} canPlay={props.canPlay} podcastPlay={handlePodcastPlayHome} playerTest={props.playerTest}/> 
+        <Header />
+        <MapForm 
+        time={handleTime}
+        passToType={propToType}
+        />
+        <PodcastGenreForm 
+        chosenTime={chosenTime} 
+        urlChoice={handleAudioUrl} 
+        canPlay={props.canPlay} 
+        podcastPlay={handlePodcastPlayHome} 
+        playerTest={props.playerTest}
+        infoToType={handleSubmitToType}/> 
       </>
   )
 }

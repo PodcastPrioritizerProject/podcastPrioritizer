@@ -15,12 +15,12 @@ const MapForm = (props) => {
   const [walkRoute, setWalkRoute] = useState({});
   const [bikeRoute, setBikeRoute] = useState({});
   const [driveRoute, setDriveRoute] = useState({});
-  const [chosenCommuteTime, setChosenCommuteTime] = useState("")
+  const [chosenCommuteTime, setChosenCommuteTime] = useState(0)
   const [chosenCommuteSession, setChosenCommuteSession] = useState("")
   const [chosenCommuteType, setChosenCommuteType] = useState("")
   const [submitState, setSubmitState] = useState(false)
   const [commuteComponent, setComuteComponent] = useState(false)
-
+  const [commuteComponentSession, setCommuteComponentSession] = useState(window.sessionStorage.commuteType)
   // create a useEffect to call axios when onChange happens for the to input field for MapForm
   useEffect(() => {
     // conditional statement to call axios when input length is longer than 1 character
@@ -75,9 +75,6 @@ const MapForm = (props) => {
   // form submit function that makes two axios calls using the final input values of autoTo/autoFrom
   const handleSubmit = (e) => {
     e.preventDefault()
-
-    
-
     if (autoFrom === ""){
       Swal.fire({
         icon: 'warning',
@@ -87,7 +84,7 @@ const MapForm = (props) => {
         confirmButtonColor: '#F97068',
         background: "#1a2635"
       })
-    } else if (autoTo === ""){
+    } else if (autoTo === "") {
       Swal.fire({
         icon: 'warning',
         text: 'Please enter your destination',
@@ -95,17 +92,26 @@ const MapForm = (props) => {
         color: "#EDF2EF",
         confirmButtonColor: '#F97068',
         background: "#1a2635"
+      }) 
+    } else if (autoTo === autoFrom){
+      Swal.fire({
+        icon: 'warning',
+        text: 'Your starting location and your destination have to be different',
+        color: "#EDF2EF",
+        confirmButtonColor: '#F97068',
+        background: "#1a2635"
       })
     }else {
       // if the input fields are not empty, disable the button after submit
-      e.target[2].disabled = true
-
+      e.target[3].disabled = true
+      console.log(e.target)
       // clearing the session storage data
       window.sessionStorage.clear()
-
+  
       // this state triggers loading animation
       setSubmitState(true)
       setComuteComponent(true)
+     
       axios.all([
         axios.get("https://www.mapquestapi.com/directions/v2/route", {
           params: {
@@ -137,12 +143,14 @@ const MapForm = (props) => {
         // after both axios calls are made, we wait for all of the data before taking it and sending it to our App.js via props
       ]).then(axios.spread((apiDataBike, apiDataWalk, apiDataDrive) => {
 
+        window.sessionStorage.setItem('commuteType', true)
+        
         commuteRef.current.scrollIntoView({ behavior: 'smooth' })
         // when the API call returns, enable the submit button
-        e.target[2].disabled = false
+        e.target[3].disabled = false
         // stop loading animation render
         setSubmitState(false)
-        if (apiDataBike.data.info.statuscode === 402) {
+        if (apiDataBike.data.info.statuscode === 402 || apiDataBike.data.route.formattedTime === "00:00:00") {
           console.log(apiDataBike.data)
           Swal.fire({
             icon: 'error',
@@ -171,16 +179,16 @@ const MapForm = (props) => {
           setBikeRoute(apiDataBike.data.route)
           setDriveRoute(apiDataDrive.data.route)
         }
-   
       })).catch(error => {
         console.log(error)
       });
     }
     // clear the input fields if BOTH of them are not empty after submit
-    if (autoFrom !== "" && autoTo !== "") {
+    if (autoFrom === autoTo){
+      setAutoTo("")
+    } else if (autoFrom !== "" && autoTo !== "") {
       setAutoTo("")
       setAutoFrom("")
-
     }
   }
   // this function lifts information from <CommuteType /> to be used for the map and podcast displays
@@ -190,15 +198,14 @@ const MapForm = (props) => {
     setChosenCommuteType(type)
   }
 
-  // Delete This!
   // when the final commute is selected, this sends the information to App.js to be used in our podcast display
   useEffect(() => {
     props.time(chosenCommuteTime)
   }, [chosenCommuteTime])
 
+  // geolocator function
   const myLocation = () => {
     const locationFinder = (pos) => {
-      console.log(pos)
       let crd = pos.coords;
       let currentLocation = `${crd.latitude}, ${crd.longitude}`
       setAutoFrom(currentLocation)
@@ -207,7 +214,7 @@ const MapForm = (props) => {
   }
   
   const commuteRef = useRef()
-
+ 
   return (
     <section className='mapDetails'>
       <div className="wrapper">
@@ -217,7 +224,7 @@ const MapForm = (props) => {
           <div className="startingLocation">
             <label htmlFor="fromLocation" className='orange'>Enter starting location</label>
             <div className="inputStart">
-              <input type="text" onChange={handleInputFrom} list="fromLocation" id="from" value={autoFrom} autoComplete="off"/>
+              <input placeholder="483 Queen St W, Toronto, ON" type="text" onChange={handleInputFrom} list="fromLocation" id="from" value={autoFrom} autoComplete="off"/>
               <button type='button' onClick={myLocation}>
                 <BiCurrentLocation />
               </button>
@@ -238,7 +245,7 @@ const MapForm = (props) => {
           <div className="finalLocation">
             <div className="inputFinal">
               <label htmlFor="toLocation" className='yellow'>Enter destination</label>
-              <input type="text" onChange={handleInputTo} list="toLocation" id="to" value={autoTo} autoComplete="off"/>
+              <input placeholder="Toronto, ON" type="text" onChange={handleInputTo} list="toLocation" id="to" value={autoTo} autoComplete="off"/>
                 <datalist id="toLocation" >
                   {
                     // map through the givenAddress state defined by the axios call and return it as options (autofill API)
@@ -251,9 +258,9 @@ const MapForm = (props) => {
                     })
                   }
                 </datalist>
-            <button ref={commuteRef}>Submit</button>
             </div>
           </div>
+            <button ref={commuteRef}>Get the Route</button>
         </form>
         {/* loading animation while waiting for API results */}
         {
@@ -262,17 +269,18 @@ const MapForm = (props) => {
           : null
         }
         {
-          commuteComponent === true
+          commuteComponent === true || commuteComponentSession === "true"
           ? <CommuteType
             walkTime={walkRoute}
             bikeTime={bikeRoute}
             driveTime={driveRoute}
             choices={handleChoices}
+            passFromPodcast={props.passToType}
           />
           : null
         }
         {
-          chosenCommuteTime === "" && window.sessionStorage.finalGenre === undefined
+          chosenCommuteTime === 0 && window.sessionStorage.finalGenre === undefined
           ? null
           : <MapDisplay
             map={chosenCommuteSession} />

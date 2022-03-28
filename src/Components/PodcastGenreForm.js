@@ -9,6 +9,7 @@ import PodcastEntry from './PodcastEntry';
 import LoadingAnimationP from './LoadingAnimationP';
 
 
+
 function PodcastGenreForm(props) {
   //Store user input and genres returned from api
   const [ selectedGenre, setSelectedGenre ] = useState([])
@@ -16,12 +17,10 @@ function PodcastGenreForm(props) {
   const [ finalGenreInput, setFinalGenreInput ] = useState('')
   const [ podcastArray, setPodcastArray ] = useState([])
   const [submitState, setSubmitState] = useState(false)
+  const [loadState, setLoadState] = useState(false)
   const [minWalk, setMinWalk] = useState(window.sessionStorage.getItem('minWalk'))
   const [maxWalk, setMaxWalk] = useState(window.sessionStorage.getItem('maxWalk'))
   const [finalGenre, setFinalGenre] = useState(window.sessionStorage.getItem('finalGenre'))
-
-  // const [sessionTime, setSessionTime] = useState(window.sessionStorage.getItem('count'));
-
 
   let minWalkTime = props.chosenTime
   minWalkTime = Math.floor((minWalkTime * 0.8) / 60)
@@ -30,15 +29,12 @@ function PodcastGenreForm(props) {
     minWalkTime = window.sessionStorage.getItem('minWalk')
   }
   
-
-
   let maxWalkTime = props.chosenTime
   maxWalkTime = Math.floor((maxWalkTime * 1.2) / 60)
 // changes
   if (props.chosenTime === 0) {
     maxWalkTime = window.sessionStorage.getItem('maxWalk')
   }
-  
   
   //Track user input and set variable state  
   const handleInput = (e) => {
@@ -52,6 +48,13 @@ function PodcastGenreForm(props) {
     window.sessionStorage.setItem('minWalk', minWalkTime);
     window.sessionStorage.setItem('maxWalk', maxWalkTime);
     window.sessionStorage.setItem('finalGenre', userGenreInput);
+    props.infoToType(e)
+
+  }
+
+  window.onbeforeunload = () => {
+    window.sessionStorage.clear()
+    console.log("clear podcast genre")
   }
 
   // Run when routing back
@@ -72,7 +75,7 @@ function PodcastGenreForm(props) {
         setSubmitState(false)
         setPodcastArray(response.data.results)
       })
-    }
+    } 
   }, [])
 
   //Run Autocomplete API if user input is longer than 1 character
@@ -109,9 +112,11 @@ function PodcastGenreForm(props) {
   //Run Search API to gather a list of related movies, taking in the autocompleted input as the parameter. API call will only run if character length is greater than 1.
 
   useEffect(function() {
+
     if(userGenreInput.length >= 1){
 
       setSubmitState(true)
+      setLoadState(true)
       axios({
         url: 'https://listen-api.listennotes.com/api/v2/search',
         headers: { "X-ListenAPI-Key": "317ae89aeb8841b9b61635577fa94768" },
@@ -121,18 +126,25 @@ function PodcastGenreForm(props) {
             len_max: `${maxWalkTime}`,
         }
       }).then((response) => {
-        setFinalGenreInput("")   
-        setSubmitState(false)  
+        setFinalGenreInput("")
+        setTimeout(() => {
+          setSubmitState(false)  
+        }, 2000)   
         setPodcastArray(response.data.results)
-
-        if (podcastArray.length <= 1) {
-          //Re-run API call with larger audio length params.
-          console.log(``);
+        setLoadState(false)
+        if (response.data.results.length < 1) {
+          Swal.fire({
+            icon: 'error',
+            text: 'Sorry, we could not find any podcasts to match your commute length',
+            color: "#EDF2EF",
+            confirmButtonColor: '#F97068',
+            background: "#1a2635"
+          })
         }
 
       })
 
-    }
+    } 
 
   }, [finalGenreInput])
 
@@ -146,14 +158,14 @@ function PodcastGenreForm(props) {
   return (
     <section className='podcastForm'>
         {
-        props.chosenTime === "" && window.sessionStorage.finalGenre === undefined
+        props.chosenTime === 0 && window.sessionStorage.finalGenre === undefined
         ? null
         :
 
       <div className="wrapper">
         <h2>What Podcast Genre?</h2>
         <form action="" onSubmit={ handleSubmit } className="podcastGenreForm">
-          <input type="text" onChange={ handleInput } list="genres" value={ userGenreInput }/>
+              <input placeholder="Music, Finance, News..." type="text" onChange={ handleInput } list="genres" value={ userGenreInput }/>
           <datalist id="genres">
             {
               //Map through the returned Genres array, return character matched genres. 
@@ -172,7 +184,7 @@ function PodcastGenreForm(props) {
       </div>
       }
       {
-        submitState === true
+        loadState === true
           ? <LoadingAnimationP />
           : null
       }

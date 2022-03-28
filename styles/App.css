@@ -270,7 +270,7 @@ html {
 
 .wrapper {
   max-width: 1000px;
-  width: 95%;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -332,10 +332,36 @@ button:active {
   -webkit-box-shadow: 0px 0px 0px 2px #F97068;
           box-shadow: 0px 0px 0px 2px #F97068;
 }
+button.podcastButton {
+  background-color: transparent;
+}
+button:disabled {
+  color: #949494;
+  opacity: 0.5;
+}
+
+input:disabled + label {
+  opacity: 0.5;
+}
+input:disabled + label svg {
+  color: #949494;
+}
+
+input[type=radio]:checked + label {
+  opacity: 1;
+}
+input[type=radio]:checked + label svg {
+  color: #F97068;
+}
 
 svg {
   color: #F97068;
   font-size: 2rem;
+}
+
+a {
+  text-decoration: none;
+  color: #F97068;
 }
 
 h1, h2, p {
@@ -510,8 +536,29 @@ header .aboutSection .punchline {
     opacity: 1;
   }
 }
+datalist {
+  cursor: pointer;
+  outline: none;
+  background: #7a7a7a;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 15px;
+  margin: 5px 0;
+  padding: 10px 10px;
+  color: #E8EB5E;
+  text-align: center;
+}
+datalist option {
+  text-align: center;
+  font-size: 0.8rem;
+}
+
 .mapDetails {
   width: 100%;
+}
+.mapDetails .wrapper .loading {
+  margin-bottom: 20px;
 }
 .mapDetails .wrapper h2 {
   padding-bottom: 20px;
@@ -578,11 +625,16 @@ header .aboutSection .punchline {
 }
 .mapDetails .wrapper .destinationForm .finalLocation .inputFinal {
   position: relative;
-}
-.mapDetails .wrapper .destinationForm .finalLocation .inputFinal button {
-  position: absolute;
-  right: 0;
-  bottom: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 .mapDetails .wrapper .destinationForm .finalLocation input {
   width: 100%;
@@ -604,9 +656,9 @@ header .aboutSection .punchline {
   margin-bottom: 40px;
 }
 .commuteType .commuteIconsForm .travelIconsLabel {
-  width: 28.3333333333vw;
+  width: 27.3333333333vw;
   min-height: 90px;
-  height: 28.3333333333vw;
+  height: 27.3333333333vw;
   max-height: 200px;
   max-width: 300px;
   background-color: #273b50;
@@ -641,6 +693,9 @@ header .aboutSection .punchline {
       -ms-flex-pack: center;
           justify-content: center;
 }
+.commuteType .commuteIconsForm .travelIconsLabel .individualIcons p {
+  padding: 3px 0;
+}
 .commuteType .commuteIconsForm input[type=radio]:checked + label {
   background-color: #1a2635;
   -webkit-box-shadow: 0px 0px 0px 2px #F97068;
@@ -671,6 +726,9 @@ header .aboutSection .punchline {
 .podcastForm {
   width: 100%;
 }
+.podcastForm .loading {
+  margin-bottom: 20px;
+}
 .podcastForm h2 {
   padding-bottom: 20px;
 }
@@ -695,16 +753,19 @@ header .aboutSection .punchline {
 .podcastForm ul {
   margin-bottom: 100px;
 }
+.podcastForm ul .individualPodcast {
+  position: relative;
+}
 .podcastForm ul .individualPodcast a {
   text-decoration: none;
+  color: #EDF2EF;
 }
 .podcastForm ul .individualPodcast li {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin: 30px 0;
-  padding: 15px 0;
+  padding: 40px 0;
   border-bottom: 1px solid #EDF2EF;
   border-top: 1px solid #EDF2EF;
 }
@@ -717,12 +778,93 @@ header .aboutSection .punchline {
      object-fit: contain;
 }
 .podcastForm ul .individualPodcast li .textContainer {
-  width: 70%;
+  width: calc(70% - 20px);
+  margin-left: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 .podcastForm ul .individualPodcast li .textContainer h3 {
   color: #EDF2EF;
+  padding-bottom: 10px;
+}
+.podcastForm ul .podcastButton {
+  position: absolute;
+  right: 0px;
+  bottom: 10px;
+  z-index: 10;
+}
+
+.podcastCard {
+  position: relative;
+  width: 100%;
+}
+.podcastCard .navBar {
+  position: fixed;
+  width: 100%;
+  background-color: #1a2635;
+  opacity: 0.9;
+}
+.podcastCard .navBar a button {
+  margin: 5px 10px;
+  background-color: transparent;
+  padding: 0;
+  height: 40px;
+  width: 40px;
+}
+.podcastCard .wrapper .podcastContent {
+  margin-top: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.podcastCard .wrapper .podcastContent .podcastCardImage {
+  margin: 10px 0;
+  width: 75%;
+  max-width: 250px;
+}
+.podcastCard .wrapper .podcastContent .podcastCardImage img {
+  width: 100%;
+}
+.podcastCard .wrapper .podcastContent .podcastCardText {
+  width: 100%;
+}
+.podcastCard .wrapper .podcastContent .podcastCardText .details {
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #EDF2EF;
+}
+.podcastCard .wrapper .podcastContent .podcastCardText .details h2 {
+  margin: 10px 0;
+  color: #E8EB5E;
+  text-align: center;
+}
+.podcastCard .wrapper .podcastContent .podcastCardText .details h3 {
+  margin: 20px 0 15px 0;
+}
+.podcastCard .wrapper .podcastContent .podcastCardText .podcastBody {
+  width: 100%;
+  margin-bottom: 100px;
+}
+.podcastCard .wrapper .podcastContent .podcastCardText .podcastBody p {
+  line-height: 1.25rem;
+  overflow: hidden;
 }
 
 .rhap_forward-button,
@@ -756,6 +898,42 @@ header .aboutSection .punchline {
   bottom: 0;
   height: 120px;
   width: 100%;
+  z-index: 100;
+  opacity: 90%;
+}
+.audioPlayer .rhap_container {
+  background-color: #161e27;
+}
+.audioPlayer .rhap_container .rhap_time {
+  color: #EDF2EF;
+}
+.audioPlayer .rhap_container .rhap_progress-filled {
+  background-color: #E8EB5E;
+}
+.audioPlayer .rhap_container .rhap_progress-indicator {
+  background-color: #F97068;
+}
+.audioPlayer .rhap_container .rhap_volume-container {
+  height: 32px;
+}
+.audioPlayer .rhap_container .rhap_volume-container button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.audioPlayer .rhap_container .rhap_volume-container button svg {
+  -o-object-fit: contain;
+     object-fit: contain;
+  width: 100%;
+}
+.audioPlayer .rhap_container .rhap_volume-indicator {
+  background-color: #F97068;
+}
+.audioPlayer .rhap_container .rhap_controls-section .rhap_additional-controls {
+  display: none;
 }
 
 .audioThumbnail {
@@ -763,4 +941,23 @@ header .aboutSection .punchline {
 }
 .audioThumbnail img {
   height: 100%;
+}
+
+footer {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 20px;
+}
+footer .footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+footer .footer a {
+  padding-left: 7px;
 }

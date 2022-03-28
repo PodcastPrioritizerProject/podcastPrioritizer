@@ -4,14 +4,14 @@ import { Link} from 'react-router-dom';
 //Import React icons
 import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai'
 
-
 function PodcastEntry(props) {
+
+
 
   const [isClicked, setIsClicked] = useState(false)
   const [buttonId, setButtonId] = useState("")
 
   const results = props.podcasts
-
   useEffect(()=>{
       setIsClicked(true)
       props.podcastPlay(isClicked)
@@ -20,10 +20,10 @@ function PodcastEntry(props) {
   useEffect(() => {
     if (props.canPlay === false){
       setIsClicked(false)
-      // props.podcastPlay(isClicked)
+
     } else if (props.canPlay === true) {
       setIsClicked(true)
-      // props.podcastPlay(isClicked)
+
     }
   }, [props.canPlay])
  
@@ -40,7 +40,7 @@ function PodcastEntry(props) {
         setIsClicked(false)
       }
     } else {
-      console.log("no info")
+
     }
     
     //Connects both the audio player icon as well as the podcast entry audio icon
@@ -56,6 +56,8 @@ function PodcastEntry(props) {
                     // mapping array for podcasts and displaying it on the DOM
                     results.map((e) => { 
 
+                      console.log(e);
+
                         //Calculate podcast time to be minutes and hours 
                         let audioMinutes = Math.floor(e.audio_length_sec / 60) % 60
                         let audioHours = Math.floor(e.audio_length_sec / 3600) 
@@ -69,6 +71,7 @@ function PodcastEntry(props) {
                         }
                         return (
                         <div key={e.id} className="individualPodcast">
+                      
                         <Link to={`/${e.id}`}>
                             <li>
                                 <div className="imgContainer">
@@ -80,7 +83,7 @@ function PodcastEntry(props) {
                                 </div>
                             </li>
                         </Link>
-                        <button id={e.id} type='button' 
+                        <button id={e.id} className="podcastButton" type='button' 
                         onClick={(event) => {handleClick(e, event)}}>
                         {/* Onclick that changes the pause/play button depending on if it was clicked. Button is connected with the audioPlayer via canPlay */}
                         {
@@ -91,7 +94,7 @@ function PodcastEntry(props) {
                             <AiFillPlayCircle />
                             
                         }
-            
+          
                         </button>
                     </div>
                     )
