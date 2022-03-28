@@ -24,8 +24,12 @@ const CommuteType = (props) => {
   const walkR = useRef()
   const bikeR = useRef()
   const driveR = useRef()
-  console.log(bikeR)
+
   useEffect(() => {
+
+    walkR.current.checked = false
+    bikeR.current.checked = false
+    driveR.current.checked = false
 
     if (window.sessionStorage.chosenCommute === walkR.current.id){
       walkR.current.checked = true
@@ -35,7 +39,9 @@ const CommuteType = (props) => {
     } else if (window.sessionStorage.chosenCommute === bikeR.current.id){
       let distanceB = window.sessionStorage.bikeDistance
       bikeR.current.checked = true
+      if (bikeR.current.labels[0].children[0].children[1] !== undefined) {
       bikeR.current.labels[0].children[0].children[1].innerText = `${window.sessionStorage.bikeTime} \n ${Number(distanceB).toFixed(1)}km`
+      }
      
     } else if (window.sessionStorage.chosenCommute === driveR.current.id){
       let distanceD = window.sessionStorage.driveDistance
@@ -44,8 +50,12 @@ const CommuteType = (props) => {
       
     }
 
-  },[])
-  
+  },[props.bikeTime, props.driveTime])
+
+  // console.log(walkR)
+  // console.log(bikeR)
+  // console.log(driveR)
+
   return (
     <div className="commuteType">
       <h2>How Will You Be Travelling?</h2>
@@ -70,23 +80,42 @@ const CommuteType = (props) => {
           </div>
         </label>
         <input type="radio" id="bike" name="types" className="sr-only" ref={bikeR}
-          disabled={(props.bikeTime.time ? false : true) || ((props.passFromPodcast !== "" && bikeR.current.id !== radioState.target.id) ? true : false) }
+          disabled={(props.bikeTime.time ? false : true) || ((props.passFromPodcast !== "" && bikeR.current.id !== radioState.target.id) ? true : false) || (props.bikeTime.distance >= 200 ? true : false)}
           onClick={(e) => { handleChange(props.bikeTime.time, props.bikeTime.sessionId, props.bikeTime.options.routeType, e)}}
         />
         <label htmlFor="bike" aria-label="biking time" className='travelIconsLabel'>
           <div className='individualIcons'>
             <MdDirectionsBike />
+<<<<<<< HEAD
             {
               props.bikeTime.formattedTime === undefined && props.bikeTime.formattedTime !== undefined
                 ? <p>TOO FAR TO BIKE</p>
                 : <p>{props.walkTime.formattedTime}</p>
             }
             <p>{props.bikeTime.formattedTime}</p>
+=======
+            {/* <p>{props.bikeTime.formattedTime}</p> */}
+            {/* {
+              props.bikeTime.distance === undefined
+              ? null 
+              : <p>{props.bikeTime.formattedTime}</p>
+            } */}
+>>>>>>> 60d5053fde89c39644770c089b07625d2a68bf93
             {
+              props.bikeTime.distance === undefined
+                ? null
+                : props.bikeTime.distance >= 200
+                ? <p>TOO FAR TO BIKE</p>
+                : <>
+                    <p>{props.bikeTime.formattedTime}</p>
+                    <p>{props.bikeTime.distance.toFixed(1)}km</p>
+                  </>
+            }
+            {/* {
               props.bikeTime.distance === undefined
               ? null
               : <p>{props.bikeTime.distance.toFixed(1)}km</p>
-            }
+            } */}
           </div>
         </label>
         <input type="radio" id="drive" name="types" className="sr-only" ref={driveR}

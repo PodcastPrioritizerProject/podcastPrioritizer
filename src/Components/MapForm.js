@@ -21,6 +21,12 @@ const MapForm = (props) => {
   const [submitState, setSubmitState] = useState(false)
   const [commuteComponent, setComuteComponent] = useState(false)
   const [commuteComponentSession, setCommuteComponentSession] = useState(window.sessionStorage.commuteType)
+  const [propToType, setPropToType] = useState(props.passToType)
+
+  useEffect(() => {
+    setPropToType(props.passToType)
+  }, [props.passToType])
+
   // create a useEffect to call axios when onChange happens for the to input field for MapForm
   useEffect(() => {
     // conditional statement to call axios when input length is longer than 1 character
@@ -102,11 +108,17 @@ const MapForm = (props) => {
         background: "#1a2635"
       })
     }else {
+
+      
+      // console.log(propToType)
+      setWalkRoute({})
+      setBikeRoute({})
+      setDriveRoute({})
       // if the input fields are not empty, disable the button after submit
       e.target[3].disabled = true
-      console.log(e.target)
       // clearing the session storage data
       window.sessionStorage.clear()
+
   
       // this state triggers loading animation
       setSubmitState(true)
@@ -142,7 +154,7 @@ const MapForm = (props) => {
         })
         // after both axios calls are made, we wait for all of the data before taking it and sending it to our App.js via props
       ]).then(axios.spread((apiDataBike, apiDataWalk, apiDataDrive) => {
-
+        setPropToType("")
         window.sessionStorage.setItem('commuteType', true)
         
         commuteRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -180,7 +192,17 @@ const MapForm = (props) => {
           setDriveRoute(apiDataDrive.data.route)
         }
       })).catch(error => {
+        Swal.fire({
+          icon: 'error',
+          text: "Sorry for the wait! We tried our best but could not find a route for your destination",
+          footer: "Hint: Check for any typos or add a more specific address.",
+          color: "#EDF2EF",
+          confirmButtonColor: '#F97068',
+          background: "#1a2635"
+        })
         console.log(error)
+        e.target[3].disabled = false
+        setSubmitState(false)
       });
     }
     // clear the input fields if BOTH of them are not empty after submit
@@ -275,7 +297,7 @@ const MapForm = (props) => {
             bikeTime={bikeRoute}
             driveTime={driveRoute}
             choices={handleChoices}
-            passFromPodcast={props.passToType}
+            passFromPodcast={propToType}
           />
           : null
         }

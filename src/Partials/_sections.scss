@@ -177,7 +177,6 @@ datalist {
             li {
                 width: 100%;
                 display: flex;
-                // margin: 30px 0;
                 padding: 40px 0;
                 border-bottom: 1px solid $tertiary;
                 border-top: 1px solid $tertiary;
@@ -199,10 +198,13 @@ datalist {
                     flex-direction: column;
                     justify-content: space-between;
                     // max-height: 150px;
-                    h3 {
+                    .podcastTitle {
+                        color: $secondary;
+                        padding-bottom: 10px;
+                    }
+                    .podcastTitleOriginal {
                         color: $tertiary;
                         padding-bottom: 10px;
-                        
                     }
                 }
             }
