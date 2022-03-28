@@ -179,8 +179,10 @@ datalist {
                 width: 100%;
                 display: flex;
                 padding: 40px 0;
-                border-bottom: 1px solid $tertiary;
-                border-top: 1px solid $tertiary;
+                padding: 40px 15px;
+                margin: 20px 0;
+                background-color: $quinary;
+                border-radius: 2px;
 
                 .imgContainer {
                     width: 30%;

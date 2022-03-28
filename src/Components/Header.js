@@ -15,7 +15,7 @@ function Header() {
                     Can't decide on what podcast to play for your commute?
                 </p>
                 <p>
-                    We got the <em className="yellow">perfect</em> solution for you!  Simply enter your <em className="orange">starting location</em>, <em className="orange">desired destination</em>, <em className="orange">type of commute</em>, and<em className="orange"> genre of podcast</em> and we'll do the rest! Just sit back, relax and enjoy as we provide a list of suggested podcasts that fit <em className="yellow">your</em> duration of travel.  Let's Start!
+                    We've got the <em className="yellow">perfect</em> solution for you!  Simply enter your <em className="orange">starting location</em>, <em className="orange">desired destination</em>, <em className="orange">type of commute</em>, and<em className="orange"> genre of podcast</em> and we'll do the rest! Just sit back, relax and enjoy as we provide a list of suggested podcasts that fit <em className="yellow">your</em> duration of travel.  Let's Start!
                 </p>
             </div>
         </header>

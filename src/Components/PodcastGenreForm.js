@@ -73,6 +73,16 @@ function PodcastGenreForm(props) {
       }).then((response) => {
         setSubmitState(false)
         setPodcastArray(response.data.results)
+      }).catch(error => {
+          if (error.message === "Network Error") {
+            Swal.fire({
+              icon: 'error',
+              text: "Oops, it looks like you're not connected to the internet!",
+              color: "#EDF2EF",
+              confirmButtonColor: '#F97068',
+              background: "#1a2635"
+            })
+          }
       })
     } 
   }, [])
@@ -141,6 +151,16 @@ function PodcastGenreForm(props) {
           })
         }
 
+      }).catch(error => {
+        if (error.message === "Network Error") {
+          Swal.fire({
+            icon: 'error',
+            text: "Oops, it looks like you're not connected to the internet!",
+            color: "#EDF2EF",
+            confirmButtonColor: '#F97068',
+            background: "#1a2635"
+          })
+        }
       })
 
     } 

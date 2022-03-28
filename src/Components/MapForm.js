@@ -43,6 +43,14 @@ const MapForm = (props) => {
         }
       }).then((response) => {
         setGivenAddress(response.data.results)
+      }).catch(error => {
+        Swal.fire({
+          icon: 'error',
+          text: "Oops, it looks like you're not connected to the internet!",
+          color: "#EDF2EF",
+          confirmButtonColor: '#F97068',
+          background: "#1a2635"
+        })
       })
     }
   }, [autoTo])
@@ -64,6 +72,14 @@ const MapForm = (props) => {
       }).then((response) => {
         setGivenAddress(response.data.results)
         
+      }).catch(error => {
+        Swal.fire({
+          icon: 'error',
+          text: "Oops, it looks like you're not connected to the internet!",
+          color: "#EDF2EF",
+          confirmButtonColor: '#F97068',
+          background: "#1a2635"
+        })
       })
     }
   }, [autoFrom])
@@ -108,22 +124,20 @@ const MapForm = (props) => {
         background: "#1a2635"
       })
     }else {
-
-      
       // console.log(propToType)
       setWalkRoute({})
       setBikeRoute({})
       setDriveRoute({})
+
       // if the input fields are not empty, disable the button after submit
       e.target[3].disabled = true
+
       // clearing the session storage data
       window.sessionStorage.clear()
 
-  
       // this state triggers loading animation
       setSubmitState(true)
       setComuteComponent(true)
-      
       axios.all([
         axios.get("https://www.mapquestapi.com/directions/v2/route", {
           params: {
@@ -192,17 +206,30 @@ const MapForm = (props) => {
           setDriveRoute(apiDataDrive.data.route)
         }
       })).catch(error => {
-        Swal.fire({
-          icon: 'error',
-          text: "Sorry for the wait! We tried our best but could not find a route for your destination",
-          footer: "Hint: Check for any typos or add a more specific address.",
-          color: "#EDF2EF",
-          confirmButtonColor: '#F97068',
-          background: "#1a2635"
-        })
-        console.log(error)
-        e.target[3].disabled = false
-        setSubmitState(false)
+        if (error.message === "Network Error") {
+          Swal.fire({
+            icon: 'error',
+            text: "Oops, it looks like you're not connected to the internet!",
+            color: "#EDF2EF",
+            confirmButtonColor: '#F97068',
+            background: "#1a2635"
+          })
+          e.target[3].disabled = false
+          setSubmitState(false)
+          setComuteComponent(false)
+        } else {
+          Swal.fire({
+            icon: 'error',
+            text: "Sorry for the wait! We tried our best but could not find a route for your destination",
+            footer: "Hint: Check for any typos or add a more specific address.",
+            color: "#EDF2EF",
+            confirmButtonColor: '#F97068',
+            background: "#1a2635"
+          })
+          setSubmitState(false)
+          e.target[3].disabled = false
+          setComuteComponent(false)
+        }
       });
     }
     // clear the input fields if BOTH of them are not empty after submit
