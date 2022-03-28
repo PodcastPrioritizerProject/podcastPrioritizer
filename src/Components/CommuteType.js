@@ -52,10 +52,6 @@ const CommuteType = (props) => {
 
   },[props.bikeTime, props.driveTime])
 
-  // console.log(walkR)
-  // console.log(bikeR)
-  // console.log(driveR)
-
   return (
     <div className="commuteType">
       <h2>How Will You Be Travelling?</h2>
@@ -86,21 +82,6 @@ const CommuteType = (props) => {
         <label htmlFor="bike" aria-label="biking time" className='travelIconsLabel'>
           <div className='individualIcons'>
             <MdDirectionsBike />
-<<<<<<< HEAD
-            {
-              props.bikeTime.formattedTime === undefined && props.bikeTime.formattedTime !== undefined
-                ? <p>TOO FAR TO BIKE</p>
-                : <p>{props.walkTime.formattedTime}</p>
-            }
-            <p>{props.bikeTime.formattedTime}</p>
-=======
-            {/* <p>{props.bikeTime.formattedTime}</p> */}
-            {/* {
-              props.bikeTime.distance === undefined
-              ? null 
-              : <p>{props.bikeTime.formattedTime}</p>
-            } */}
->>>>>>> 60d5053fde89c39644770c089b07625d2a68bf93
             {
               props.bikeTime.distance === undefined
                 ? null

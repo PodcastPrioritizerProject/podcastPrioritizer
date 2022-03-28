@@ -56,11 +56,7 @@ function PodcastEntry(props) {
                     // mapping array for podcasts and displaying it on the DOM
                     results.map((e) => { 
 
-<<<<<<< HEAD
-                      console.log(e);
-=======
                       console.log(e)
->>>>>>> 60d5053fde89c39644770c089b07625d2a68bf93
 
                         //Calculate podcast time to be minutes and hours 
                         let audioMinutes = Math.floor(e.audio_length_sec / 60) % 60
