@@ -1,8 +1,14 @@
 //Import useEffect, useState, and Link from React & React router
 import { useEffect, useState } from 'react';
 import { Link} from 'react-router-dom';
+import firebase from '../firebase';
+
 //Import React icons
-import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai'
+import { AiFillPlayCircle, AiFillPauseCircle, AiFillHeart } from 'react-icons/ai'
+
+// access our database, import the corresponding firebase modules
+import { getDatabase, ref, push, set, remove } from 'firebase/database';
+
 
 function PodcastEntry(props) {
 
@@ -49,6 +55,32 @@ function PodcastEntry(props) {
     props.podcastPlay(isClicked)
   }
 
+  // connects a reference to the likesButton checkbox
+  // const likesButton = useRef()
+
+  // Handles button click which adds the like to the firebase data
+
+  const handleLikes = (e, event) => {
+    const database = getDatabase(firebase);
+    const dbRef = ref(database, `${e.id}`);
+
+    const storedData = {
+      id: e.id,
+      image: e.thumbnail,
+      title: e.title_original,
+      titleArtist: e.podcast_title_original,
+      audioUrl: e.audio
+    }
+    
+    if (event.target.checked === true) {
+      set(dbRef, storedData);
+    } else if (event.target.checked === false) {
+      remove(dbRef);
+    }
+
+    // console.log(e);
+    console.log(event)
+  }
     return (
         <ul>
             <div className="wrapper">
@@ -99,6 +131,9 @@ function PodcastEntry(props) {
                         }
           
                         </button>
+                        <input id={`${e.id}likes`} type='checkbox' onClick={(event) => {handleLikes(e, event)}}/>
+                        <label htmlFor={`${e.id}likes`} > <AiFillHeart /></label>
+                        
                     </div>
                     )
                     })
