@@ -9,6 +9,7 @@ import Home from './Components/Home';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import Footer from './Components/Footer';
+import Likes from './Components/Likes';
 
 function App() {
   const [audioObject, setAudioObject] = useState({})
@@ -42,6 +43,7 @@ function App() {
 
   return (
       <>
+        <Likes />
         <Routes>
           <Route path="/" element={<Home 
             audioUrl={handleAudioUrl} 
