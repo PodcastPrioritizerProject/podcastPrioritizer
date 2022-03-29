@@ -6,6 +6,8 @@ import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai'
 
 function PodcastEntry(props) {
 
+
+
   const [isClicked, setIsClicked] = useState(false)
   const [buttonId, setButtonId] = useState("")
 
@@ -69,6 +71,7 @@ function PodcastEntry(props) {
                         }
                         return (
                         <div key={e.id} className="individualPodcast">
+                      
                         <Link to={`/${e.id}`}>
                             <li>
                                 <div className="imgContainer">
