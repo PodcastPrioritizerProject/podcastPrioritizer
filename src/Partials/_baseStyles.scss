@@ -31,6 +31,12 @@ html {
     margin: 0 auto;
 }
 
+.wrapperUl {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+}
+
 h1 {
     font-family: $mainFont;
     color: $tertiary;

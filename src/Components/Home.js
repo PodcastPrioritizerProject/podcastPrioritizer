@@ -6,7 +6,6 @@ import MapForm from './MapForm';
 import PodcastGenreForm from './PodcastGenreForm';
 
 const Home = (props) => {
-  // console.log(props.playerTest, "PLEASE WORK")
   const [chosenTime, setChosenTime] = useState('');
   const [propToType, setPropToType] = useState("")
   // this function passes podcast info to parent
@@ -15,10 +14,8 @@ const Home = (props) => {
   } 
   // updates props taken from child into state
   const handleTime = (time) => {
-      // console.log('handletime')
       setChosenTime(time)
   };
-  // console.log("can audio play HOME", props.canPlay)
   const handlePodcastPlayHome = (e) => {
     props.podcastPlay(e)
   }

@@ -1,0 +1,108 @@
+// styling for the nav (likes.js)
+
+nav {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    background-color: $primary;
+    opacity: 0.95;
+    width: 100vw;
+    height: 50px;
+    // display: flex;
+
+    .wrapper {
+        position: relative;
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+
+        .likes {
+            z-index: 1100;
+            position: fixed;
+            top: 5px;
+            padding: 5px;
+            display: flex;
+            height: 40px;
+            width: 40px;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            svg {
+                height: 100%;
+                width: 100%;
+            }
+        }
+        ul {
+            position: fixed;
+            z-index: 100;
+            background-color: rgb(42, 46, 66);
+            opacity: 0;
+            overflow: auto;
+            height: 100%;
+            top: 0;
+            left: 110vw;
+            padding-top: 80px;
+            width: 100%;
+            transition: all .25s ease-in;
+            visibility: hidden;
+            &.showNav {
+                opacity: 1;
+                top: 0;
+                left: 0;
+                visibility: visible;
+            }
+    
+            .likedPodcastsContainer {
+                padding: 30px 20px;
+                display: flex;
+                border-bottom: 1px solid $tertiary;
+                
+                .imageContainer {
+                    width: 30%;
+                    img{
+                        width: 100%;
+                    }
+                }
+                .textContainer {
+                    width: calc(70% - 20px);
+                    padding-left: 20px;
+                    .podcastTitle {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
+                        display: -webkit-box;
+                        margin-bottom: 5px;
+                    }
+                    .podcastArtist {
+                        color: $secondary;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
+                        display: -webkit-box;
+                        margin-bottom: 10px;
+                    }
+                    .likesButtons {
+                        display: flex;
+                        justify-content: flex-end;
+                        button {
+                            margin: 10px 20px 0 20px;
+                            background-color: transparent;
+                            width: 50px;
+                            height: 50px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            svg {
+                                height: 100%;
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

@@ -44,6 +44,7 @@ const MapForm = (props) => {
       }).then((response) => {
         setGivenAddress(response.data.results)
       }).catch(error => {
+        // the only time the autocomplete call will receive an error is during connection loss
         Swal.fire({
           icon: 'error',
           text: "Oops, it looks like you're not connected to the internet!",
@@ -71,8 +72,8 @@ const MapForm = (props) => {
         }
       }).then((response) => {
         setGivenAddress(response.data.results)
-        
       }).catch(error => {
+        // the only time the autocomplete call will receive an error is during connection loss
         Swal.fire({
           icon: 'error',
           text: "Oops, it looks like you're not connected to the internet!",
@@ -124,7 +125,6 @@ const MapForm = (props) => {
         background: "#1a2635"
       })
     }else {
-      // console.log(propToType)
       setWalkRoute({})
       setBikeRoute({})
       setDriveRoute({})
@@ -170,13 +170,14 @@ const MapForm = (props) => {
       ]).then(axios.spread((apiDataBike, apiDataWalk, apiDataDrive) => {
         setPropToType("")
         window.sessionStorage.setItem('commuteType', true)
-        
         commuteRef.current.scrollIntoView({ behavior: 'smooth' })
         // when the API call returns, enable the submit button
         e.target[3].disabled = false
         // stop loading animation render
         setSubmitState(false)
         if (apiDataBike.data.info.statuscode === 402 || apiDataBike.data.route.formattedTime === "00:00:00") {
+
+          // when the API returns a 402, we present the user with a message
           console.log(apiDataBike.data)
           Swal.fire({
             icon: 'error',
@@ -189,6 +190,8 @@ const MapForm = (props) => {
           setBikeRoute({})
           setDriveRoute({})
         } else if (apiDataBike.data.info.statuscode === 602){
+
+          // when the API returns a 602, it also returns a message that they cannot compute the route after some time
           Swal.fire({
             icon: 'error',
             text: "Sorry for the wait! We tried our best but could not find a route for your destination",
@@ -207,6 +210,8 @@ const MapForm = (props) => {
         }
       })).catch(error => {
         if (error.message === "Network Error") {
+
+          // error handling for connection loss during api search
           Swal.fire({
             icon: 'error',
             text: "Oops, it looks like you're not connected to the internet!",
@@ -243,7 +248,6 @@ const MapForm = (props) => {
     setChosenCommuteSession(sessionId)
     setChosenCommuteType(type)
   }
-
   // when the final commute is selected, this sends the information to App.js to be used in our podcast display
   useEffect(() => {
     props.time(chosenCommuteTime)
@@ -266,7 +270,6 @@ const MapForm = (props) => {
       <div className="wrapper">
         <h2>Where To?</h2>
         <form action="" onSubmit={handleSubmit} className="destinationForm">
-
           <div className="startingLocation">
             <label htmlFor="fromLocation" className='orange'>Enter starting location</label>
             <div className="inputStart">
@@ -331,9 +334,6 @@ const MapForm = (props) => {
           : <MapDisplay
             map={chosenCommuteSession} />
         }
-
-        
-    
       </div>
     </section>
   )
