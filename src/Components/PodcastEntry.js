@@ -65,7 +65,7 @@ function PodcastEntry(props) {
       id: e.id,
       image: e.thumbnail,
       title: e.title_original,
-      titleArtist: e.podcast_title_original,
+      titleArtist: e.podcast.title_original,
       audioUrl: e.audio
     }
       set(dbRef, storedData);
@@ -78,7 +78,7 @@ function PodcastEntry(props) {
                     // mapping array for podcasts and displaying it on the DOM
                     results.map((e) => { 
 
-                      // console.log(e)
+                      console.log(e)
 
                         //Calculate podcast time to be minutes and hours 
                         let audioMinutes = Math.floor(e.audio_length_sec / 60) % 60
@@ -102,7 +102,7 @@ function PodcastEntry(props) {
                                 <div className="textContainer">
                                     <div className="titleBlock">
                                       <h3 className='podcastTitleOriginal'>{e.title_original}</h3>
-                                      <h3 className='podcastTitle'>{e.podcast_title_original}</h3>
+                                      <h3 className='podcastTitle'>{e.podcast.title_original}</h3>
                                     </div>
                                     <p>{audioHours} {audioMinutes}min</p>
                                 </div>
