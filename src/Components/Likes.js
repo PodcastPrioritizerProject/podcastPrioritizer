@@ -33,15 +33,8 @@ const Likes = () => {
                 );
             }
             setLikedPodcasts(newState);
-<<<<<<< HEAD
-            // console.log(response)
         });
     }, []);
-      // console.log(likedPodcasts);
-=======
-        });
-    }, []);
->>>>>>> 3b63c9d3ddbd722a1ce207bd602142f457821f51
 
     // adding a function to remove the liked podcast off of firebase as well as the DOM
     const handleRemove = (e) => {

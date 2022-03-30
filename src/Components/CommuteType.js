@@ -67,12 +67,6 @@ const CommuteType = (props) => {
       })
     }
   },[props.bikeTime, props.driveTime])
-<<<<<<< HEAD
-  // console.log(window.sessionStorage.bikeTime)
-  // console.log(props.bikeTime.formattedTime)
-=======
-
->>>>>>> 3b63c9d3ddbd722a1ce207bd602142f457821f51
   return (
     <div className="commuteType">
       <h2>How Will You Be Travelling?</h2>
