@@ -1,5 +1,5 @@
 //Import useEffect, useState, and Link from React & React router
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link} from 'react-router-dom';
 import firebase from '../firebase';
 
@@ -7,16 +7,16 @@ import firebase from '../firebase';
 import { AiFillPlayCircle, AiFillPauseCircle, AiFillHeart } from 'react-icons/ai'
 
 // access our database, import the corresponding firebase modules
-import { getDatabase, ref, push, set, remove } from 'firebase/database';
+import { getDatabase, ref, push, set, remove, onValue } from 'firebase/database';
 
 
 function PodcastEntry(props) {
 
-
-
+  // setting useStates
   const [isClicked, setIsClicked] = useState(false)
   const [buttonId, setButtonId] = useState("")
-
+  
+  // connecting to audio player to display the same button on the player and the podcastEntry array
   const results = props.podcasts
   useEffect(()=>{
       setIsClicked(true)
@@ -55,13 +55,10 @@ function PodcastEntry(props) {
     props.podcastPlay(isClicked)
   }
 
-  // connects a reference to the likesButton checkbox
-  // const likesButton = useRef()
-
   // Handles button click which adds the like to the firebase data
-
+  const database = getDatabase(firebase);
+  // const dbDependancy = ref(database)
   const handleLikes = (e, event) => {
-    const database = getDatabase(firebase);
     const dbRef = ref(database, `${e.id}`);
 
     const storedData = {
@@ -71,16 +68,9 @@ function PodcastEntry(props) {
       titleArtist: e.podcast_title_original,
       audioUrl: e.audio
     }
-    
-    if (event.target.checked === true) {
       set(dbRef, storedData);
-    } else if (event.target.checked === false) {
-      remove(dbRef);
-    }
-
-    // console.log(e);
-    console.log(event)
   }
+
     return (
         <ul>
             <div className="wrapper">
@@ -131,8 +121,9 @@ function PodcastEntry(props) {
                         }
           
                         </button>
-                        <input id={`${e.id}likes`} type='checkbox' onClick={(event) => {handleLikes(e, event)}}/>
-                        <label htmlFor={`${e.id}likes`} > <AiFillHeart /></label>
+                        <button id={e.id} className="podcastLikeButton" type='button' onClick={(event) => { handleLikes(e, event) }}>
+                          <AiFillHeart />
+                        </button>
                         
                     </div>
                     )

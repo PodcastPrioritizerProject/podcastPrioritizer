@@ -30,11 +30,11 @@ const PodcastDetails = () => {
     //Destructure the object returned by the API call
     const { title, description, image, audio_length_sec } = podcastInfo
 
-    
+    // adding a useEffect for an undefined and regex for description
     useEffect(() => {
 
         if (description === undefined) {
-        console.log("no info")
+
         } else {
         let newDescription = description
         let newestDescription = newDescription.replace(/(<([^>]+)>)/gi, "")
@@ -61,7 +61,7 @@ const PodcastDetails = () => {
     //Run a useEffect which takes in the description, if evaluated to a string run Regex to remove HTML elements from API call.   
     useEffect( () => {
         if (description === undefined) {
-            console.log("no info")
+
         } else {
             let newDescription = description
             let newestDescription = newDescription.replace(/(<([^>]+)>)/gi, " ");
