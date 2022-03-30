@@ -215,8 +215,15 @@ datalist {
         .podcastButton {
             position: absolute;
             right: 0px;
-            bottom: 10px;
+            bottom: 0px;
             z-index: 10;
+        }
+        .podcastLikeButton {
+            position: absolute;
+            right: 60px;
+            bottom: 0px;
+            z-index: 10;
+            background-color: transparent;
         }
     }
 }
@@ -230,9 +237,9 @@ datalist {
     .navBar {
         position: fixed;
         width: 100%;
-        background-color: $primary;
+        background-color: transparent;
         opacity: 0.9;
-        
+        z-index: 10000;
         a {
             button {
                 margin: 5px 10px;
@@ -240,6 +247,7 @@ datalist {
                 padding: 0;
                 height: 40px;
                 width: 40px;
+                position: fixed;
             }
         }
     }

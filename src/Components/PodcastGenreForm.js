@@ -51,6 +51,7 @@ function PodcastGenreForm(props) {
     props.infoToType(e)
   }
 
+  // Clear the session storage before the refresh is loaded
   window.onbeforeunload = () => {
     window.sessionStorage.clear()
     console.log("clear podcast genre")
@@ -119,11 +120,8 @@ function PodcastGenreForm(props) {
   }, [userGenreInput])
   
   //Run Search API to gather a list of related movies, taking in the autocompleted input as the parameter. API call will only run if character length is greater than 1.
-
   useEffect(function() {
-
     if(userGenreInput.length >= 1){
-
       setSubmitState(true)
       setLoadState(true)
       axios({
@@ -151,6 +149,7 @@ function PodcastGenreForm(props) {
           })
         }
 
+      // catch error for if the network error occurs
       }).catch(error => {
         if (error.message === "Network Error") {
           Swal.fire({
@@ -162,15 +161,14 @@ function PodcastGenreForm(props) {
           })
         }
       })
-
     } 
-
   }, [finalGenreInput])
 
+  //  passing the url
   const handleUrl = (url) => {
     props.urlChoice(url)
   }
-
+  // passing the podcast play
   const handlePodcastPlay = (e) => {
     props.podcastPlay(e)
   }
@@ -180,7 +178,6 @@ function PodcastGenreForm(props) {
         props.chosenTime === 0 && window.sessionStorage.finalGenre === undefined
         ? null
         :
-
       <div className="wrapper">
         <h2>What Podcast Genre?</h2>
         <form action="" onSubmit={ handleSubmit } className="podcastGenreForm">
@@ -203,6 +200,7 @@ function PodcastGenreForm(props) {
       </div>
       }
       {
+        // setting a load animation while searing for the podcasts
         loadState === true
           ? <LoadingAnimationP />
           : null

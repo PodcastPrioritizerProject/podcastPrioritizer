@@ -1,3 +1,5 @@
+// for the commute type, instead of giving the client results and recommending the type of commute only on the duration/distance of the route, we decided it would be much better if the user can decide on the type of commute and then be presented with podcasts that are within 20% of the commute duration. This way the user has better control of the podcast results they recieve. If they don't feel like biking on a certain day, there is no need to give them podcast results where biking is the suggested commute type.
+
 import { AiFillCar } from 'react-icons/ai';
 import { MdDirectionsBike } from 'react-icons/md';
 import { FaWalking } from 'react-icons/fa';
@@ -8,12 +10,12 @@ const CommuteType = (props) => {
 
   const [radioState, setRadioState] = useState("")
 
+  // radio button change to be lifted up as props and also saved into session storage so that we can use the this information after routing
   const handleChange = (time, sessionId, type, e) => {
     props.choices(time, sessionId, type)
     window.sessionStorage.setItem('count', time);
     window.sessionStorage.setItem('map', sessionId)
     setRadioState(e)
-    console.log(e)
     window.sessionStorage.setItem('chosenCommute', e.target.id)
     window.sessionStorage.setItem('walkTime', props.walkTime.formattedTime)
     window.sessionStorage.setItem('bikeTime', props.bikeTime.formattedTime)
@@ -22,16 +24,18 @@ const CommuteType = (props) => {
     window.sessionStorage.setItem('bikeDistance', props.bikeTime.distance)
     window.sessionStorage.setItem('driveDistance', props.driveTime.distance)
   }
+  // creating a reference to our radio buttons
   const walkR = useRef()
   const bikeR = useRef()
   const driveR = useRef()
 
   useEffect(() => {
-
+    // making sure on load - more specifically when we route and the page loads - the radio buttons are not selected
     walkR.current.checked = false
     bikeR.current.checked = false
     driveR.current.checked = false
 
+    // the following if/else statements are there so we can still display the previous user selected route option, while retaining the information after routing
     if (window.sessionStorage.chosenCommute === walkR.current.id){
       walkR.current.checked = true
       let distanceW = window.sessionStorage.walkDistance
@@ -52,6 +56,7 @@ const CommuteType = (props) => {
     }
     if (props.driveTime.formattedTime === "00:00:00") {
 
+      // an error handle for a very rare api return of the given formatted time, but does not result in an error
       Swal.fire({
         icon: 'error',
         text: "Sorry for the wait! We tried our best but could not find a route for your destination",
@@ -61,15 +66,14 @@ const CommuteType = (props) => {
         background: "#1a2635"
       })
     }
-
   },[props.bikeTime, props.driveTime])
-  console.log(window.sessionStorage.bikeTime)
-  console.log(props.bikeTime.formattedTime)
+
   return (
     <div className="commuteType">
       <h2>How Will You Be Travelling?</h2>
       <form action="" id="types" className='commuteIconsForm'>
         <input type="radio" id="walk" name="types" className="sr-only" ref={walkR}
+        // we are disabling the radio button if the api does not return a time for this route, but does for the others
           disabled={(props.walkTime.time ? false : true) || ((props.passFromPodcast !== "" && walkR.current.id !== radioState.target.id) ? true : false)}
           onClick={(e) => {handleChange(props.walkTime.time, props.walkTime.sessionId, props.walkTime.options.routeType, e)}}
         />
@@ -89,6 +93,7 @@ const CommuteType = (props) => {
           </div>
         </label>
         <input type="radio" id="bike" name="types" className="sr-only" ref={bikeR}
+        // we are disabling the radio button if the api does not return a time for this route, but does for the others
           disabled={(props.bikeTime.time ? false : true) || ((props.passFromPodcast !== "" && bikeR.current.id !== radioState.target.id) ? true : false) || (props.bikeTime.distance >= 200 ? true : false)}
           onClick={(e) => { handleChange(props.bikeTime.time, props.bikeTime.sessionId, props.bikeTime.options.routeType, e)}}
         />
@@ -112,15 +117,10 @@ const CommuteType = (props) => {
                 </>
                 : null
             }
-        
-            {/* {
-              props.bikeTime.distance === undefined
-              ? null
-              : <p>{props.bikeTime.distance.toFixed(1)}km</p>
-            } */}
           </div>
         </label>
         <input type="radio" id="drive" name="types" className="sr-only" ref={driveR}
+        // we are disabling the radio button if the api does not return a time for this route, but does for the others
           disabled={(props.driveTime.time ? false : true) || ((props.passFromPodcast !== "" && driveR.current.id !== radioState.target.id) ? true : false) }
           onClick={(e) => { handleChange(props.driveTime.time, props.driveTime.sessionId, props.driveTime.options.routeType, e)}}
         />
