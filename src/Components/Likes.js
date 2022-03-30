@@ -30,10 +30,10 @@ const Likes = () => {
                 );
             }
             setLikedPodcasts(newState);
-            console.log(response)
+            // console.log(response)
         });
     }, []);
-      console.log(likedPodcasts);
+      // console.log(likedPodcasts);
 
     const handleRemove = (e) => {
       const database = getDatabase(firebase);
