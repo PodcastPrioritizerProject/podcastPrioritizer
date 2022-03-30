@@ -67,7 +67,6 @@ const CommuteType = (props) => {
       })
     }
   },[props.bikeTime, props.driveTime])
-
   return (
     <div className="commuteType">
       <h2>How Will You Be Travelling?</h2>
