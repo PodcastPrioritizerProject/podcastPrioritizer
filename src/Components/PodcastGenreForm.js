@@ -54,7 +54,6 @@ function PodcastGenreForm(props) {
   // Clear the session storage before the refresh is loaded
   window.onbeforeunload = () => {
     window.sessionStorage.clear()
-    console.log("clear podcast genre")
   }
 
   // Run when routing back

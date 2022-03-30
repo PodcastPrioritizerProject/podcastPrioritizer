@@ -12,12 +12,11 @@ import { getDatabase, ref, push, set, remove, onValue } from 'firebase/database'
 
 function PodcastEntry(props) {
 
-
-
+  // setting useStates
   const [isClicked, setIsClicked] = useState(false)
   const [buttonId, setButtonId] = useState("")
-  const [favPodcasts, setFavPodcasts] = useState([]);
 
+  // connecting to audio player to display the same button on the player and the podcastEntry array
   const results = props.podcasts
   useEffect(() => {
     setIsClicked(true)
@@ -56,9 +55,6 @@ function PodcastEntry(props) {
     props.podcastPlay(isClicked)
   }
 
-  // connects a reference to the likesButton checkbox
-  // const likesButton = useRef()
-
   // Handles button click which adds the like to the firebase data
   const database = getDatabase(firebase);
   // const dbDependancy = ref(database)
@@ -72,10 +68,7 @@ function PodcastEntry(props) {
       titleArtist: e.podcast.title_original,
       audioUrl: e.audio
     }
-
-
     set(dbRef, storedData);
-    console.log(event.currentTarget)
   }
 
   return (
@@ -102,12 +95,12 @@ function PodcastEntry(props) {
                 <Link to={`/${e.id}`}>
                   <li>
                     <div className="imgContainer">
-                      <img src={e.thumbnail} alt={`picture for ${e.podcast_title_original}`} />
+                      <img src={e.thumbnail} alt={`picture for ${e.podcast.title_original}`} />
                     </div>
                     <div className="textContainer">
                       <div className="titleBlock">
                         <h3 className='podcastTitleOriginal'>{e.title_original}</h3>
-                        <h3 className='podcastTitle'>{e.podcast_title_original}</h3>
+                        <h3 className='podcastTitle'>{e.podcast.title_original}</h3>
                       </div>
                       <p>{audioHours} {audioMinutes}min</p>
                     </div>
@@ -126,7 +119,7 @@ function PodcastEntry(props) {
                   }
 
                 </button>
-                <button id={e.id} type='button' onClick={(event) => { handleLikes(e, event) }}>
+                <button id={e.id} className="podcastLikeButton" type='button' onClick={(event) => { handleLikes(e, event) }}>
                   <AiFillHeart />
                 </button>
 
@@ -140,4 +133,3 @@ function PodcastEntry(props) {
 }
 
 export default PodcastEntry;
-
