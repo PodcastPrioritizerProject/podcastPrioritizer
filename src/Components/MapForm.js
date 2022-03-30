@@ -178,7 +178,6 @@ const MapForm = (props) => {
         if (apiDataBike.data.info.statuscode === 402 || apiDataBike.data.route.formattedTime === "00:00:00") {
 
           // when the API returns a 402, we present the user with a message
-          console.log(apiDataBike.data)
           Swal.fire({
             icon: 'error',
             text: "All roads lead to Rome, but no roads lead to where you're going!",

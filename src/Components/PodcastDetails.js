@@ -15,7 +15,7 @@ const PodcastDetails = () => {
     useEffect(() => {
         axios({
             url: `https://listen-api.listennotes.com/api/v2/episodes/${podcastId}`,
-            headers: { "X-ListenAPI-Key": "0be4947c18024c2d8a5bb0dcb11eb2ac" },
+            headers: { "X-ListenAPI-Key": "d6e3e64e5eec4dd68226157de0098df4" },
             params: {
                 id: `${podcastId}`
             }
@@ -42,7 +42,6 @@ const PodcastDetails = () => {
 
         }
     }, [description])
-
 
     //Calculate podcast time to be minutes and hours 
     const audioMinutes = Math.floor(audio_length_sec / 60) % 60
