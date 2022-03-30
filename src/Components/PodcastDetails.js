@@ -43,7 +43,6 @@ const PodcastDetails = () => {
         }
     }, [description])
 
-    console.log(podcastInfo)
     //Calculate podcast time to be minutes and hours 
     const audioMinutes = Math.floor(audio_length_sec / 60) % 60
     let audioHours = Math.floor(audio_length_sec / 3600) 
