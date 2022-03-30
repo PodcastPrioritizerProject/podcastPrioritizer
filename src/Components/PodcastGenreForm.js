@@ -83,6 +83,15 @@ function PodcastGenreForm(props) {
               confirmButtonColor: '#F97068',
               background: "#1a2635"
             })
+          } else if (error.message === "Request failed with status code 429"){
+            Swal.fire({
+              icon: 'error',
+              text: "Sorry, the API has reached the rate limit. ",
+              color: "#EDF2EF",
+              confirmButtonColor: '#F97068',
+              background: "#1a2635"
+            })
+            setLoadState(false)
           }
       })
     } 
@@ -147,7 +156,7 @@ function PodcastGenreForm(props) {
             confirmButtonColor: '#F97068',
             background: "#1a2635"
           })
-        }
+        } 
 
       // catch error for if the network error occurs
       }).catch(error => {
@@ -159,6 +168,15 @@ function PodcastGenreForm(props) {
             confirmButtonColor: '#F97068',
             background: "#1a2635"
           })
+        } else if (error.message === "Request failed with status code 429") {
+          Swal.fire({
+            icon: 'error',
+            text: "Sorry, the API has reached the rate limit. ",
+            color: "#EDF2EF",
+            confirmButtonColor: '#F97068',
+            background: "#1a2635"
+          })
+          setLoadState(false)
         }
       })
     } 
