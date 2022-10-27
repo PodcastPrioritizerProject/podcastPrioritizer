@@ -58,7 +58,7 @@ function PodcastEntry(props) {
   // Handles button click which adds the like to the firebase data
   const database = getDatabase(firebase);
   // const dbDependancy = ref(database)
-  const handleLikes = (e, event) => {
+  const handleLikes = (e) => {
     const dbRef = ref(database, `${e.id}`);
 
     const storedData = {
