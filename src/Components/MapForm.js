@@ -26,7 +26,15 @@ const MapForm = (props) => {
   useEffect(() => {
     setPropToType(props.passToType)
   }, [props.passToType])
-
+  useEffect(() => {
+    Swal.fire({
+      icon: 'warning',
+      text: "There are some issues with MapQuest's autocomplete and map display. Sorry for the inconvenience. The rest of the site's features work!",
+      color: "#EDF2EF",
+      confirmButtonColor: '#F97068',
+      background: "#1a2635"
+    })
+  }, [])
   // create a useEffect to call axios when onChange happens for the to input field for MapForm
   useEffect(() => {
     // conditional statement to call axios when input length is longer than 1 character
@@ -44,14 +52,15 @@ const MapForm = (props) => {
       }).then((response) => {
         setGivenAddress(response.data.results)
       }).catch(error => {
+        // console.log(error)
         // the only time the autocomplete call will receive an error is during connection loss
-        Swal.fire({
-          icon: 'error',
-          text: "Oops, it looks like you're not connected to the internet!",
-          color: "#EDF2EF",
-          confirmButtonColor: '#F97068',
-          background: "#1a2635"
-        })
+        // Swal.fire({
+        //   icon: 'error',
+        //   text: "Oops, it looks like you're not connected to the internet!",
+        //   color: "#EDF2EF",
+        //   confirmButtonColor: '#F97068',
+        //   background: "#1a2635"
+        // })
       })
     }
   }, [autoTo])
@@ -74,13 +83,13 @@ const MapForm = (props) => {
         setGivenAddress(response.data.results)
       }).catch(error => {
         // the only time the autocomplete call will receive an error is during connection loss
-        Swal.fire({
-          icon: 'error',
-          text: "Oops, it looks like you're not connected to the internet!",
-          color: "#EDF2EF",
-          confirmButtonColor: '#F97068',
-          background: "#1a2635"
-        })
+        // Swal.fire({
+        //   icon: 'error',
+        //   text: "Oops, it looks like you're not connected to the internet!",
+        //   color: "#EDF2EF",
+        //   confirmButtonColor: '#F97068',
+        //   background: "#1a2635"
+        // })
       })
     }
   }, [autoFrom])
@@ -178,7 +187,6 @@ const MapForm = (props) => {
         if (apiDataBike.data.info.statuscode === 402 || apiDataBike.data.route.formattedTime === "00:00:00") {
 
           // when the API returns a 402, we present the user with a message
-          console.log(apiDataBike.data)
           Swal.fire({
             icon: 'error',
             text: "All roads lead to Rome, but no roads lead to where you're going!",
@@ -212,13 +220,13 @@ const MapForm = (props) => {
         if (error.message === "Network Error") {
 
           // error handling for connection loss during api search
-          Swal.fire({
-            icon: 'error',
-            text: "Oops, it looks like you're not connected to the internet!",
-            color: "#EDF2EF",
-            confirmButtonColor: '#F97068',
-            background: "#1a2635"
-          })
+          // Swal.fire({
+          //   icon: 'error',
+          //   text: "Oops, it looks like you're not connected to the internet!",
+          //   color: "#EDF2EF",
+          //   confirmButtonColor: '#F97068',
+          //   background: "#1a2635"
+          // })
           e.target[3].disabled = false
           setSubmitState(false)
           setComuteComponent(false)

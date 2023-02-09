@@ -54,7 +54,6 @@ function PodcastGenreForm(props) {
   // Clear the session storage before the refresh is loaded
   window.onbeforeunload = () => {
     window.sessionStorage.clear()
-    console.log("clear podcast genre")
   }
 
   // Run when routing back
@@ -64,7 +63,7 @@ function PodcastGenreForm(props) {
       setSubmitState(true)
       axios({
         url: 'https://listen-api.listennotes.com/api/v2/search',
-        headers: { "X-ListenAPI-Key": "317ae89aeb8841b9b61635577fa94768" },
+        headers: { "X-ListenAPI-Key": "0be4947c18024c2d8a5bb0dcb11eb2ac" },
         params: {
           
           q:`${finalGenre}`,
@@ -83,6 +82,15 @@ function PodcastGenreForm(props) {
               confirmButtonColor: '#F97068',
               background: "#1a2635"
             })
+          } else if (error.message === "Request failed with status code 429"){
+            Swal.fire({
+              icon: 'error',
+              text: "Sorry, the API has reached the rate limit. ",
+              color: "#EDF2EF",
+              confirmButtonColor: '#F97068',
+              background: "#1a2635"
+            })
+            setLoadState(false)
           }
       })
     } 
@@ -93,7 +101,7 @@ function PodcastGenreForm(props) {
     if (userGenreInput.length < 1) {
       axios({
         url: 'https://listen-api.listennotes.com/api/v2/genres',
-        headers: { "X-ListenAPI-Key": "317ae89aeb8841b9b61635577fa94768" },
+        headers: { "X-ListenAPI-Key": "0be4947c18024c2d8a5bb0dcb11eb2ac" },
         params: {
             top_level_only: 1
         }
@@ -107,7 +115,7 @@ function PodcastGenreForm(props) {
         
       axios({
         url: 'https://listen-api.listennotes.com/api/v2/typeahead',
-        headers: { "X-ListenAPI-Key": "317ae89aeb8841b9b61635577fa94768" },
+        headers: { "X-ListenAPI-Key": "0be4947c18024c2d8a5bb0dcb11eb2ac" },
         params: {
             q: `${userGenreInput}`,
             show_genres: 1
@@ -126,7 +134,7 @@ function PodcastGenreForm(props) {
       setLoadState(true)
       axios({
         url: 'https://listen-api.listennotes.com/api/v2/search',
-        headers: { "X-ListenAPI-Key": "317ae89aeb8841b9b61635577fa94768" },
+        headers: { "X-ListenAPI-Key": "0be4947c18024c2d8a5bb0dcb11eb2ac" },
         params: {
             q: `${userGenreInput}`,
             len_min: `${minWalkTime}`,
@@ -147,7 +155,7 @@ function PodcastGenreForm(props) {
             confirmButtonColor: '#F97068',
             background: "#1a2635"
           })
-        }
+        } 
 
       // catch error for if the network error occurs
       }).catch(error => {
@@ -159,6 +167,15 @@ function PodcastGenreForm(props) {
             confirmButtonColor: '#F97068',
             background: "#1a2635"
           })
+        } else if (error.message === "Request failed with status code 429") {
+          Swal.fire({
+            icon: 'error',
+            text: "Sorry, the API has reached the rate limit. ",
+            color: "#EDF2EF",
+            confirmButtonColor: '#F97068',
+            background: "#1a2635"
+          })
+          setLoadState(false)
         }
       })
     } 
