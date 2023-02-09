@@ -1,5 +1,5 @@
 //Import useEffect, useState, and Link from React & React router
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import firebase from '../firebase';
 
@@ -7,7 +7,7 @@ import firebase from '../firebase';
 import { AiFillPlayCircle, AiFillPauseCircle, AiFillHeart } from 'react-icons/ai'
 
 // access our database, import the corresponding firebase modules
-import { getDatabase, ref, push, set, remove, onValue } from 'firebase/database';
+import { getDatabase, ref, set} from 'firebase/database';
 
 
 function PodcastEntry(props) {
@@ -58,7 +58,7 @@ function PodcastEntry(props) {
   // Handles button click which adds the like to the firebase data
   const database = getDatabase(firebase);
   // const dbDependancy = ref(database)
-  const handleLikes = (e, event) => {
+  const handleLikes = (e) => {
     const dbRef = ref(database, `${e.id}`);
 
     const storedData = {
