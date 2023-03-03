@@ -23,7 +23,7 @@ const MapDisplay = (props) => {
       setVisible(!visible)
     }
   }
-
+  console.log(mapBackup)
   return (
 
     <div className="mapButton">
@@ -35,7 +35,7 @@ const MapDisplay = (props) => {
         {
           visible === true
           ? null
-          :<img src={`https://mapquestapi.com/staticmap/v5/map?key=pXPeEb8fKG1bWJTjmqYRZoLhF0sGhYUW&session=${mapBackup}&type=dark`}alt="" />
+          :<img src={`http://mapquestapi.com/staticmap/v5/map?key=zNwYuUfmHAqqz4UIHM8oAoLY8aph9QQw&session=${mapBackup}&type=dark`}alt="" />
         }
       </div>
     </div>

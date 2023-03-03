@@ -26,15 +26,15 @@ const MapForm = (props) => {
   useEffect(() => {
     setPropToType(props.passToType)
   }, [props.passToType])
-  useEffect(() => {
-    Swal.fire({
-      icon: 'warning',
-      text: "There are some issues with MapQuest's autocomplete and map display. Sorry for the inconvenience. The rest of the site's features work!",
-      color: "#EDF2EF",
-      confirmButtonColor: '#F97068',
-      background: "#1a2635"
-    })
-  }, [])
+  // useEffect(() => {
+  //   Swal.fire({
+  //     icon: 'warning',
+  //     text: "There are some issues with MapQuest's autocomplete and map display. Sorry for the inconvenience. The rest of the site's features work!",
+  //     color: "#EDF2EF",
+  //     confirmButtonColor: '#F97068',
+  //     background: "#1a2635"
+  //   })
+  // }, [])
   // create a useEffect to call axios when onChange happens for the to input field for MapForm
   useEffect(() => {
     // conditional statement to call axios when input length is longer than 1 character
@@ -47,7 +47,7 @@ const MapForm = (props) => {
           collection: `${["adminArea", "address", "airport"]}`,
           limit: 5,
           countryCode: 'CA',
-          location: [43.6, 79.3]
+          // location: [43.6, 79.3]
         }
       }).then((response) => {
         setGivenAddress(response.data.results)
@@ -77,7 +77,7 @@ const MapForm = (props) => {
           collection: `${["adminArea", "address", "airport"]}`,
           limit: 5,
           countryCode: 'CA',
-          location: [43.6, 79.3]
+          // location: [43.6, 79.3]
         }
       }).then((response) => {
         setGivenAddress(response.data.results)
